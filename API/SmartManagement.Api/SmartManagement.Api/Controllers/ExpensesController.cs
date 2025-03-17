@@ -23,11 +23,11 @@ namespace SmartManagement.Api.Controllers
             _userService = userService;
         }
         [HttpPost]
-        public async Task<IActionResult> AddExpense([FromForm] ExpenseDto expenseDto)
+        public async Task<IActionResult> AddExpense([FromBody] ExpenseDto expenseDto)
         {
             try
             {
-                var userId =_userService.GetUserIdFromToken(User);
+                var userId = _userService.GetUserIdFromToken(User);
 
                 if (userId != expenseDto.UserId.ToString())
                 {
@@ -45,11 +45,11 @@ namespace SmartManagement.Api.Controllers
                     expenseDto.FixedExpenseAndIncomeId
                 );
 
-                if (expenseDto.File != null)
-                {
-                    var presignedUrl = await _S3FileService.GetPresignedUrlAsync(expenseDto.File.FileName, expenseDto.File.ContentType);
-                    return Ok(new { expenseId, presignedUrl });
-                }
+                //if (expenseDto.File != null)
+                //{
+                //    var presignedUrl = await _S3FileService.GetPresignedUrlAsync(expenseDto.File.FileName, expenseDto.File.ContentType);
+                //    return Ok(new { expenseId, presignedUrl });
+                //}
 
                 return Ok(new { expenseId });
             }

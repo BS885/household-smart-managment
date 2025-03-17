@@ -10,10 +10,12 @@ using System.Threading.Tasks;
 
 namespace SmartManagement.Service.Services
 {
-    public class TransactionDocumentService: ITransactionDocumentService
+    public class TransactionDocumentService : ITransactionDocumentService
     {
+       
         private readonly ITransactionDocumentRepository _transactionDocumentRepository;
         private readonly ILogger<TransactionDocumentService> _logger;
+
         public TransactionDocumentService(ITransactionDocumentRepository transactionDocumentRepository, ILogger<TransactionDocumentService> logger)
         {
             _transactionDocumentRepository = transactionDocumentRepository;
@@ -30,7 +32,7 @@ namespace SmartManagement.Service.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error getting transaction document by ID: {id}");
-                throw ex;
+                throw;
             }
         }
 
@@ -44,7 +46,7 @@ namespace SmartManagement.Service.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting all transaction documents");
-                throw ex;
+                throw;
             }
         }
 
@@ -58,7 +60,7 @@ namespace SmartManagement.Service.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error adding transaction document with ID: {transactionDocument.Id}");
-                throw ex;
+                throw;
             }
         }
 
@@ -72,7 +74,7 @@ namespace SmartManagement.Service.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error updating transaction document with ID: {transactionDocument.Id}");
-                throw ex;
+                throw;
             }
         }
 
@@ -80,27 +82,19 @@ namespace SmartManagement.Service.Services
         {
             try
             {
-                _logger.LogInformation($"Deleting transaction document with ID: {id}");
-                await _transactionDocumentRepository.DeleteAsync(id);
+                _logger.LogInformation($"Soft deleting transaction document with ID: {id}");
+                var document = await _transactionDocumentRepository.GetByIdAsync(id);
+                if (document != null)
+                {
+                    document.IsDeleted = true;
+                    document.UpdatedAt = DateTime.UtcNow;
+                    await _transactionDocumentRepository.UpdateAsync(document);
+                }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error deleting transaction document with ID: {id}");
-                throw ex;
-            }
-        }
-
-        public async Task<IEnumerable<TransactionDocument>> GetTransactionDocumentsByTransactionIdAsync(int transactionId)
-        {
-            try
-            {
-                _logger.LogInformation($"Getting transaction documents by transaction ID: {transactionId}");
-                return await _transactionDocumentRepository.GetByTransactionIdAsync(transactionId);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error getting transaction documents by transaction ID: {transactionId}");
-                throw ex;
+                _logger.LogError(ex, $"Error soft deleting transaction document with ID: {id}");
+                throw;
             }
         }
     }

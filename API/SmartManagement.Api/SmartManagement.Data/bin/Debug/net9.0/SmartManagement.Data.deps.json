@@ -37,6 +37,18 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Http.Features/5.0.17": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "8.0.0",
+          "System.IO.Pipelines": "5.0.2"
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Http.Features.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.1722.21507"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore/8.0.13": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Abstractions": "9.0.3",
@@ -195,7 +207,13 @@
           }
         }
       },
+      "System.IO.Pipelines/5.0.2": {},
       "SmartManagement.Core/1.0.0": {
+        "dependencies": {
+          "AWSSDK.S3": "3.7.415.18",
+          "Microsoft.AspNetCore.Http.Features": "5.0.17",
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0"
+        },
         "runtime": {
           "SmartManagement.Core.dll": {
             "assemblyVersion": "1.0.0",
@@ -224,6 +242,13 @@
       "sha512": "sha512-lTq+XOORliPaWETAOrsbFFaNu4Zjtd0YFrhBHQC+rIyK/yvTw0ma+v3Wl59thkNSR7wcTxcuMuqFfMaxPlQcag==",
       "path": "awssdk.s3/3.7.415.18",
       "hashPath": "awssdk.s3.3.7.415.18.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Http.Features/5.0.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3jG2xS+dx8DDCGV/F+STdPTg89lX3ao3dF/VEPvJaz3wzBIjuadipTtYNEXDIVuOPZwb6jdmhrX9jkzOIBm5cw==",
+      "path": "microsoft.aspnetcore.http.features/5.0.17",
+      "hashPath": "microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore/8.0.13": {
       "type": "package",
@@ -329,6 +354,13 @@
       "sha512": "sha512-gOHP6v/nFp5V/FgHqv9mZocGqCLGofihEX9dTbLhiXX3H7SJHmGX70GIPUpiqLT+1jIfDxg1PZh9MTUKuk7Kig==",
       "path": "pomelo.entityframeworkcore.mysql/8.0.3",
       "hashPath": "pomelo.entityframeworkcore.mysql.8.0.3.nupkg.sha512"
+    },
+    "System.IO.Pipelines/5.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Iew+dfa6FFiyvWBdRmXApixRY1db+beyutpIck4SOSe0NLM8FD/7AD54MscqVLhvfSMLHO7KadjTRT7fqxOGTA==",
+      "path": "system.io.pipelines/5.0.2",
+      "hashPath": "system.io.pipelines.5.0.2.nupkg.sha512"
     },
     "SmartManagement.Core/1.0.0": {
       "type": "project",

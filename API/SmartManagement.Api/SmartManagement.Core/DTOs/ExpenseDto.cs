@@ -17,6 +17,6 @@ namespace SmartManagement.Core.DTOs
         public TransactionType TypeTransaction { get; set; }
         public decimal Sum { get; set; }
         public int? FixedExpenseAndIncomeId { get; set; }
-        public IFormFile File { get; set; }
+        //public IFormFile File { get; set; }
     }
 }

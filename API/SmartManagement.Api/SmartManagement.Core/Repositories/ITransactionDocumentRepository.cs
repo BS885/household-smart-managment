@@ -14,6 +14,6 @@ namespace SmartManagement.Core.Repositories
         Task<TransactionDocument> AddAsync(TransactionDocument transactionDocument);
         Task UpdateAsync(TransactionDocument transactionDocument);
         Task DeleteAsync(int id);
-        Task<IEnumerable<TransactionDocument>> GetByTransactionIdAsync(int transactionId);
+        Task SoftDeleteAsync(int id);
     }
 }

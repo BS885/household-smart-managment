@@ -331,7 +331,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Features": "5.0.17"
+          "AWSSDK.S3": "3.7.415.18",
+          "Microsoft.AspNetCore.Http.Features": "5.0.17",
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0"
         },
         "compile": {
           "bin/placeholder/SmartManagement.Core.dll": {}
