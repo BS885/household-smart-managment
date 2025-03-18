@@ -71,7 +71,7 @@ namespace SmartManagement.Api.Controllers
                 }
 
                 var userId = _userService.GetUserIdFromToken(User);
-                if (expense.IdUser.ToString() != userId)
+                if (expense.UserId.ToString() != userId)
                 {
                     return Forbid("אין לך הרשאה לצפות בהוצאה זו.");
                 }
@@ -112,7 +112,7 @@ namespace SmartManagement.Api.Controllers
                 }
 
                 var userId = _userService.GetUserIdFromToken(User);
-                if (expense.IdUser.ToString() != userId)
+                if (expense.UserId.ToString() != userId)
                 {
                     return Forbid("אין לך הרשאה לעדכן הוצאה זו.");
                 }
@@ -146,7 +146,7 @@ namespace SmartManagement.Api.Controllers
                 }
 
                 var userId = _userService.GetUserIdFromToken(User);
-                if (expense.IdUser.ToString() != userId)
+                if (expense.UserId.ToString() != userId)
                 {
                     return Forbid("אין לך הרשאה למחוק הוצאה זו.");
                 }

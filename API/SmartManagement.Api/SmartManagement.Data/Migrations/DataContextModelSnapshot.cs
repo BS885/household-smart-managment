@@ -22,6 +22,27 @@ namespace SmartManagement.Data.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
+            modelBuilder.Entity("SmartManagement.Core.Models.CategoryExpenseAndIncome", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CategoriesExpenseAndIncome");
+                });
+
             modelBuilder.Entity("SmartManagement.Core.Models.ExpenseAndIncome", b =>
                 {
                     b.Property<int>("Id")
@@ -30,7 +51,7 @@ namespace SmartManagement.Data.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Category")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
@@ -43,10 +64,7 @@ namespace SmartManagement.Data.Migrations
                     b.Property<int?>("FixedExpenseAndIncomeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdFile")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUser")
+                    b.Property<int?>("IdTransactionDocument")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Sum")
@@ -55,7 +73,12 @@ namespace SmartManagement.Data.Migrations
                     b.Property<int>("TypeTransaction")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("ExpensesAndIncomes");
                 });
@@ -68,7 +91,7 @@ namespace SmartManagement.Data.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Category")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("DayOfMonth")
@@ -84,6 +107,9 @@ namespace SmartManagement.Data.Migrations
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<int>("TypeTransaction")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -111,9 +137,6 @@ namespace SmartManagement.Data.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<int>("FileType")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FolderId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -175,6 +198,17 @@ namespace SmartManagement.Data.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("SmartManagement.Core.Models.ExpenseAndIncome", b =>
+                {
+                    b.HasOne("SmartManagement.Core.Models.CategoryExpenseAndIncome", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

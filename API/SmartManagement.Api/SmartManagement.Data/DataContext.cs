@@ -14,6 +14,7 @@ namespace SmartManagement.Data
         public DbSet<ExpenseAndIncome> ExpensesAndIncomes { get; set; }
         public DbSet<FixedExpenseAndIncome> FixedExpensesAndIncomes { get; set; }
         public DbSet<TransactionDocument> TransactionDocuments { get; set; }
+        public DbSet<CategoryExpenseAndIncome> CategoriesExpenseAndIncome { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 

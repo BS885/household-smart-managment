@@ -38,7 +38,7 @@ namespace SmartManagement.Data.Repositories
             return result;
         }
 
-        public async Task UpdateExpenseAsync(int expenseId, DateTime date, CategoriesIncomeAndExpense category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId)
+        public async Task UpdateExpenseAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId)
         {
             try
             {
@@ -99,23 +99,27 @@ namespace SmartManagement.Data.Repositories
             }
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoriesIncomeAndExpense category)
+        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoryExpenseAndIncome category)
         {
             _logger.LogInformation($"get expenses by category {category}");
-            return await _context.ExpensesAndIncomes.Where(e => e.Category == category).ToListAsync();
+
+            return await _context.ExpensesAndIncomes
+                .Include(e => e.Category) // טוען את הנווטות
+                .Where(e => e.Category.Id == category.Id)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByDateRangeAsync(DateTime startDate, DateTime endDate,int userID)
         {
             _logger.LogInformation($"get expenses by date range {startDate} - {endDate}");
 
-            return await _context.ExpensesAndIncomes.Where(e =>  e.IdUser==userID &&e.Date >= startDate && e.Date <= endDate).ToListAsync();
+            return await _context.ExpensesAndIncomes.Where(e =>  e.UserId == userID &&e.Date >= startDate && e.Date <= endDate).ToListAsync();
         }
 
         public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByUserIdAsync(int userId)
         {
             return await _context.ExpensesAndIncomes
-                                 .Where(e => e.IdUser == userId)
+                                 .Where(e => e.UserId == userId)
                                  .ToListAsync();
         }
     }

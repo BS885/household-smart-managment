@@ -23,7 +23,7 @@ namespace SmartManagement.Service.Services
             _logger = logger;
         }
 
-        public async Task<int> AddExpenseAsync(DateTime date, CategoriesIncomeAndExpense category, int userId, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId)
+        public async Task<int> AddExpenseAsync(DateTime date, CategoryExpenseAndIncome category, int userId, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace SmartManagement.Service.Services
                 {
                     Date = date,
                     Category = category,
-                    IdUser = userId,
+                    UserId = userId,
                     Description = description,
                     TypeTransaction = typeTransaction,
                     Sum = sum,
@@ -49,7 +49,7 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task UpdateExpenseAsync(int expenseId, DateTime date, CategoriesIncomeAndExpense category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId)
+        public async Task UpdateExpenseAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace SmartManagement.Service.Services
             return await _expenseRepository.GetExpensesByUserIdAsync(userId);
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoriesIncomeAndExpense category)
+        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoryExpenseAndIncome category)
         {
             try
             {

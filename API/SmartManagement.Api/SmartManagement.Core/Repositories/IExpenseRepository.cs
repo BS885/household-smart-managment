@@ -14,7 +14,7 @@ namespace SmartManagement.Core.Repositories
 
         Task<ExpenseAndIncome> FindExpenseById(int id);
 
-        Task UpdateExpenseAsync(int expenseId, DateTime date, CategoriesIncomeAndExpense category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId);
+        Task UpdateExpenseAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId);
 
         Task<IEnumerable<ExpenseAndIncome>> GetAllExpensesAsync();
 
@@ -22,7 +22,7 @@ namespace SmartManagement.Core.Repositories
 
         Task DeleteExpenseAsync(int expenseId);
 
-        Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoriesIncomeAndExpense category);
+        Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoryExpenseAndIncome category);
 
         Task<IEnumerable<ExpenseAndIncome>> GetExpensesByDateRangeAsync(DateTime startDate, DateTime endDate, int userID);
     }

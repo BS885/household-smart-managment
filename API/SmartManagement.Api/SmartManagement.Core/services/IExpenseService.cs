@@ -10,9 +10,9 @@ namespace SmartManagement.Core.services
 {
     public interface IExpenseService
     {
-        Task<int> AddExpenseAsync(DateTime date, CategoriesIncomeAndExpense category, int userId, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId);
+        Task<int> AddExpenseAsync(DateTime date, CategoryExpenseAndIncome category, int userId, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId);
 
-        Task UpdateExpenseAsync(int expenseId, DateTime date, CategoriesIncomeAndExpense category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId);
+        Task UpdateExpenseAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId);
 
         Task<ExpenseAndIncome> GetExpenseByIdAsync(int expenseId);
 
@@ -20,7 +20,7 @@ namespace SmartManagement.Core.services
 
         Task DeleteExpenseAsync(int expenseId);
 
-        Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoriesIncomeAndExpense category);
+        Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoryExpenseAndIncome category);
 
         Task<IEnumerable<ExpenseAndIncome>> GetExpensesByDateRangeAsync(DateTime startDate, DateTime endDate, int userID);
 
