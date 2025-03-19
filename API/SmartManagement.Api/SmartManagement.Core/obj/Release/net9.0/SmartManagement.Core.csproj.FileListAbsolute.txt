@@ -1,0 +1,13 @@
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\bin\Release\net9.0\SmartManagement.Core.deps.json
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\bin\Release\net9.0\SmartManagement.Core.dll
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\bin\Release\net9.0\SmartManagement.Core.pdb
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\obj\Release\net9.0\SmartManagement.Core.csproj.AssemblyReference.cache
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\obj\Release\net9.0\SmartManagement.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\obj\Release\net9.0\SmartManagement.Core.AssemblyInfoInputs.cache
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\obj\Release\net9.0\SmartManagement.Core.AssemblyInfo.cs
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\obj\Release\net9.0\SmartManagement.Core.csproj.CoreCompileInputs.cache
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\obj\Release\net9.0\SmartManagement.Core.sourcelink.json
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\obj\Release\net9.0\SmartManagement.Core.dll
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\obj\Release\net9.0\refint\SmartManagement.Core.dll
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\obj\Release\net9.0\SmartManagement.Core.pdb
+C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Core\obj\Release\net9.0\ref\SmartManagement.Core.dll
