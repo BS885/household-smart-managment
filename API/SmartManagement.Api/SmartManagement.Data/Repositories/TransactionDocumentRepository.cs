@@ -17,6 +17,7 @@ namespace SmartManagement.Data.Repositories
         {
             _context = context;
         }
+
         public async Task<TransactionDocument> GetByIdAsync(int id)
         {
             return await _context.TransactionDocuments.FirstOrDefaultAsync(u => u.Id == id && u.IsDeleted == false);

@@ -19,7 +19,14 @@ namespace SmartManagement.Service.services
         private readonly ILogger<S3Service> _logger;
         public S3Service(IAmazonS3 s3Client, IConfiguration configuration, ILogger<S3Service> logger)
         {
-            _s3Client = s3Client;
+            var accessKey = configuration["AWS:AccessKey"];
+            var secretKey = configuration["AWS:SecretKey"];
+            var region = configuration["AWS:Region"];
+
+            var credentials = new Amazon.Runtime.BasicAWSCredentials(accessKey, secretKey);
+            var config = new AmazonS3Config { RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(region) };
+
+            _s3Client = new AmazonS3Client(credentials, config);
             _bucketName = configuration["AWS:BucketName"];
             _logger = logger;
         }

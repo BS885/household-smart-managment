@@ -146,6 +146,7 @@ namespace SmartManagement.Service.Services
                 throw;
             }
         }
+
     }
 }
 

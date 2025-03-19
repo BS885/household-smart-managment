@@ -15,11 +15,13 @@ namespace SmartManagement.Service.Services
        
         private readonly ITransactionDocumentRepository _transactionDocumentRepository;
         private readonly ILogger<TransactionDocumentService> _logger;
+        private readonly IExpenseService _expenseService;
 
-        public TransactionDocumentService(ITransactionDocumentRepository transactionDocumentRepository, ILogger<TransactionDocumentService> logger)
+        public TransactionDocumentService(ITransactionDocumentRepository transactionDocumentRepository, ILogger<TransactionDocumentService> logger, IExpenseService expenseService)
         {
             _transactionDocumentRepository = transactionDocumentRepository;
             _logger = logger;
+            _expenseService = expenseService;
         }
 
         public async Task<TransactionDocument> GetTransactionDocumentByIdAsync(int id)
@@ -36,18 +38,30 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task<IEnumerable<TransactionDocument>> GetAllTransactionDocumentsAsync()
+        public async Task<TransactionDocument> GetTransactionDocumentByTransactionIdAsync(int transactionID)
         {
-            try
+            var expens = await _expenseService.GetExpenseByIdAsync(transactionID);
+            if (expens == null)
             {
-                _logger.LogInformation("Getting all transaction documents");
-                return await _transactionDocumentRepository.GetAllAsync();
+                var errorMessage = $"Expense not found for transaction ID: {transactionID}";
+                _logger.LogError(errorMessage);
+                throw new Exception(errorMessage);
             }
-            catch (Exception ex)
+            if (!expens.IdTransactionDocument.HasValue)
             {
-                _logger.LogError(ex, "Error getting all transaction documents");
-                throw;
+                var errorMessage = $"Transaction document ID is null for expense with ID: {expens.Id}";
+                _logger.LogError(errorMessage);
+                throw new Exception(errorMessage);
             }
+            var file = await _transactionDocumentRepository.GetByIdAsync(expens.IdTransactionDocument.Value);
+            if (file == null)
+            {
+                var errorMessage = $"Transaction document not found for ID: {expens.IdTransactionDocument}";
+                _logger.LogError(errorMessage);
+                throw new Exception(errorMessage);
+            }
+
+            return file;
         }
 
         public async Task AddTransactionDocumentAsync(TransactionDocument transactionDocument)

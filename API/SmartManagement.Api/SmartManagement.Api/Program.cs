@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Amazon.S3;
+using SmartManagement.Service.services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,12 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITransactionDocumentService, TransactionDocumentService>();
+builder.Services.AddScoped<Is3Service, S3Service>();
+builder.Services.AddScoped<ITransactionDocumentRepository, TransactionDocumentRepository>();
+builder.Services.AddScoped<ITransactionDocumentService,TransactionDocumentService>();
+builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
+builder.Services.AddScoped<IExpenseService, ExpenseService>();
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseMySql(builder.Configuration["ConnectionStrings:DefaultConnection"],

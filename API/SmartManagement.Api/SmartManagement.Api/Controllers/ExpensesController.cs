@@ -45,12 +45,6 @@ namespace SmartManagement.Api.Controllers
                     expenseDto.FixedExpenseAndIncomeId
                 );
 
-                //if (expenseDto.File != null)
-                //{
-                //    var presignedUrl = await _S3FileService.GetPresignedUrlAsync(expenseDto.File.FileName, expenseDto.File.ContentType);
-                //    return Ok(new { expenseId, presignedUrl });
-                //}
-
                 return Ok(new { expenseId });
             }
             catch (Exception ex)
