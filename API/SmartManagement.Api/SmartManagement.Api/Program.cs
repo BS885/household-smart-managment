@@ -26,7 +26,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddDbContext<DataContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+    options.UseMySql(builder.Configuration["ConnectionStrings:DefaultConnection"],
         new MySqlServerVersion(new Version(8, 0, 41))));
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
