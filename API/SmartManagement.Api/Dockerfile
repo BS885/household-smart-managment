@@ -27,6 +27,6 @@ USER appuser
 
 # חשיפת הפורט והגדרתו לפי Render (ברוב המקרים זה יהיה $PORT)
 ENV ASPNETCORE_URLS=http://+:$PORT
-EXPOSE 5000
+EXPOSE 5014
 
 ENTRYPOINT ["dotnet", "SmartManagement.Api.dll"]
