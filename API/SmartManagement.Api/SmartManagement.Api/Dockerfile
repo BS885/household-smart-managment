@@ -5,7 +5,7 @@ FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0-alpine AS build
 
 WORKDIR /source
 
-COPY . .
+COPY . . 
 
 WORKDIR /source/SmartManagement.Api
 
@@ -25,8 +25,9 @@ COPY --from=build /app .
 RUN adduser -D appuser
 USER appuser
 
-# חשיפת הפורט והגדרתו לפי Render (ברוב המקרים זה יהיה $PORT)
-ENV ASPNETCORE_URLS=http://+:$PORT
-EXPOSE 5014
+# חשיפת הפורט והגדרת ASPNETCORE_URLS ל-HTTP על פורט 80
+ENV ASPNETCORE_URLS=http://+:80
+EXPOSE 80
 
+# קביעת הפקודה להרצה
 ENTRYPOINT ["dotnet", "SmartManagement.Api.dll"]
