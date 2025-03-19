@@ -72,4 +72,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5014";
+
 app.Run();
