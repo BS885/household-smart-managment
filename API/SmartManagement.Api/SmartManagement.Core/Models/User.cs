@@ -22,6 +22,6 @@ namespace SmartManagement.Core.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public Role RoleUser { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
     }
 }

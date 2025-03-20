@@ -23,38 +23,32 @@ namespace SmartManagement.Api.Controllers
             _authService = authService;
         }
 
-        [HttpPost("login")] 
+        [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest loginRequest)
         {
-            User user = _authService.Login(loginRequest);
-            if (user != null)
+            try
             {
-                var claims = new List<Claim>()
+                string token = _authService.Login(loginRequest);
+
+                if (token != null)
                 {
-                    new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(ClaimTypes.Email, user.Email)
-                };
-                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("JWT:Key")));
-                var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-                var tokeOptions = new JwtSecurityToken(
-                    issuer: _configuration.GetValue<string>("JWT:Issuer"),
-                    audience: _configuration.GetValue<string>("JWT:Audience"),
-                    claims: claims,
-                    expires: DateTime.Now.AddMinutes(6),
-                    signingCredentials: signingCredentials
-                );
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-                return Ok(new { Token = tokenString });
+                    return Ok(new { Token = token });
+                }
+
+                return Unauthorized(new { Message = "Invalid username or password" });
             }
-            return Unauthorized();
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while processing your request.", Error = ex.Message });
+            }
         }
 
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterUserDto userRegister)
         {
             try
-            { 
-               var user= _authService.Register(userRegister);
+            {
+                var user = _authService.Register(userRegister);
 
                 return CreatedAtAction(nameof(Register), new { email = user.Email }, user);
             }
@@ -65,4 +59,3 @@ namespace SmartManagement.Api.Controllers
         }
     }
 }
-    

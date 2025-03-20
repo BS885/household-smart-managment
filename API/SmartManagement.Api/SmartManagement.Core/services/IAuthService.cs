@@ -10,7 +10,8 @@ namespace SmartManagement.Core.services
 {
     public interface IAuthService
     {
-        User Login(LoginRequest loginRequest);
+        string Login(LoginRequest loginRequest);
         User Register(RegisterUserDto userRegister);
+        string GenerateJwtToken(User user);
     }
 }

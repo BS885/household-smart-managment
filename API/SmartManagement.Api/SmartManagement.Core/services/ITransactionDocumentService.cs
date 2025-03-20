@@ -10,7 +10,7 @@ namespace SmartManagement.Core.services
     public interface ITransactionDocumentService
     {
         Task<TransactionDocument> GetTransactionDocumentByIdAsync(int id);
-        Task<TransactionDocument> GetTransactionDocumentByTransactionIdAsync(int transactionID);
+        //Task<TransactionDocument> GetTransactionDocumentByTransactionIdAsync(int transactionID);
         Task AddTransactionDocumentAsync(TransactionDocument transactionDocument);
         Task UpdateTransactionDocumentAsync(TransactionDocument transactionDocument);
         Task DeleteTransactionDocumentAsync(int id);

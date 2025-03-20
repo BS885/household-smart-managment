@@ -33,7 +33,7 @@ namespace SmartManagement.Data.Repositories
 
         public async Task<ExpenseAndIncome> FindExpenseById(int id)
         {
-            var result = await _context.ExpensesAndIncomes.FindAsync(id);
+            var result = await _context.ExpensesAndIncomes.Include(e => e.Category).FirstOrDefaultAsync(e => e.Id == id);
             _logger.LogInformation($"find expense by Id");
             return result;
         }
@@ -113,14 +113,13 @@ namespace SmartManagement.Data.Repositories
         {
             _logger.LogInformation($"get expenses by date range {startDate} - {endDate}");
 
-            return await _context.ExpensesAndIncomes.Where(e =>  e.UserId == userID &&e.Date >= startDate && e.Date <= endDate).ToListAsync();
+            return await _context.ExpensesAndIncomes.Where(e =>  e.UserId == userID &&e.Date >= startDate && e.Date <= endDate).Include(e=>e.Category).ToListAsync();
         }
 
         public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByUserIdAsync(int userId)
         {
             return await _context.ExpensesAndIncomes
-                                 .Where(e => e.UserId == userId)
-                                 .ToListAsync();
+                                 .Where(e => e.UserId == userId).Include(e => e.Category).ToListAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SmartManagement.Core.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartManagement.Core.DTOs;
 using SmartManagement.Core.Models;
 using SmartManagement.Core.Repositories;
 using System;
@@ -20,17 +21,17 @@ namespace SmartManagement.Data.Repositories
 
         public User GetUserByEmail(string email)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Email == email);
-            if (user == null)
-            {
-                return null;
-            }
-            return user;
+            return _context.Users
+                .Include(u => u.UserRoles)
+                .ThenInclude(ur => ur.Role)
+                .ThenInclude(r => r.RolePermissions)
+                .ThenInclude(rp => rp.Permission)
+                .FirstOrDefault(u => u.Email == email);
         }
 
         public User GetUserById(int id)
         {
-            var user = _context.Users.FirstOrDefault(u=>u.UserId == id);
+            var user = _context.Users.FirstOrDefault(u => u.UserId == id);
             return user;
         }
 

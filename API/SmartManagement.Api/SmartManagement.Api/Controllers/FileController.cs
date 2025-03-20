@@ -33,23 +33,23 @@ namespace SmartManagement.Api.Controllers
             }
         }
 
-        [HttpGet("transaction/{transactionId}")]
-        public async Task<IActionResult> GetTransactionDocumentByTransactionIdAsync(int transactionId)
-        {
-            try
-            {
-                var document = await _transactionDocumentService.GetTransactionDocumentByTransactionIdAsync(transactionId);
-                if (document == null)
-                {
-                    return NotFound($"Transaction document for transaction ID {transactionId} not found.");
-                }
-                return Ok(document);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error retrieving transaction document for transaction ID {transactionId}: {ex.Message}");
-            }
-        }
+        //[HttpGet("transaction/{transactionId}")]
+        //public async Task<IActionResult> GetTransactionDocumentByTransactionIdAsync(int transactionId)
+        //{
+        //    try
+        //    {
+        //        var document = await _transactionDocumentService.GetTransactionDocumentByTransactionIdAsync(transactionId);
+        //        if (document == null)
+        //        {
+        //            return NotFound($"Transaction document for transaction ID {transactionId} not found.");
+        //        }
+        //        return Ok(document);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Error retrieving transaction document for transaction ID {transactionId}: {ex.Message}");
+        //    }
+        //}
 
         [HttpPost]
         public async Task<IActionResult> AddTransactionDocumentAsync([FromBody] TransactionDocument transactionDocument)

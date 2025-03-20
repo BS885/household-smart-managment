@@ -30,9 +30,6 @@ namespace SmartManagement.Core.DTOs
         [Required]
         [MinLength(6, ErrorMessage = "Password must be at least 6 characters long.")]
         public string Password { get; set; }
-
-        [Required]
-        public Role RoleUser { get; set; }
     }
 
 }

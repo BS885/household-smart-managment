@@ -17,7 +17,7 @@ namespace SmartManagement.Core.Models
         public TransactionType TypeTransaction { get; set; }
         public decimal Sum { get; set; }
         public int DayOfMonth { get; set; }
-        [ForeignKey(nameof(UserId))]
-        public int UserId { get; set; }
+        public User User { get; set; }
+        public int UserId { get; set; } 
     }
 }
