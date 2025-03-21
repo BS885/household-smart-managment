@@ -12,7 +12,9 @@ namespace SmartManagement.Service.Services
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
         {
-            if (context.User.HasClaim(c => c.Type == "Permission" && c.Value == requirement.Permission))
+            var userPermissions = context.User.FindAll("Permission").Select(c => c.Value).ToList();
+
+            if (userPermissions.Contains(requirement.Permission))
             {
                 context.Succeed(requirement);
             }

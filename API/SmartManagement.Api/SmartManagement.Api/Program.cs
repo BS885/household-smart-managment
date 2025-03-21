@@ -13,6 +13,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Amazon.S3;
 using SmartManagement.Service.services;
+using SmartManagement.Core.Security;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,7 @@ builder.Services.AddScoped<ITransactionDocumentRepository, TransactionDocumentRe
 builder.Services.AddScoped<ITransactionDocumentService,TransactionDocumentService>();
 builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
+builder.Services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseMySql(builder.Configuration["ConnectionStrings:DefaultConnection"],
@@ -42,24 +45,29 @@ builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.Authority = "https://localhost:7074";
-        options.Audience = "https://localhost:7074";
-        options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new TokenValidationParameters
+        .AddJwtBearer(options =>
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-        };
-    });
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidIssuer = builder.Configuration["JWT:Issuer"],
+                ValidAudience = builder.Configuration["JWT:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
+            };
+        });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Users.Update", policy =>
+    policy.RequireClaim("Permission", "Users.Update"));
 
-builder.Services.AddAuthorization();
+    options.AddPolicy("AdminOnly", policy =>
+        policy.RequireRole("Admin"));
+});
+
+
+//builder.Services.AddAuthorization();
 
 builder.Services.AddAWSService<IAmazonS3>();
 

@@ -14,25 +14,28 @@ namespace SmartManagement.Api.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly ILogger<UserController> _logger;
+        public UserController(IUserService userService, ILogger<UserController> logger)
         {
 
             _userService = userService;
+            _logger = logger;
         }
 
-       
+
         [HttpPut("{id}")]
-        [Authorize]
+        [Authorize(Policy = "Users.Update")]
         public IActionResult UpdateProfile([FromBody] UpdateUserDto updateProfileDto, string id)
         {
+            _logger.LogInformation("enter");
+
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (userId != id)
             {
-
-                return Forbid("token not valid");
+                _logger.LogInformation("userId" + id);
+                return Unauthorized("token not valid");
             }
-
             try
             {
                 _userService.UpdateUser(
