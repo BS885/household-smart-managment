@@ -20,12 +20,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteExpenseAsync, loadExpenses } from "../redux/ExpenseSlice";
-import { AppDispatch, RootState } from "../redux/store";
-import { Expense } from "../models/Expense";
+import { deleteExpenseAsync, loadExpenses } from "../../redux/ExpenseSlice";
+import { AppDispatch, RootState } from "../../redux/store";
+import { Expense } from "../../models/Expense";
 import AddExpense from "./AddExpense";
 import EditExpense from "./EditExpense";
-import useSortedExpenses from "../CustemHooks/useSortedExpenses ";
+import useSortedExpenses from "../../CustemHooks/useSortedExpenses ";
 
 const ExpenseTracker = () => {
   const dispatch = useDispatch<AppDispatch>();

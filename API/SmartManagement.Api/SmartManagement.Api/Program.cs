@@ -15,6 +15,10 @@ using Amazon.S3;
 using SmartManagement.Service.services;
 using SmartManagement.Core.Security;
 using Microsoft.AspNetCore.Authorization;
+using Amazon.Runtime;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Amazon;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,15 +41,9 @@ builder.Services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
-//builder.Services.AddDbContext<DataContext>(options =>
-//    options.UseMySql(builder.Configuration["ConnectionStrings:DefaultConnection"],
-//        new MySqlServerVersion(new Version(8, 0, 41))));
-
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     new MySqlServerVersion(new Version(8, 0, 41))));
-
-
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -65,16 +63,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
             };
         });
-builder.Services.AddAuthorization(options =>
+
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy("Users.Update", policy =>
-    policy.RequireClaim("Permission", "Users.Update"));
-
-    options.AddPolicy("AdminOnly", policy =>
-        policy.RequireRole("Admin"));
+    options.AddPolicy("AllowSpecificOrigin", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173", "https://household-smart-managment.onrender.com")
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
 });
-
-
 //builder.Services.AddAuthorization();
 
 builder.Services.AddAWSService<IAmazonS3>();
@@ -95,6 +93,27 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
     });
 
+var awsOptions = builder.Configuration.GetSection("AWS");
+string region = awsOptions["Region"] ?? "us-east-1";
+string accessKeyId = awsOptions["AccessKey"];
+string secretAccessKey = awsOptions["SecretKey"];
+
+if (string.IsNullOrEmpty(accessKeyId) || string.IsNullOrEmpty(secretAccessKey))
+{
+    throw new InvalidOperationException("AWS credentials are missing from appsettings.json.");
+}
+
+builder.Services.AddSingleton<IAmazonS3>(sp =>
+{
+    var options = new AmazonS3Config
+    {
+        RegionEndpoint = RegionEndpoint.GetBySystemName(region)
+    };
+
+    var credentials = new BasicAWSCredentials(accessKeyId, secretAccessKey);
+    return new AmazonS3Client(credentials, options);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -103,10 +122,10 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseCors("AllowSpecificOrigin");
-
 
 app.UseAuthentication();
 
@@ -114,6 +133,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5014";
 
 app.Run();

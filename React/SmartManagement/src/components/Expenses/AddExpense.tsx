@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
-import { AppDispatch, RootState } from '../redux/store';
+import { AppDispatch, RootState } from '../../redux/store';
 import { useEffect } from 'react';
-import { fetchCategories } from '../redux/categoriesSlice';
-import { addExpenseAsync, loadExpenses } from '../redux/ExpenseSlice';
-import { Expense } from '../models/Expense';
+import { fetchCategories } from '../../redux/categoriesSlice';
+import { addExpenseAsync, loadExpenses } from '../../redux/ExpenseSlice';
+import { Expense } from '../../models/Expense';
+import { uploadFile } from '../../redux/FileSlice';
 
 const AddExpense = ({ onClose }: { onClose: Function }) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,6 +29,10 @@ const AddExpense = ({ onClose }: { onClose: Function }) => {
       category: expenseData.category,
       description: expenseData.description,
     };
+    if(expenseData.file) {
+      console.log('File:', expenseData.file);
+      dispatch(uploadFile(expenseData.file));
+    }
 
     return dispatch(addExpenseAsync(newExpense)) // כאן הוספנו return
       .unwrap()

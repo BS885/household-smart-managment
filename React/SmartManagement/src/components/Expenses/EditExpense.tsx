@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../redux/store";
 import { useEffect } from "react";
-import { fetchCategories } from "../redux/categoriesSlice";
-import { Expense } from "../models/Expense";
-import { loadExpenses, updateExpenseAsync } from "../redux/ExpenseSlice";
+import { RootState } from "../../redux/store";
+import { Expense } from "../../models/Expense";
+import { fetchCategories } from "../../redux/categoriesSlice";
+import { updateExpenseAsync, loadExpenses } from "../../redux/ExpenseSlice";
+import { AppDispatch } from "../../redux/store";
 import ExpenseForm from "./ExpenseForm";
+
 
 const EditExpense = ({ onClose, expense }: { onClose: Function, expense: Expense }) => {
     const dispatch = useDispatch<AppDispatch>();

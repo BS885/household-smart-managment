@@ -27,7 +27,6 @@ namespace SmartManagement.Api.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest loginRequest)
         {
-            Console.WriteLine("enter");
             try
             {
                 LoginResult result = _authService.Login(loginRequest);

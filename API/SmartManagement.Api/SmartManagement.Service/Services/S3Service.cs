@@ -74,13 +74,15 @@ namespace SmartManagement.Service.services
         {
             try
             {
+               _logger.LogInformation($"Generating presigned URL for file: {fileName} backet Name: {_bucketName}");
+
                 var request = new GetPreSignedUrlRequest
                 {
                     BucketName = _bucketName,
                     Key = fileName,
                     Verb = HttpVerb.PUT,
-                    Expires = DateTime.UtcNow.AddMinutes(10),
-                    ContentType = contentType
+                    Expires = DateTime.UtcNow.AddMinutes(5),
+                    ContentType = "png/pdf"
                 };
 
                 string url = await Task.Run(() => _s3Client.GetPreSignedURL(request));
