@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SmartManagement.Data</id>
+    <version>1.0.0</version>
+    <authors>SmartManagement.Data</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="e40bea01b056e4803293deeff85aa69b74351b8c" />
+    <dependencies>
+      <group targetFramework="net9.0">
+        <dependency id="SmartManagement.Core" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="AWSSDK.S3" version="3.7.415.18" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore" version="8.0.13" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.Abstractions" version="9.0.3" exclude="Build,Analyzers" />
+        <dependency id="Pomelo.EntityFrameworkCore.MySql" version="8.0.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\bin\Debug\net9.0\SmartManagement.Data.dll" target="lib\net9.0\SmartManagement.Data.dll" />
+  </files>
+</package>
