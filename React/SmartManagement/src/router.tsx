@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import RegistrationForm from "./components/RegistrationForm";
 import Login from "./components/Login";
 import AppLayout from "./components/AppLayout";
@@ -13,10 +13,7 @@ export const router = createBrowserRouter([
         element: <AppLayout />, // Header will always be present
         errorElement: <h1>Error</h1>,
         children: [
-        // {
-        //     index: true, // This makes it the default child route
-        //     element: <Navigate to="/graphs" replace />
-        // },
+
             { path: "reports", element: <Reports /> },
             { path: "income-management", element: <InComeTracker /> },
             { path: "expense-management", element: <ExpenseTracker /> },
