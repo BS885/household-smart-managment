@@ -8,7 +8,7 @@ import { Visibility, VisibilityOff, AccountCircle, Email, Phone, Lock, ArrowBack
 import { AppDispatch } from '../redux/store';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../redux/userSlice';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 const RegistrationForm = () => {
     const dispatch: AppDispatch = useDispatch();
     // ניהול שלבי הרשמה
@@ -19,7 +19,7 @@ const RegistrationForm = () => {
     const [serverError, setServerError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [openSnackbar, setOpenSnackbar] = useState(false);
-
+    const navigate=useNavigate();
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -163,7 +163,7 @@ const RegistrationForm = () => {
                     // הצגת הודעת הצלחה
                     setSuccessMessage('ההרשמה הושלמה בהצלחה!');
                     setOpenSnackbar(true);
-
+                    navigate('/'); // מעבר לדף התחברות לאחר הרשמה מוצלחת
                     // איפוס טופס לאחר הרשמה מוצלחת
                     setFormData({
                         Name: '', email: '', phone: '', address: '', city: '', password: '', confirmPassword: '', agreeTerms: false

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
+using SmartManagement.Core.DTOs;
 using SmartManagement.Core.Models;
 using SmartManagement.Core.Repositories;
 using SmartManagement.Core.services;
@@ -12,17 +14,18 @@ namespace SmartManagement.Service.Services
 {
     public class TransactionDocumentService : ITransactionDocumentService
     {
-       
+
         private readonly ITransactionDocumentRepository _transactionDocumentRepository;
         private readonly ILogger<TransactionDocumentService> _logger;
-        private readonly IExpenseService _expenseService;
+        private readonly IMapper _mapper;
 
-        public TransactionDocumentService(ITransactionDocumentRepository transactionDocumentRepository, ILogger<TransactionDocumentService> logger, IExpenseService expenseService)
+        public TransactionDocumentService(ITransactionDocumentRepository transactionDocumentRepository, ILogger<TransactionDocumentService> logger, IMapper mapper)
         {
             _transactionDocumentRepository = transactionDocumentRepository;
             _logger = logger;
-            _expenseService = expenseService;
+            _mapper = mapper;
         }
+
 
         public async Task<TransactionDocument> GetTransactionDocumentByIdAsync(int id)
         {
@@ -64,16 +67,18 @@ namespace SmartManagement.Service.Services
         //    return file;
         //}
 
-        public async Task AddTransactionDocumentAsync(TransactionDocument transactionDocument)
+        public async Task<TransactionDocument> AddTransactionDocumentAsync(FileDto transactionDocument)
         {
             try
             {
-                _logger.LogInformation($"Adding transaction document with ID: {transactionDocument.Id}");
-                await _transactionDocumentRepository.AddAsync(transactionDocument);
+                _logger.LogInformation($"Adding transaction document with ");
+                var file = _mapper.Map<TransactionDocument>(transactionDocument);
+                await _transactionDocumentRepository.AddAsync(file);
+                return file;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error adding transaction document with ID: {transactionDocument.Id}");
+                _logger.LogError(ex, $"Error adding transaction document ");
                 throw;
             }
         }
@@ -100,7 +105,7 @@ namespace SmartManagement.Service.Services
                 var document = await _transactionDocumentRepository.GetByIdAsync(id);
                 if (document != null)
                 {
-                    document.IsDeleted = true;
+                    //document.IsDeleted = true;
                     document.UpdatedAt = DateTime.UtcNow;
                     await _transactionDocumentRepository.UpdateAsync(document);
                 }

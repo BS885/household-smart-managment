@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Expense } from "../models/Expense";
+import { Expense, ExpenseToSave, FileState } from "../models/Expense";
 import api from "./api";
 
 interface ExpenseState {
@@ -23,7 +23,28 @@ export const loadExpenses = createAsyncThunk("expenses/loadExpenses", async () =
 export const addExpenseAsync = createAsyncThunk("expenses/addExpense", async (expense: Omit<Expense, "id">) => {
   const response = await api.post("/expenses", expense);
   console.log(response.data);
-  return response.data; 
+  return response.data;
+});
+
+export const addWithFileExpenseAsync = createAsyncThunk("expenses/addExpense", async ({ expense, file }: { expense: Omit<Expense, "id">; file: FileState }) => {
+  const expenseAndFile = {
+
+    Date: new Date(expense.date).toISOString().split('T')[0],
+    Category: expense.category,
+    Description: expense.description,
+    Sum: expense.sum,
+    file: true,
+    FileName: file.fileName,
+    FileType: file.fileType,
+    Filesize: file.fileSize.toString(),
+  };
+
+  console.log("Sending request with data:", expenseAndFile);
+
+  const response = await api.post("/expenses", expenseAndFile);
+
+  console.log(response.data);
+  return response.data;
 });
 
 export const updateExpenseAsync = createAsyncThunk("expenses/updateExpense", async (expense: Expense) => {

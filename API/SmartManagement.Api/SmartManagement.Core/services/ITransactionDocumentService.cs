@@ -1,4 +1,5 @@
-﻿using SmartManagement.Core.Models;
+﻿using SmartManagement.Core.DTOs;
+using SmartManagement.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace SmartManagement.Core.services
     {
         Task<TransactionDocument> GetTransactionDocumentByIdAsync(int id);
         //Task<TransactionDocument> GetTransactionDocumentByTransactionIdAsync(int transactionID);
-        Task AddTransactionDocumentAsync(TransactionDocument transactionDocument);
+        Task<TransactionDocument> AddTransactionDocumentAsync(FileDto transactionDocument);
         Task UpdateTransactionDocumentAsync(TransactionDocument transactionDocument);
         Task DeleteTransactionDocumentAsync(int id);
     }

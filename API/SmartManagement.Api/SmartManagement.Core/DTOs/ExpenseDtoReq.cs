@@ -15,5 +15,9 @@ namespace SmartManagement.Core.DTOs
         public string Category { get; set; }
         public string Description { get; set; }
         public decimal Sum { get; set; }
+        public bool file { get; set; } = false;
+        public string? FileType { get; set; } 
+        public string? FileName { get; set; } 
+        public string? Filesize { get; set; }
     }
 }

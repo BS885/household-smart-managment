@@ -31,12 +31,17 @@ namespace SmartManagement.Api.Controllers
                 var userId = _userService.GetUserIdFromToken(User);
 
                 var expenseId = await _expenseService.AddExpenseAsync(
+                    
                     expenseDto.Date,
                     expenseDto.Category,
                     int.Parse(userId),
                     expenseDto.Description,
                     TransactionType.UnFixedExpense,
                     expenseDto.Sum,
+                    expenseDto.file,
+                    expenseDto.FileType,
+                    expenseDto.FileName,
+                    expenseDto.Filesize,
                     null
                 );
 

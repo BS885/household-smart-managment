@@ -22,11 +22,9 @@ namespace SmartManagement.Data.Repositories
         public User GetUserByEmail(string email)
         {
             return _context.Users
-                .Include(u => u.UserRoles)
-                .ThenInclude(ur => ur.Role)
-                .ThenInclude(r => r.RolePermissions)
-                .ThenInclude(rp => rp.Permission)
-                .FirstOrDefault(u => u.Email == email);
+          .Include(ur => ur.Roles)
+           .ThenInclude(r => r.Permissions)
+           .FirstOrDefault(u => u.Email == email);
         }
 
         public User GetUserById(int id)

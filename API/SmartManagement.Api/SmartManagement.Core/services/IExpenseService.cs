@@ -12,7 +12,7 @@ namespace SmartManagement.Core.services
 {
     public interface IExpenseService
     {
-        Task<int> AddExpenseAsync(DateTime date, string category, int userId, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId);
+        Task<int> AddExpenseAsync(DateTime date, string category, int userId, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId);
 
         Task UpdateExpenseAsync(int expenseId, DateTime date, string category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId);
 

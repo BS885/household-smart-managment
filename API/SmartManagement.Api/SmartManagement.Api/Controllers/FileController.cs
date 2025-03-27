@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SmartManagement.Core.DTOs;
 using SmartManagement.Core.Models;
 using SmartManagement.Core.services;
 
@@ -52,12 +53,12 @@ namespace SmartManagement.Api.Controllers
         //}
 
         [HttpPost]
-        public async Task<IActionResult> AddTransactionDocumentAsync([FromBody] TransactionDocument transactionDocument)
+        public async Task<IActionResult> AddTransactionDocumentAsync([FromBody] FileDto transactionDocument)
         {
             try
             {
                 await _transactionDocumentService.AddTransactionDocumentAsync(transactionDocument);
-                return CreatedAtAction(nameof(GetTransactionDocumentByIdAsync), new { id = transactionDocument.Id }, transactionDocument);
+                return CreatedAtAction(nameof(GetTransactionDocumentByIdAsync), transactionDocument);
             }
             catch (Exception ex)
             {

@@ -18,6 +18,7 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { uploadFile } from '../../redux/FileSlice';
 
 interface ExpenseFormProps {
   onSubmit: (data: any) => Promise<void>;
@@ -32,7 +33,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit, categories, initial
     sum: "",
     category: "",
     description: "",
-    file: null as File | string | null
+    file: null as File | null
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -65,6 +66,38 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit, categories, initial
       setFormData(prev => ({ ...prev, file: e.target.files![0] }));
     }
   };
+
+//   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+//     if (e.target.files && e.target.files[0]) {
+//         const file = e.target.files[0];
+
+//         try {
+//             // כאן אתה צריך להעלות את הקובץ לשרת ולקבל את המידע הנדרש
+//             // נניח שאתה מקבל את הנתונים לאחר ההעלאה
+//             const uploadedFile = {
+//                 fileName: file.name,
+//                 fileType: file.type,
+//                 fileSize: file.size,
+//             };
+
+//             console.log("File uploaded successfully:", uploadedFile);
+
+//             setFormData(prev => ({
+//                 ...prev,
+//                 file: {
+//                     fileName: uploadedFile.fileName,
+//                     fileType: uploadedFile.fileType,
+//                     fileSize: uploadedFile.fileSize
+//                 }
+//             }));
+//         } catch (error) {
+//             console.error("File upload failed:", error);
+//             setErrors(prev => ({ ...prev, general: "שגיאה בהעלאת הקובץ" }));
+//         }
+//     }
+// };
+
+
 
   const handleRemoveFile = () => {
     setFormData(prev => ({ ...prev, file: null }));

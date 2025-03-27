@@ -20,13 +20,13 @@ namespace SmartManagement.Data.Repositories
 
         public async Task<TransactionDocument> GetByIdAsync(int id)
         {
-            return await _context.TransactionDocuments.FirstOrDefaultAsync(u => u.Id == id && u.IsDeleted == false);
+            return await _context.TransactionDocuments.FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<IEnumerable<TransactionDocument>> GetAllAsync()
         {
             return await _context.TransactionDocuments
-                    .Where(d => !d.IsDeleted)
+                    //.Where(d => !d.IsDeleted)
                     .ToListAsync();
         }
 
@@ -58,7 +58,7 @@ namespace SmartManagement.Data.Repositories
             var transactionDocument = await _context.TransactionDocuments.FindAsync(id);
             if (transactionDocument != null)
             {
-                transactionDocument.IsDeleted = true;
+                //transactionDocument.IsDeleted = true;
                 transactionDocument.UpdatedAt = DateTime.UtcNow;
                 await _context.SaveChangesAsync();
             }

@@ -4,8 +4,9 @@ import Login from "./components/Login";
 import AppLayout from "./components/AppLayout";
 import ExpenseTracker from "./components/Expenses/ExpenseTracker";
 import Reports from "./components/Expenses/Reports";
-import InComeTracker from "./ExpenseTracker";
-import Graphs from "./Graphs";
+import InComeTracker from "./components/InComeTracker";
+import Graphs from "./components/Graphs";
+
 
 export const router = createBrowserRouter([
     {

@@ -12,8 +12,8 @@ using SmartManagement.Data;
 namespace SmartManagement.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250324142849_TransactionDocument nullable")]
-    partial class TransactionDocumentnullable
+    [Migration("20250326082508_enter cateegories")]
+    partial class entercateegories
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,36 @@ namespace SmartManagement.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("PermissionRole", b =>
+                {
+                    b.Property<int>("PermissionsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RolesRoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PermissionsId", "RolesRoleId");
+
+                    b.HasIndex("RolesRoleId");
+
+                    b.ToTable("RolePermissions", (string)null);
+                });
+
+            modelBuilder.Entity("RoleUser", b =>
+                {
+                    b.Property<int>("RolesRoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolesRoleId", "UsersUserId");
+
+                    b.HasIndex("UsersUserId");
+
+                    b.ToTable("UserRoles", (string)null);
+                });
 
             modelBuilder.Entity("SmartManagement.Core.Models.CategoryExpenseAndIncome", b =>
                 {
@@ -50,6 +80,128 @@ namespace SmartManagement.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CategoriesExpenseAndIncome");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "קניות בסופר, מסעדות ובתי קפה",
+                            ISExpense = true,
+                            IsIncome = false,
+                            Name = "אוכל"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "דלק, תחבורה ציבורית, רכב",
+                            ISExpense = true,
+                            IsIncome = false,
+                            Name = "תחבורה"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "שכר דירה, משכנתא, חשבונות בית",
+                            ISExpense = true,
+                            IsIncome = false,
+                            Name = "דיור"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "קניית בגדים, נעליים ואביזרים",
+                            ISExpense = true,
+                            IsIncome = false,
+                            Name = "ביגוד והנעלה"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "ביטוח רפואי, תרופות, טיפולי שיניים",
+                            ISExpense = true,
+                            IsIncome = false,
+                            Name = "בריאות"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "קולנוע, תיאטרון, טיולים",
+                            ISExpense = true,
+                            IsIncome = false,
+                            Name = "בילויים ופנאי"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "שכר לימוד, ספרים, קורסים",
+                            ISExpense = true,
+                            IsIncome = false,
+                            Name = "חינוך"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "ריהוט, כלי בית, תחזוקה",
+                            ISExpense = true,
+                            IsIncome = false,
+                            Name = "מוצרים לבית"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "ארנונה, חשמל, מים, גז, אינטרנט",
+                            ISExpense = true,
+                            IsIncome = false,
+                            Name = "תשלומים חודשיים"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "הוצאות בלתי צפויות",
+                            ISExpense = true,
+                            IsIncome = false,
+                            Name = "שונות"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Description = "הכנסה מעבודה חודשית",
+                            ISExpense = false,
+                            IsIncome = true,
+                            Name = "משכורת"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Description = "רווחים מעסק עצמאי",
+                            ISExpense = false,
+                            IsIncome = true,
+                            Name = "הכנסה מעסק"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Description = "רווחים מהשקעות במניות, קרנות",
+                            ISExpense = false,
+                            IsIncome = true,
+                            Name = "השקעות"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Description = "הכנסות מביטוח לאומי, פנסיה",
+                            ISExpense = false,
+                            IsIncome = true,
+                            Name = "קצבאות"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Description = "הכנסות צדדיות, עבודות זמניות",
+                            ISExpense = false,
+                            IsIncome = true,
+                            Name = "הכנסות נוספות"
+                        });
                 });
 
             modelBuilder.Entity("SmartManagement.Core.Models.ExpenseAndIncome", b =>
@@ -152,7 +304,7 @@ namespace SmartManagement.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permission");
+                    b.ToTable("Permissions");
 
                     b.HasData(
                         new
@@ -235,21 +387,6 @@ namespace SmartManagement.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SmartManagement.Core.Models.RolePermission", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RoleId", "PermissionId");
-
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("RolePermission");
-                });
-
             modelBuilder.Entity("SmartManagement.Core.Models.TransactionDocument", b =>
                 {
                     b.Property<int>("Id")
@@ -330,19 +467,34 @@ namespace SmartManagement.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("SmartManagement.Core.Models.UserRole", b =>
+            modelBuilder.Entity("PermissionRole", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.HasOne("SmartManagement.Core.Models.Permission", null)
+                        .WithMany()
+                        .HasForeignKey("PermissionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.HasOne("SmartManagement.Core.Models.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RolesRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.HasKey("UserId", "RoleId");
+            modelBuilder.Entity("RoleUser", b =>
+                {
+                    b.HasOne("SmartManagement.Core.Models.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RolesRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("UserRoles");
+                    b.HasOne("SmartManagement.Core.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SmartManagement.Core.Models.ExpenseAndIncome", b =>
@@ -385,61 +537,6 @@ namespace SmartManagement.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SmartManagement.Core.Models.RolePermission", b =>
-                {
-                    b.HasOne("SmartManagement.Core.Models.Permission", "Permission")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SmartManagement.Core.Models.Role", "Role")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Permission");
-
-                    b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("SmartManagement.Core.Models.UserRole", b =>
-                {
-                    b.HasOne("SmartManagement.Core.Models.Role", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SmartManagement.Core.Models.User", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SmartManagement.Core.Models.Permission", b =>
-                {
-                    b.Navigation("RolePermissions");
-                });
-
-            modelBuilder.Entity("SmartManagement.Core.Models.Role", b =>
-                {
-                    b.Navigation("RolePermissions");
-
-                    b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("SmartManagement.Core.Models.User", b =>
-                {
-                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

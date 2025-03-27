@@ -62,6 +62,7 @@ namespace SmartManagement.Service.Services
             if (userRegister == null)
                 throw new ArgumentNullException(nameof(userRegister), "User cannot be null.");
 
+            // בדיקה אם המשתמש כבר קיים
             var existingUser = _userRepository.GetUserByEmail(userRegister.Email);
             if (existingUser != null)
             {
@@ -69,33 +70,30 @@ namespace SmartManagement.Service.Services
                 throw new InvalidOperationException("A user with this email already exists.");
             }
 
-            // מוודא שהתפקיד שנשלח קיים במערכת, אחרת ברירת מחדל ל-"USER"
-            if (userRegister == null)
-                throw new ArgumentNullException(nameof(userRegister), "User register DTO cannot be null.");
-
-           
+            // קביעת תפקיד למשתמש (ברירת מחדל: "User")
             var roleName = string.IsNullOrEmpty(userRegister.RoleName) ? "User" : userRegister.RoleName;
             _logger.LogInformation("Registering user with Role {RoleName}", roleName);
-            var role = _roleRepository.GetRoleByName(roleName);
 
+            // קבלת האובייקט Role מהמסד נתונים במקום יצירת אובייקט חדש
+            var role = _roleRepository.GetRoleByName(roleName);
             if (role == null)
             {
                 throw new InvalidOperationException($"Role '{roleName}' does not exist.");
             }
 
+            // מיפוי ה-DTO לאובייקט User
             var user = _mapper.Map<User>(userRegister);
 
-            // משייך את ה-Role למשתמש
-            user.UserRoles = new List<UserRole>
-            {
-                new UserRole { RoleId = role.RoleId, User = user }
-            };
+            // שיוך ה-Role הקיים למשתמש (במקום ליצור חדש)
+            user.Roles = new List<Role> { role };
 
+            // שמירת המשתמש במסד הנתונים
             _userRepository.AddUser(user);
             _logger.LogInformation("Added user with ID {UserId} and Role {RoleName}", user.UserId, roleName);
 
             return user;
         }
+
         public string GenerateJwtToken(User user)
         {
             var claims = new List<Claim>
@@ -106,15 +104,15 @@ namespace SmartManagement.Service.Services
             };
 
             // הוספת תפקידים כ-Claims
-            foreach (var role in user.UserRoles)
+            foreach (var role in user.Roles)
             {
-                claims.Add(new Claim(ClaimTypes.Role, role.Role.RoleName));
+                claims.Add(new Claim(ClaimTypes.Role, role.RoleName));
             }
 
             // הוספת הרשאות כ-Claims
-            var permissions = user.UserRoles
-                .SelectMany(ur => ur.Role.RolePermissions)
-                .Select(rp => rp.Permission.Name)
+            var permissions = user.Roles
+                .SelectMany(ur => ur.Permissions)
+                .Select(rp => rp.Name)
                 .Distinct();
 
             foreach (var permission in permissions)

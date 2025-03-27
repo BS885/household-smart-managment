@@ -287,7 +287,10 @@ const LoginForm = () => {
                     setLoginError("שגיאה בשרת. אנא נסה מאוחר יותר.");
                 } else if (error?.response?.status === 401) {
                     setLoginError("פרטי ההתחברות לא תקינים. אנא נסה שוב.");
-                } else {
+                } else if (error?.response?.status === 404) {
+                    setLoginError("המשתמש לא נמצא. אנא הירשם.");
+                }
+                else {
                     setLoginError("שגיאה לא צפויה. אנא נסה שוב.");
                 }
                 console.log("❌ שגיאת התחברות:", error?.message);

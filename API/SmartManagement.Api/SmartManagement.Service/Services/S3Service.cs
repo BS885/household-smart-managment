@@ -32,6 +32,7 @@ namespace SmartManagement.Service.services
                     BucketName = _bucketName,
                     Key = fileName,
                     Expires = DateTime.UtcNow.AddMinutes(10)
+
                 };
 
                 string url = await Task.Run(() => _s3Client.GetPreSignedURL(request));
@@ -82,10 +83,10 @@ namespace SmartManagement.Service.services
                     Key = fileName,
                     Verb = HttpVerb.PUT,
                     Expires = DateTime.UtcNow.AddMinutes(5),
-                    ContentType = "png/pdf"
+                    ContentType = contentType
                 };
 
-                string url = await Task.Run(() => _s3Client.GetPreSignedURL(request));
+                string url = await  _s3Client.GetPreSignedURLAsync(request);
                 _logger.LogInformation($"Generated presigned URL for file: {fileName}");
                 return url;
             }

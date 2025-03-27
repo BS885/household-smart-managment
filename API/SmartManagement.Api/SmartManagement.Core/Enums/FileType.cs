@@ -14,6 +14,7 @@ namespace SmartManagement.Core.Enums
         DOCX,
         XLSX,
         TXT,
+        jpeg,
         Other
     }
 }

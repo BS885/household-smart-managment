@@ -1,13 +1,107 @@
+// import { useDispatch, useSelector } from 'react-redux';
+// import ExpenseForm from './ExpenseForm';
+// import { AppDispatch, RootState } from '../../redux/store';
+// import { useEffect } from 'react';
+// import { fetchCategories } from '../../redux/categoriesSlice';
+// import { addExpenseAsync, addWithFileExpenseAsync, loadExpenses } from '../../redux/ExpenseSlice';
+// import { Expense } from '../../models/Expense';
+// import { uploadFile } from '../../redux/FileSlice';
+
+// const AddExpense = ({ onClose }: { onClose: Function }) => {
+//   const dispatch = useDispatch<AppDispatch>();
+//   const categories = useSelector((state: RootState) => state.categories.categories);
+//   const status = useSelector((state: RootState) => state.categories.status);
+
+//   // טוען את הקטגוריות כאשר הקומפוננטה נטענת
+//   useEffect(() => {
+//     if (status === 'idle') {
+//       dispatch(fetchCategories());
+//     }
+//   }, [dispatch, status]);
+
+// const handleAddExpense = async (expenseData: any) => {
+//   console.log('Adding expense:', expenseData);
+
+//   if(expenseData.file){
+
+//   let fileData = null;
+
+//   if (expenseData.file instanceof File) {
+//       try {
+//           // שליחת הקובץ לשרת וקבלת מידע עליו
+//           const uploadedFile = await dispatch(uploadFile(expenseData.file)).unwrap();
+//           console.log('File uploaded successfully:', uploadedFile);
+
+//           fileData = {
+//             fileName: expenseData.file.name, // השם כפי שהוחזר מהשרת
+//             fileType: expenseData.file.type, // סוג הקובץ
+//             fileSize: expenseData.file.size  // גודל הקובץ
+//           };
+//       } catch (error) {
+//           console.error('File upload failed:', error);
+//           return; // אם ההעלאה נכשלת, לא נמשיך
+//       }
+//   }
+
+//   const newExpense: Omit<Expense, 'id'> = {
+//       date: expenseData.date,
+//       sum: expenseData.sum,
+//       category: expenseData.category,
+//       description: expenseData.description,
+//   };
+
+//   try {
+//       await dispatch(addWithFileExpenseAsync({ ...newExpense, file: fileData })).unwrap(); // שליחת ההוצאה עם מידע על הקובץ החדשnewExpense)).unwrap();
+//       dispatch(loadExpenses());
+//       onClose();
+//   } catch (error) {
+//       console.error('Failed to add expense:', error);
+//   }
+// }else{
+
+//   const newExpense: Omit<Expense, 'id'| 'file'> = {
+//     date: expenseData.date,
+//     sum: expenseData.sum,
+//     category: expenseData.category,
+//     description: expenseData.description,
+//   };
+
+//   try {
+//     await dispatch(addExpenseAsync(newExpense)).unwrap();
+//     dispatch(loadExpenses());
+//     onClose();
+//   } catch (error) {
+//     console.error('Failed to add expense:', error);
+//   }
+
+// };
+
+//   // החזרת טופס הוצאה
+//   return <ExpenseForm onSubmit={handleAddExpense} categories={categories} />;
+// };
+
+// export default AddExpense;
+
+
 import { useDispatch, useSelector } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
 import { AppDispatch, RootState } from '../../redux/store';
 import { useEffect } from 'react';
 import { fetchCategories } from '../../redux/categoriesSlice';
-import { addExpenseAsync, loadExpenses } from '../../redux/ExpenseSlice';
+import { addExpenseAsync, addWithFileExpenseAsync, loadExpenses } from '../../redux/ExpenseSlice';
 import { Expense } from '../../models/Expense';
 import { uploadFile } from '../../redux/FileSlice';
 
-const AddExpense = ({ onClose }: { onClose: Function }) => {
+// הגדרת הממשק המתאים ל-expenseData
+interface ExpenseData {
+  date: string;
+  sum: number;
+  category: string;
+  description: string;
+  file?: File;
+}
+
+const AddExpense = ({ onClose }: { onClose: () => void }) => {
   const dispatch = useDispatch<AppDispatch>();
   const categories = useSelector((state: RootState) => state.categories.categories);
   const status = useSelector((state: RootState) => state.categories.status);
@@ -15,36 +109,70 @@ const AddExpense = ({ onClose }: { onClose: Function }) => {
   // טוען את הקטגוריות כאשר הקומפוננטה נטענת
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchCategories());
+      dispatch(fetchCategories()).unwrap().catch(console.error); 
     }
   }, [dispatch, status]);
 
-
-  const handleAddExpense = (expenseData: any) => {
+  const handleAddExpense = async (expenseData: ExpenseData) => {
     console.log('Adding expense:', expenseData);
-
-    const newExpense: Omit<Expense, 'id'> = {
-      date: expenseData.date,
-      sum: expenseData.sum,
-      category: expenseData.category,
-      description: expenseData.description,
-    };
-    if(expenseData.file) {
-      console.log('File:', expenseData.file);
-      dispatch(uploadFile(expenseData.file));
-    }
-
-    return dispatch(addExpenseAsync(newExpense)) // כאן הוספנו return
-      .unwrap()
-      .then(() => {
-        dispatch(loadExpenses());
+  
+    if (expenseData.file) {
+      let fileData = null;
+  
+      if (expenseData.file instanceof File) {
+        try {
+          // Upload the file and get file information
+          const uploadedFile = await dispatch(uploadFile(expenseData.file)).unwrap();
+          console.log('File uploaded successfully:', uploadedFile);
+  
+          fileData = {
+            fileName: expenseData.file.name, // Name as returned from the server
+            fileType: expenseData.file.type, // File type
+            fileSize: expenseData.file.size, // File size
+          };
+  
+          const newExpense: Omit<Expense, 'id' | 'file'> = {
+            date: expenseData.date,
+            sum: expenseData.sum,
+            category: expenseData.category,
+            description: expenseData.description,
+          };
+  
+          // Wrap the newExpense inside an object with the 'expense' property
+          try {
+            await dispatch(addWithFileExpenseAsync({ expense: newExpense, file: fileData })).unwrap();
+            await dispatch(loadExpenses()).unwrap();
+            onClose();
+          } catch (error) {
+            console.error('Failed to add expense:', error);
+          }
+  
+        } catch (error) {
+          console.error('File upload failed:', error);
+          return; // If the upload fails, we do not proceed
+        }
+      }
+  
+    } else {
+      const newExpense: Omit<Expense, 'id' | 'file'> = {
+        date: expenseData.date,
+        sum: expenseData.sum,
+        category: expenseData.category,
+        description: expenseData.description,
+      };
+  
+      try {
+        await dispatch(addExpenseAsync(newExpense)).unwrap();
+        await dispatch(loadExpenses()).unwrap();
         onClose();
-      })
-      .catch((error) => {
-        console.error("Failed to add expense:", error);
-      });
+      } catch (error) {
+        console.error('Failed to add expense:', error);
+      }
+    }
   };
+  
 
+  // החזרת טופס הוצאה
   return <ExpenseForm onSubmit={handleAddExpense} categories={categories} />;
 };
 

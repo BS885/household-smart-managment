@@ -12,8 +12,8 @@ using SmartManagement.Data;
 namespace SmartManagement.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250320200147_add permition3")]
-    partial class addpermition3
+    [Migration("20250325235009_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,36 @@ namespace SmartManagement.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("PermissionRole", b =>
+                {
+                    b.Property<int>("PermissionsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RolesRoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PermissionsId", "RolesRoleId");
+
+                    b.HasIndex("RolesRoleId");
+
+                    b.ToTable("RolePermissions", (string)null);
+                });
+
+            modelBuilder.Entity("RoleUser", b =>
+                {
+                    b.Property<int>("RolesRoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolesRoleId", "UsersUserId");
+
+                    b.HasIndex("UsersUserId");
+
+                    b.ToTable("UserRoles", (string)null);
+                });
 
             modelBuilder.Entity("SmartManagement.Core.Models.CategoryExpenseAndIncome", b =>
                 {
@@ -76,7 +106,7 @@ namespace SmartManagement.Data.Migrations
                     b.Property<decimal>("Sum")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("TransactionDocumentId")
+                    b.Property<int?>("TransactionDocumentId")
                         .HasColumnType("int");
 
                     b.Property<int>("TypeTransaction")
@@ -152,7 +182,7 @@ namespace SmartManagement.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permission");
+                    b.ToTable("Permissions");
 
                     b.HasData(
                         new
@@ -235,21 +265,6 @@ namespace SmartManagement.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SmartManagement.Core.Models.RolePermission", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RoleId", "PermissionId");
-
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("RolePermission");
-                });
-
             modelBuilder.Entity("SmartManagement.Core.Models.TransactionDocument", b =>
                 {
                     b.Property<int>("Id")
@@ -330,19 +345,34 @@ namespace SmartManagement.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("SmartManagement.Core.Models.UserRole", b =>
+            modelBuilder.Entity("PermissionRole", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.HasOne("SmartManagement.Core.Models.Permission", null)
+                        .WithMany()
+                        .HasForeignKey("PermissionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.HasOne("SmartManagement.Core.Models.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RolesRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.HasKey("UserId", "RoleId");
+            modelBuilder.Entity("RoleUser", b =>
+                {
+                    b.HasOne("SmartManagement.Core.Models.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RolesRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("UserRoles");
+                    b.HasOne("SmartManagement.Core.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SmartManagement.Core.Models.ExpenseAndIncome", b =>
@@ -359,9 +389,7 @@ namespace SmartManagement.Data.Migrations
 
                     b.HasOne("SmartManagement.Core.Models.TransactionDocument", "TransactionDocument")
                         .WithMany()
-                        .HasForeignKey("TransactionDocumentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TransactionDocumentId");
 
                     b.HasOne("SmartManagement.Core.Models.User", "User")
                         .WithMany()
@@ -387,61 +415,6 @@ namespace SmartManagement.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SmartManagement.Core.Models.RolePermission", b =>
-                {
-                    b.HasOne("SmartManagement.Core.Models.Permission", "Permission")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SmartManagement.Core.Models.Role", "Role")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Permission");
-
-                    b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("SmartManagement.Core.Models.UserRole", b =>
-                {
-                    b.HasOne("SmartManagement.Core.Models.Role", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SmartManagement.Core.Models.User", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SmartManagement.Core.Models.Permission", b =>
-                {
-                    b.Navigation("RolePermissions");
-                });
-
-            modelBuilder.Entity("SmartManagement.Core.Models.Role", b =>
-                {
-                    b.Navigation("RolePermissions");
-
-                    b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("SmartManagement.Core.Models.User", b =>
-                {
-                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

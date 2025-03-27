@@ -5,7 +5,7 @@
 namespace SmartManagement.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class permition4 : Migration
+    public partial class removeS3KEYfromTransactionDocument : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
