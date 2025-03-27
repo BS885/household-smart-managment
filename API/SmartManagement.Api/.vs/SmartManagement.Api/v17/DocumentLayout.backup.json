@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|solutionrelative:smartmanagement.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.api\\controllers\\expensescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|solutionrelative:smartmanagement.api\\controllers\\expensescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.service\\services\\expenseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|solutionrelative:smartmanagement.service\\services\\expenseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\Migrations\\20250327012316_remove Description from TransactionDocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SmartManagement.Data\\Migrations\\20250327012316_remove Description from TransactionDocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F92332C7-777E-4FEA-8680-B1FA9D8131C3}|SmartManagement.Core\\SmartManagement.Core.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.core\\services\\iexpenseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -49,6 +49,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.service\\services\\s3service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|solutionrelative:smartmanagement.service\\services\\s3service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5165D9C5-A7BC-4FC6-B5BC-40C3CB981A5C}|SmartManagement.Data\\SmartManagement.Data.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.data\\migrations\\20250327012316_remove description from transactiondocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5165D9C5-A7BC-4FC6-B5BC-40C3CB981A5C}|SmartManagement.Data\\SmartManagement.Data.csproj|solutionrelative:smartmanagement.data\\migrations\\20250327012316_remove description from transactiondocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,8 +62,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "SmartManagement.Api\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\appsettings.Development.json",
+              "RelativeToolTip": "SmartManagement.Api\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-27T07:05:34.61Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -74,7 +91,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "TransactionDocument.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\Models\\TransactionDocument.cs",
               "RelativeDocumentMoniker": "SmartManagement.Core\\Models\\TransactionDocument.cs",
@@ -82,8 +99,7 @@
               "RelativeToolTip": "SmartManagement.Core\\Models\\TransactionDocument.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAkwAsAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T01:13:23.091Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T01:13:23.091Z"
             },
             {
               "$type": "Document",
@@ -95,12 +111,11 @@
               "RelativeToolTip": "SmartManagement.Api\\Controllers\\S3Controller.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T22:45:56.194Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T22:45:56.194Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "TransactionDocumentService.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\TransactionDocumentService.cs",
               "RelativeDocumentMoniker": "SmartManagement.Service\\Services\\TransactionDocumentService.cs",
@@ -108,8 +123,7 @@
               "RelativeToolTip": "SmartManagement.Service\\Services\\TransactionDocumentService.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAAkwE4AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T17:14:22.45Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T17:14:22.45Z"
             },
             {
               "$type": "Document",
@@ -121,25 +135,24 @@
               "RelativeToolTip": "SmartManagement.Core\\services\\IExpenseService.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAYwA4AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T14:55:51.513Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T14:55:51.513Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ExpensesController.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Controllers\\ExpensesController.cs",
               "RelativeDocumentMoniker": "SmartManagement.Api\\Controllers\\ExpensesController.cs",
               "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Controllers\\ExpensesController.cs",
               "RelativeToolTip": "SmartManagement.Api\\Controllers\\ExpensesController.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAswBsAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-26T12:19:32.398Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ExpenseService.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\ExpenseService.cs",
               "RelativeDocumentMoniker": "SmartManagement.Service\\Services\\ExpenseService.cs",
@@ -147,12 +160,11 @@
               "RelativeToolTip": "SmartManagement.Service\\Services\\ExpenseService.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAkwCkAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T12:15:01.184Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T12:15:01.184Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 12,
               "Title": "20250327012316_remove Description from TransactionDocument.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\Migrations\\20250327012316_remove Description from TransactionDocument.cs",
               "RelativeDocumentMoniker": "SmartManagement.Data\\Migrations\\20250327012316_remove Description from TransactionDocument.cs",
@@ -160,8 +172,7 @@
               "RelativeToolTip": "SmartManagement.Data\\Migrations\\20250327012316_remove Description from TransactionDocument.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T01:23:16.951Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T01:23:16.951Z"
             },
             {
               "$type": "Document",
@@ -173,8 +184,7 @@
               "RelativeToolTip": "SmartManagement.Service\\MappingProfile.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAADwvx8AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T11:57:45.109Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T11:57:45.109Z"
             },
             {
               "$type": "Document",
@@ -186,8 +196,7 @@
               "RelativeToolTip": "SmartManagement.Core\\DTOs\\ExpenseDtoReq.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T00:17:36.478Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T00:17:36.478Z"
             },
             {
               "$type": "Document",
@@ -199,8 +208,7 @@
               "RelativeToolTip": "SmartManagement.Core\\DTOs\\FileDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T00:56:18.282Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T00:56:18.282Z"
             },
             {
               "$type": "Document",
@@ -212,8 +220,7 @@
               "RelativeToolTip": "SmartManagement.Core\\Enums\\FileType.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T01:03:29.679Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T01:03:29.679Z"
             },
             {
               "$type": "Document",
@@ -225,8 +232,7 @@
               "RelativeToolTip": "SmartManagement.Service\\Services\\S3Service.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T10:13:27.605Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-26T10:13:27.605Z"
             }
           ]
         }

@@ -18,7 +18,6 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { uploadFile } from '../../redux/FileSlice';
 
 interface ExpenseFormProps {
   onSubmit: (data: any) => Promise<void>;

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Expense, ExpenseToSave, FileState } from "../models/Expense";
+import { Expense, FileState } from "../models/Expense";
 import api from "./api";
 
 interface ExpenseState {
