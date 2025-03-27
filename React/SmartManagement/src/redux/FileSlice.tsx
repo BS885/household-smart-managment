@@ -68,11 +68,9 @@ export const downloadFile = createAsyncThunk(
       console.log("downloadFile executed");
 
       // שלב 1: קבלת Presigned URL להורדה
-      const response = await api.get("/s3/download-url", {
-        params: { fileName },
-      });
+      const response = await api.get(`/s3/download-url/${fileName}`);
 
-      const presignedUrl = response.data.url;
+      const presignedUrl = response.data.downloadUrl;
       console.log("Download URL:", presignedUrl);
 
       // שלב 2: הורדת הקובץ בעזרת axios

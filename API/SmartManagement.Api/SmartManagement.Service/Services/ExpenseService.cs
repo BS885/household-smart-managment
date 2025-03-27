@@ -69,14 +69,49 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task UpdateExpenseAsync(int expenseId, DateTime date, string category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId)
+        //public async Task UpdateExpenseAsync(int expenseId, DateTime date, string category, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId)
+        //{
+        //    try
+        //    {
+        //        var categoryExpense = await _categoryRepository.GetByNameAsync(category);
+
+        //        await _expenseRepository.UpdateExpenseAsync(expenseId, date, categoryExpense, description, typeTransaction, sum, fixedExpenseAndIncomeId);
+        //        _logger.LogInformation($"update expense {expenseId}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError($"שגיאה בעדכון הוצאה: {ex.Message}");
+        //        throw new Exception($"שגיאה בעדכון הוצאה: {ex.Message}");
+        //    }
+        //}
+
+        public async Task UpdateExpenseAsync(int expenseId, DateTime date, string category, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId)
         {
             try
             {
                 var categoryExpense = await _categoryRepository.GetByNameAsync(category);
 
-                await _expenseRepository.UpdateExpenseAsync(expenseId, date, categoryExpense, description, typeTransaction, sum, fixedExpenseAndIncomeId);
-                _logger.LogInformation($"update expense {expenseId}");
+                // קודם כל, נמצא את ההוצאה הקיימת
+                var expense = await _expenseRepository.FindExpenseById(expenseId);
+                if (expense == null)
+                {
+                    throw new Exception("ההוצאה לא נמצאה");
+                }
+
+                // אם יש קובץ חדש, נטפל בו
+                TransactionDocument? resultFile = expense.TransactionDocument;
+
+                if (file)
+                {
+                    // אם יש קובץ חדש, נוסיף אותו
+                    var file1 = new FileDto { NameFile = fileName, Size = long.Parse(fileSize), TypeFile = fileType };
+                    resultFile = await _fileService.AddTransactionDocumentAsync(file1);
+                }
+
+                // עדכון ההוצאה
+                await _expenseRepository.UpdateExpenseAsync(expenseId, date, categoryExpense, description, typeTransaction, sum, fixedExpenseAndIncomeId, resultFile);
+
+                _logger.LogInformation($"הוצאה {expenseId} עודכנה בהצלחה");
             }
             catch (Exception ex)
             {
@@ -138,6 +173,7 @@ namespace SmartManagement.Service.Services
         {
             var result = await _expenseRepository.GetExpensesByUserIdAsync(userId);
             var resultList = result.ToList();
+
             return _mapper.Map<List<ExpenseRes>>(result);
         }
 

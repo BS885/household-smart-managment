@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Expense, FileState } from "../models/Expense";
+import { Expense, ExpenseToSave, FileState } from "../models/Expense";
 import api from "./api";
 
 interface ExpenseState {
-  expenses: Expense[];
+  expenses: ExpenseToSave[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
@@ -16,7 +16,7 @@ const initialState: ExpenseState = {
 
 export const loadExpenses = createAsyncThunk("expenses/loadExpenses", async () => {
   const response = await api.get("/expenses");
-  console.log(response.data.$values);
+  console.log(response.data);
   return response.data.$values;
 });
 
@@ -52,6 +52,26 @@ export const updateExpenseAsync = createAsyncThunk("expenses/updateExpense", asy
   console.log(response.data);
   return response.data;
 })
+
+export const updateWithFileExpenseAsync = createAsyncThunk("expenses/updateWithFileExpense", async ({ expense, file }: { expense: Expense; file: FileState }) => {
+  const expenseAndFile = {
+    Date: new Date(expense.date).toISOString().split('T')[0],
+    Category: expense.category,
+    Description: expense.description,
+    Sum: expense.sum,
+    file: true,
+    FileName: file.fileName,
+    FileType: file.fileType,
+    Filesize: file.fileSize.toString(),
+  };
+
+  console.log("Sending request with data:", expenseAndFile);
+
+  const response = await api.put(`/expenses/${expense.id}`, expenseAndFile);
+
+  console.log(response.data);
+  return response.data;
+});
 
 export const deleteExpenseAsync = createAsyncThunk("expenses/deleteExpense", async (id: number) => {
   const response = await api.delete(`/expenses/${id}`);

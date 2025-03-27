@@ -14,7 +14,7 @@ namespace SmartManagement.Core.Repositories
 
         Task<ExpenseAndIncome> FindExpenseById(int id);
 
-        Task UpdateExpenseAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId);
+        Task UpdateExpenseAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId, TransactionDocument? resultFile);
 
         Task<IEnumerable<ExpenseAndIncome>> GetAllExpensesAsync();
 

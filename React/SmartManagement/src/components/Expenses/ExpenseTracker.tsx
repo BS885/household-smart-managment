@@ -22,10 +22,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteExpenseAsync, loadExpenses } from "../../redux/ExpenseSlice";
 import { AppDispatch, RootState } from "../../redux/store";
-import { Expense } from "../../models/Expense";
+import { Expense, ExpenseToSave } from "../../models/Expense";
 import AddExpense from "./AddExpense";
 import EditExpense from "./EditExpense";
 import useSortedExpenses from "../../CustemHooks/useSortedExpenses ";
+import { downloadFile } from "../../redux/FileSlice";
+import DownloadIcon from '@mui/icons-material/Download';
 
 const ExpenseTracker = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,7 +36,7 @@ const ExpenseTracker = () => {
   const sortedExpenses = useSortedExpenses(expenses); // שימוש ב-Hook
 
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [expenseToDelete, setExpenseToDelete] = useState<Expense | null>(null);
+  const [expenseToDelete, setExpenseToDelete] = useState<ExpenseToSave | null>(null);
   const [isAddingExpense, setIsAddingExpense] = useState(false);
   const [isEditExpense, setIsEditExpense] = useState(false);
   const [expenseToEdit, setExpenseToEdit] = useState<Expense | null>(null);
@@ -45,7 +47,7 @@ const ExpenseTracker = () => {
     }
   }, [status, dispatch]);
 
-  const handleOpenDeleteDialog = (expense: Expense) => {
+  const handleOpenDeleteDialog = (expense: ExpenseToSave) => {
     setExpenseToDelete(expense);
     setOpenDeleteDialog(true);
   };
@@ -75,10 +77,10 @@ const ExpenseTracker = () => {
         <Box sx={{ p: 3 }}>
           <Grid container justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
             <Typography variant="h4">מעקב הוצאות</Typography>
-            <Button 
-              variant={isAddingExpense ? "outlined" : "contained"} 
-              color="primary" 
-              startIcon={isAddingExpense ? <CloseIcon /> : <AddIcon />} 
+            <Button
+              variant={isAddingExpense ? "outlined" : "contained"}
+              color="primary"
+              startIcon={isAddingExpense ? <CloseIcon /> : <AddIcon />}
               onClick={() => setIsAddingExpense(!isAddingExpense)}
             >
               {isAddingExpense ? "סגור" : "הוסף הוצאה חדשה"}
@@ -88,7 +90,7 @@ const ExpenseTracker = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  {["תאריך", "סכום", "קטגוריה", "תיאור", "פעולות"].map((header) => (
+                  {["תאריך", "סכום", "קטגוריה", "תיאור", "פעולות", "קובץ"].map((header) => (
                     <TableCell key={header} align="right" sx={{ fontWeight: "bold" }}>
                       {header}
                     </TableCell>
@@ -106,14 +108,36 @@ const ExpenseTracker = () => {
                       <IconButton size="small" color="primary" onClick={() => handleOpenEditDialog(expense)}>
                         <EditIcon fontSize="small" />
                       </IconButton>
-                      <IconButton 
-                        size="small" 
-                        color="error" 
-                        onClick={() => handleOpenDeleteDialog(expense)}
-                      >
+                      <IconButton
+                        size="small"
+                        color="error"
+                        onClick={() => handleOpenDeleteDialog(expense)}>
                         <DeleteIcon fontSize="small" />
                       </IconButton>
                     </TableCell>
+                    {
+                      expense.fileName && (
+                        <TableCell align="right">
+                          <a
+                            href="#"
+                            onClick={async (e) => {
+                              e.preventDefault();  // למנוע את הפעולה הבסיסית של הקישור
+                              try {
+                                const downloadUrl = await dispatch(downloadFile(expense.fileType || "")).unwrap();
+                                window.open(downloadUrl, "_blank");  // פתח את הקישור בהצלחה
+                              } catch (error) {
+                                console.error("שגיאה בהורדה", error);
+                              }
+                            }}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {/* השתמש באייקון הורדה */}
+                            <DownloadIcon style={{ width: "20px", height: "20px", color: "#2C3E50" }} />
+                          </a>
+                        </TableCell>
+                      )
+                    }
                   </TableRow>
                 ))}
               </TableBody>

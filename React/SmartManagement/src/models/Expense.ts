@@ -7,13 +7,14 @@ export type Expense = {
 
 };
 export type ExpenseToSave = {
+  id: number;
   date: string;
   category: string;
   description: string;
   sum: number;
   fileName?: string;
   fileType?: string;
-  fileSize?: number;
+  filesize?: string;
 }
 
 export interface ExpenseFormProps {

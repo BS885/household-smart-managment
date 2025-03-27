@@ -21,7 +21,7 @@ namespace SmartManagement.Api.Controllers
             _expenseService = expenseService;
             _userService = userService;
         }
-       
+
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddExpense([FromBody] ExpenseDtoReq expenseDto)
@@ -31,7 +31,7 @@ namespace SmartManagement.Api.Controllers
                 var userId = _userService.GetUserIdFromToken(User);
 
                 var expenseId = await _expenseService.AddExpenseAsync(
-                    
+
                     expenseDto.Date,
                     expenseDto.Category,
                     int.Parse(userId),
@@ -119,6 +119,10 @@ namespace SmartManagement.Api.Controllers
                     expenseDto.Description,
                     TransactionType.UnFixedExpense,
                     expenseDto.Sum,
+                    expenseDto.file,
+                    expenseDto.FileType,
+                    expenseDto.FileName,
+                    expenseDto.Filesize,
                     null
                 );
                 return Ok();

@@ -32,7 +32,7 @@ namespace SmartManagement.Data.Repositories
 
         public async Task<ExpenseAndIncome> AddExpenseAsynce(ExpenseAndIncome expenseAndIncome)
         {
-           await _context.ExpensesAndIncomes.AddAsync(expenseAndIncome);
+            await _context.ExpensesAndIncomes.AddAsync(expenseAndIncome);
             await _context.SaveChangesAsync();
             return expenseAndIncome;
         }
@@ -40,11 +40,12 @@ namespace SmartManagement.Data.Repositories
         public async Task<ExpenseAndIncome> FindExpenseById(int id)
         {
             var result = await _context.ExpensesAndIncomes.Include(e => e.Category).FirstOrDefaultAsync(e => e.Id == id);
+            
             _logger.LogInformation($"find expense by Id");
             return result;
         }
 
-        public async Task UpdateExpenseAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId)
+        public async Task UpdateExpenseAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId, TransactionDocument? resultFile)
         {
             try
             {
@@ -58,6 +59,7 @@ namespace SmartManagement.Data.Repositories
                     expense.TypeTransaction = typeTransaction;
                     expense.Sum = sum;
                     expense.FixedExpenseAndIncomeId = fixedExpenseAndIncomeId;
+                    expense.TransactionDocument = resultFile;
 
                     await _context.SaveChangesAsync();
                     _logger.LogInformation($"update expense {expenseId}");
@@ -127,8 +129,10 @@ namespace SmartManagement.Data.Repositories
             _logger.LogInformation("userID: " + userId);
 
             var expenses = await _context.ExpensesAndIncomes
-                .Where(e => e.UserId == userId).Include(e=>e.Category)
-                .ToListAsync(); // מבצע את השאילתה בפועל
+            .Where(e => e.UserId == userId)
+            .Include(e => e.Category)
+            .Include(e => e.TransactionDocument)
+             .ToListAsync(); // מבצע את השאילתה בפועל
 
             if (expenses == null || expenses.Count == 0)
             {
