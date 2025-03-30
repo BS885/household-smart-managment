@@ -1,4 +1,4 @@
-export type Expense = {
+export type ExpenseAndIncome = {
   id: number;
   date: string;
   category: string;
@@ -6,7 +6,7 @@ export type Expense = {
   sum: number;
 
 };
-export type ExpenseToSave = {
+export type ExpenseAndIncomeToSave = {
   id: number;
   date: string;
   category: string;
@@ -34,4 +34,9 @@ export interface FileState {
   fileName: string;
   fileType: string;
   fileSize: number;
+}
+
+export enum TransactionType{
+  Expense = "Expense",
+  Income = "Income"
 }

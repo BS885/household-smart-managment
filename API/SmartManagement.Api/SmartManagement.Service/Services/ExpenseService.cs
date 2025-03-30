@@ -14,15 +14,15 @@ using System.Threading.Tasks;
 
 namespace SmartManagement.Service.Services
 {
-    public class ExpenseService : IExpenseService
+    public class ExpenseAndIncomeService : IExpenseAndIncomeService
     {
-        private readonly IExpenseRepository _expenseRepository;
-        private readonly ILogger<ExpenseService> _logger;
+        private readonly IExpenseAndIncomeRepository _expenseRepository;
+        private readonly ILogger<ExpenseAndIncomeService> _logger;
         private readonly IMapper _mapper;
         private readonly ICategoryRepository _categoryRepository;
         private readonly ITransactionDocumentService _fileService;
 
-        public ExpenseService(IExpenseRepository expenseRepository, ILogger<ExpenseService> logger, IMapper mapper, ICategoryRepository categoryRepository, ITransactionDocumentService fileService)
+        public ExpenseAndIncomeService(IExpenseAndIncomeRepository expenseRepository, ILogger<ExpenseAndIncomeService> logger, IMapper mapper, ICategoryRepository categoryRepository, ITransactionDocumentService fileService)
         {
             _expenseRepository = expenseRepository;
             _logger = logger;
@@ -31,7 +31,7 @@ namespace SmartManagement.Service.Services
             _fileService = fileService;
         }
 
-        public async Task<int> AddExpenseAsync(DateTime date, string category, int userId, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId)
+        public async Task<int> AddExpenseOrIncomeAsync(DateTime date, string category, int userId, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace SmartManagement.Service.Services
                     TransactionDocument = resultFile
                 };
 
-                var re = await _expenseRepository.AddExpenseAsynce(expense);
+                var re = await _expenseRepository.AddExpenseOrIncomeAsynce(expense);
 
                 _logger.LogInformation("Expense added successfully");
 
@@ -69,30 +69,15 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        //public async Task UpdateExpenseAsync(int expenseId, DateTime date, string category, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId)
-        //{
-        //    try
-        //    {
-        //        var categoryExpense = await _categoryRepository.GetByNameAsync(category);
 
-        //        await _expenseRepository.UpdateExpenseAsync(expenseId, date, categoryExpense, description, typeTransaction, sum, fixedExpenseAndIncomeId);
-        //        _logger.LogInformation($"update expense {expenseId}");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"שגיאה בעדכון הוצאה: {ex.Message}");
-        //        throw new Exception($"שגיאה בעדכון הוצאה: {ex.Message}");
-        //    }
-        //}
-
-        public async Task UpdateExpenseAsync(int expenseId, DateTime date, string category, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId)
+        public async Task UpdateExpenseOrIncomeAsync(int expenseId, DateTime date, string category, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId)
         {
             try
             {
                 var categoryExpense = await _categoryRepository.GetByNameAsync(category);
 
                 // קודם כל, נמצא את ההוצאה הקיימת
-                var expense = await _expenseRepository.FindExpenseById(expenseId);
+                var expense = await _expenseRepository.FindExpenseOrIncomeById(expenseId);
                 if (expense == null)
                 {
                     throw new Exception("ההוצאה לא נמצאה");
@@ -109,7 +94,7 @@ namespace SmartManagement.Service.Services
                 }
 
                 // עדכון ההוצאה
-                await _expenseRepository.UpdateExpenseAsync(expenseId, date, categoryExpense, description, typeTransaction, sum, fixedExpenseAndIncomeId, resultFile);
+                await _expenseRepository.UpdateExpenseOrIncomeAsync(expenseId, date, categoryExpense, description, typeTransaction, sum, fixedExpenseAndIncomeId, resultFile);
 
                 _logger.LogInformation($"הוצאה {expenseId} עודכנה בהצלחה");
             }
@@ -120,11 +105,11 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task<ExpenseAndIncome> GetExpenseByIdAsync(int expenseId)
+        public async Task<ExpenseAndIncome> GetExpenseOrIncomeByIdAsync(int expenseId)
         {
             try
             {
-                var expense = await _expenseRepository.FindExpenseById(expenseId);
+                var expense = await _expenseRepository.FindExpenseOrIncomeById(expenseId);
                 if (expense == null)
                 {
                     _logger.LogWarning($"הוצאה עם מזהה {expenseId} לא נמצאה.");
@@ -140,11 +125,11 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetAllExpensesAsync()
+        public async Task<IEnumerable<ExpenseAndIncome>> GetAllExpensesOrIncomesAsync(TransactionType type)
         {
             try
             {
-                var expenses = await _expenseRepository.GetAllExpensesAsync();
+                var expenses = await _expenseRepository.GetAllExpensesOrIncomeAsync(type);
                 _logger.LogInformation("get all expenses");
                 return expenses;
             }
@@ -155,11 +140,11 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task DeleteExpenseAsync(int expenseId)
+        public async Task DeleteExpenseOrIncomeAsync(int expenseId)
         {
             try
             {
-                await _expenseRepository.DeleteExpenseAsync(expenseId);
+                await _expenseRepository.DeleteExpenseOrIncomeAsync(expenseId);
                 _logger.LogInformation($"delete expense {expenseId}");
             }
             catch (Exception ex)
@@ -169,19 +154,19 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task<List<ExpenseRes>> GetExpensesByUserIdAsync(int userId)
+        public async Task<List<ExpenseRes>> GetExpensesOrIncomesByUserIdAsync(int userId,TransactionType type)
         {
-            var result = await _expenseRepository.GetExpensesByUserIdAsync(userId);
+            var result = await _expenseRepository.GetExpensesOrIncomeByUserIdAsync(userId,type);
             var resultList = result.ToList();
 
             return _mapper.Map<List<ExpenseRes>>(result);
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoryExpenseAndIncome category)
+        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomesByCategoryAsync(CategoryExpenseAndIncome category)
         {
             try
             {
-                var expenses = await _expenseRepository.GetExpensesByCategoryAsync(category);
+                var expenses = await _expenseRepository.GetExpensesOrIncomeByCategoryAsync(category);
                 _logger.LogInformation($"get expenses by category {category}");
                 return expenses;
             }
@@ -192,11 +177,11 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByDateRangeAsync(DateTime startDate, DateTime endDate, int userID)
+        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomesByDateRangeAsync(DateTime startDate, DateTime endDate, int userID,TransactionType type)
         {
             try
             {
-                var expenses = await _expenseRepository.GetExpensesByDateRangeAsync(startDate, endDate, userID);
+                var expenses = await _expenseRepository.GetExpensesOrIncomeByDateRangeAsync(startDate, endDate, userID,type);
                 _logger.LogInformation($"get expenses by date range {startDate} - {endDate}");
                 return expenses;
             }

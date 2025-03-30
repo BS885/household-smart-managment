@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import {  ExpenseToSave } from '../models/Expense';
+import {  ExpenseAndIncomeToSave } from '../models/Expense&Income';
 
-const useSortedExpenses = (expenses: ExpenseToSave[]): ExpenseToSave[] => {
+const useSortedTransactions = (expenses: ExpenseAndIncomeToSave[]): ExpenseAndIncomeToSave[] => {
   const sortedExpenses = useMemo(() => {
     if (!expenses) return [];
     return [...expenses].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -10,4 +10,4 @@ const useSortedExpenses = (expenses: ExpenseToSave[]): ExpenseToSave[] => {
   return sortedExpenses;
 };
 
-export default useSortedExpenses;
+export default useSortedTransactions;

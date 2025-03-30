@@ -11,12 +11,12 @@ namespace SmartManagement.Api.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class ExpensesController : ControllerBase
+    public class IncomesController : ControllerBase
     {
         private readonly IExpenseAndIncomeService _expenseService;
         private readonly IUserService _userService;
 
-        public ExpensesController(IExpenseAndIncomeService expenseService, Is3Service S3FileService, IUserService userService)
+        public IncomesController(IExpenseAndIncomeService expenseService, Is3Service S3FileService, IUserService userService)
         {
             _expenseService = expenseService;
             _userService = userService;
@@ -36,7 +36,7 @@ namespace SmartManagement.Api.Controllers
                     expenseDto.Category,
                     int.Parse(userId),
                     expenseDto.Description,
-                    TransactionType.UnFixedExpense,
+                    TransactionType.UnFixIncome,
                     expenseDto.Sum,
                     expenseDto.file,
                     expenseDto.FileType,
@@ -81,13 +81,13 @@ namespace SmartManagement.Api.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAllExpensesByIDUser()
-            {
+        {
             try
             {
-                var tyu= ((int)TransactionType.UnFixedExpense);
+                var tyu = ((int)TransactionType.UnFixIncome);
                 var userId = _userService.GetUserIdFromToken(User);
 
-                var filteredExpenses = await _expenseService.GetExpensesOrIncomesByUserIdAsync(int.Parse(userId),TransactionType.UnFixedExpense);
+                var filteredExpenses = await _expenseService.GetExpensesOrIncomesByUserIdAsync(int.Parse(userId), TransactionType.UnFixIncome);
                 return Ok(filteredExpenses);
             }
             catch (Exception ex)
@@ -118,7 +118,7 @@ namespace SmartManagement.Api.Controllers
                     expenseDto.Date,
                     expenseDto.Category,
                     expenseDto.Description,
-                    TransactionType.UnFixedExpense,
+                    TransactionType.UnFixIncome,
                     expenseDto.Sum,
                     expenseDto.file,
                     expenseDto.FileType,

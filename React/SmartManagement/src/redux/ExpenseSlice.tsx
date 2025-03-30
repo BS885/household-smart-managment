@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Expense, ExpenseToSave, FileState } from "../models/Expense";
+import { ExpenseAndIncome, ExpenseAndIncomeToSave, FileState } from "../models/Expense&Income";
 import api from "./api";
 
 interface ExpenseState {
-  expenses: ExpenseToSave[];
+  expenses: ExpenseAndIncomeToSave[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
@@ -20,13 +20,13 @@ export const loadExpenses = createAsyncThunk("expenses/loadExpenses", async () =
   return response.data.$values;
 });
 
-export const addExpenseAsync = createAsyncThunk("expenses/addExpense", async (expense: Omit<Expense, "id">) => {
+export const addExpenseAsync = createAsyncThunk("expenses/addExpense", async (expense: Omit<ExpenseAndIncome, "id">) => {
   const response = await api.post("/expenses", expense);
   console.log(response.data);
   return response.data;
 });
 
-export const addWithFileExpenseAsync = createAsyncThunk("expenses/addExpense", async ({ expense, file }: { expense: Omit<Expense, "id">; file: FileState }) => {
+export const addWithFileExpenseAsync = createAsyncThunk("expenses/addExpense", async ({ expense, file }: { expense: Omit<ExpenseAndIncome, "id">; file: FileState }) => {
   const expenseAndFile = {
 
     Date: new Date(expense.date).toISOString().split('T')[0],
@@ -47,13 +47,13 @@ export const addWithFileExpenseAsync = createAsyncThunk("expenses/addExpense", a
   return response.data;
 });
 
-export const updateExpenseAsync = createAsyncThunk("expenses/updateExpense", async (expense: Expense) => {
+export const updateExpenseAsync = createAsyncThunk("expenses/updateExpense", async (expense: ExpenseAndIncome) => {
   const response = await api.put(`/expenses/${expense.id}`, expense);
   console.log(response.data);
   return response.data;
 })
 
-export const updateWithFileExpenseAsync = createAsyncThunk("expenses/updateWithFileExpense", async ({ expense, file }: { expense: Expense; file: FileState }) => {
+export const updateWithFileExpenseAsync = createAsyncThunk("expenses/updateWithFileExpense", async ({ expense, file }: { expense: ExpenseAndIncome; file: FileState }) => {
   const expenseAndFile = {
     Date: new Date(expense.date).toISOString().split('T')[0],
     Category: expense.category,
@@ -86,7 +86,7 @@ const expenseSlice = createSlice({
     removeExpense: (state, action: PayloadAction<number>) => {
       state.expenses = state.expenses.filter((expense) => expense.id !== action.payload);
     },
-    updateExpense: (state, action: PayloadAction<{ id: number; expense: Expense }>) => {
+    updateExpense: (state, action: PayloadAction<{ id: number; expense: ExpenseAndIncome }>) => {
       const index = state.expenses.findIndex((e) => e.id === action.payload.id);
       if (index !== -1) {
         state.expenses[index] = action.payload.expense;

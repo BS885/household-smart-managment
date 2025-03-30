@@ -17,16 +17,17 @@ import { he } from 'date-fns/locale';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
 
-interface ExpenseFormProps {
+interface ExpenseAndIncomeFormProps {
   onSubmit: (data: any) => Promise<void>;
   categories: string[];
   initialValues?: any;
   isEdit?: boolean;
+  isExpense?: boolean;
 }
 
-const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit, categories, initialValues = null, isEdit = false }) => {
+const ExpenseOrIncomeForm: FC<ExpenseAndIncomeFormProps> = ({ onSubmit, categories, initialValues = null, isEdit = false, isExpense=true }) => {
   const [formData, setFormData] = useState({
     date: new Date() as Date | null, // מאפשר גם null
     sum: "",
@@ -66,38 +67,6 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit, categories, initial
     }
   };
 
-//   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
-//     if (e.target.files && e.target.files[0]) {
-//         const file = e.target.files[0];
-
-//         try {
-//             // כאן אתה צריך להעלות את הקובץ לשרת ולקבל את המידע הנדרש
-//             // נניח שאתה מקבל את הנתונים לאחר ההעלאה
-//             const uploadedFile = {
-//                 fileName: file.name,
-//                 fileType: file.type,
-//                 fileSize: file.size,
-//             };
-
-//             console.log("File uploaded successfully:", uploadedFile);
-
-//             setFormData(prev => ({
-//                 ...prev,
-//                 file: {
-//                     fileName: uploadedFile.fileName,
-//                     fileType: uploadedFile.fileType,
-//                     fileSize: uploadedFile.fileSize
-//                 }
-//             }));
-//         } catch (error) {
-//             console.error("File upload failed:", error);
-//             setErrors(prev => ({ ...prev, general: "שגיאה בהעלאת הקובץ" }));
-//         }
-//     }
-// };
-
-
-
   const handleRemoveFile = () => {
     setFormData(prev => ({ ...prev, file: null }));
   };
@@ -127,7 +96,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit, categories, initial
     return newErrors;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
@@ -151,10 +120,10 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit, categories, initial
     <Paper elevation={3} sx={{ p: 4, mt: 4, mb: 4, borderRadius: 2, border: '1px solid', borderColor: 'primary.light' }}>
       <Box sx={{ textAlign: 'center', mb: 3 }}>
         <Typography variant="h4" component="h1" color="primary.main" sx={{ fontWeight: 'bold' }}>
-          {isEdit ? 'עריכת הוצאה' : 'הוספת הוצאה חדשה'}
+          {isEdit ? (isExpense ? 'עריכת הוצאה' : 'עריכת הכנסה') : (isExpense ? 'הוספת הוצאה חדשה' : 'הוספת הכנסה חדשה')}
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mt: 1 }}>
-          {isEdit ? 'ערוך את פרטי ההוצאה שלך' : 'הזן את פרטי ההוצאה החדשה'}
+          {isEdit ? `ערוך את פרטי ה ${isExpense ? 'הוצאה' : 'הכנסה'} שלך` : `הזן את פרטי ה${isExpense ? 'הוצאה' : 'הכנסה'} החדשה`}
         </Typography>
       </Box>
 
@@ -240,4 +209,4 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit, categories, initial
   );
 };
 
-export default ExpenseForm;
+export default ExpenseOrIncomeForm;

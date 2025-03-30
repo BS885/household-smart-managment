@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { RootState } from "../../redux/store";
-import { Expense } from "../../models/Expense";
-import { fetchCategories } from "../../redux/categoriesSlice";
+import { ExpenseAndIncome } from "../../models/Expense&Income";
+import { fetchExpenseCategories } from "../../redux/categoriesSlice";
 import { updateExpenseAsync, loadExpenses, updateWithFileExpenseAsync } from "../../redux/ExpenseSlice";
 import { AppDispatch } from "../../redux/store";
-import ExpenseForm from "./ExpenseForm";
+import ExpenseForm from "./ExpenseOrIncomeForm";
 import { uploadFile } from "../../redux/FileSlice";
 
 interface ExpenseData {
@@ -17,14 +17,14 @@ interface ExpenseData {
     file?: File;
 }
 
-const EditExpense = ({ onClose, expense }: { onClose: Function, expense: Expense }) => {
+const EditExpense = ({ onClose, transaction }: { onClose: Function, transaction: ExpenseAndIncome }) => {
     const dispatch = useDispatch<AppDispatch>();
-    const categories = useSelector((state: RootState) => state.categories.categories);
-    const status = useSelector((state: RootState) => state.categories.status);
+    const categories = useSelector((state: RootState) => state.categories.expenseCategories);
+    const status = useSelector((state: RootState) => state.categories.expenseStatus);
 
     useEffect(() => {
         if (status === 'idle') {
-            dispatch(fetchCategories());
+            dispatch(fetchExpenseCategories());
         }
     }, [dispatch, status]);
 
@@ -74,7 +74,7 @@ const EditExpense = ({ onClose, expense }: { onClose: Function, expense: Expense
         }
     
         // יצירת אובייקט ההוצאה לעדכון
-        const updatedExpense: Expense = {
+        const updatedExpense: ExpenseAndIncome = {
             id: expenseData.id,
             date: expenseData.date,
             sum: expenseData.sum,
@@ -107,7 +107,7 @@ const EditExpense = ({ onClose, expense }: { onClose: Function, expense: Expense
 
 
     return (
-        <ExpenseForm onSubmit={handleEditExpense} categories={categories} isEdit={true} initialValues={expense} />
+        <ExpenseForm onSubmit={handleEditExpense} categories={categories} isEdit={true} initialValues={transaction} />
     );
 }
 export default EditExpense;

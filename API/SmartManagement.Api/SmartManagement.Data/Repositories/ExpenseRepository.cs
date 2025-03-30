@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace SmartManagement.Data.Repositories
 {
-    public class ExpenseRepository : IExpenseRepository
+    public class ExpenseAndIncomeRepository : IExpenseAndIncomeRepository
     {
 
         private readonly DataContext _context;
-        private readonly ILogger<ExpenseRepository> _logger;
+        private readonly ILogger<ExpenseAndIncomeRepository> _logger;
 
-        public ExpenseRepository(DataContext context, ILogger<ExpenseRepository> logger)
+        public ExpenseAndIncomeRepository(DataContext context, ILogger<ExpenseAndIncomeRepository> logger)
         {
             if (context == null)
             {
@@ -30,26 +30,26 @@ namespace SmartManagement.Data.Repositories
         }
 
 
-        public async Task<ExpenseAndIncome> AddExpenseAsynce(ExpenseAndIncome expenseAndIncome)
+        public async Task<ExpenseAndIncome> AddExpenseOrIncomeAsynce(ExpenseAndIncome expenseAndIncome)
         {
             await _context.ExpensesAndIncomes.AddAsync(expenseAndIncome);
             await _context.SaveChangesAsync();
             return expenseAndIncome;
         }
 
-        public async Task<ExpenseAndIncome> FindExpenseById(int id)
+        public async Task<ExpenseAndIncome> FindExpenseOrIncomeById(int id)
         {
             var result = await _context.ExpensesAndIncomes.Include(e => e.Category).FirstOrDefaultAsync(e => e.Id == id);
-            
+
             _logger.LogInformation($"find expense by Id");
             return result;
         }
 
-        public async Task UpdateExpenseAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId, TransactionDocument? resultFile)
+        public async Task UpdateExpenseOrIncomeAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId, TransactionDocument? resultFile)
         {
             try
             {
-                var expense = await FindExpenseById(expenseId);
+                var expense = await FindExpenseOrIncomeById(expenseId);
 
                 if (expense != null)
                 {
@@ -77,17 +77,18 @@ namespace SmartManagement.Data.Repositories
             }
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetAllExpensesAsync()
+        public async Task<IEnumerable<ExpenseAndIncome>> GetAllExpensesOrIncomeAsync(TransactionType type)
         {
             _logger.LogInformation("get all expenses");
-            return await _context.ExpensesAndIncomes.ToListAsync();
+            return await _context.ExpensesAndIncomes.Where(e => e.TypeTransaction == type).ToListAsync();
         }
 
-        public async Task DeleteExpenseAsync(int expenseId)
+        public async Task DeleteExpenseOrIncomeAsync(int expenseId)
         {
             try
             {
-                var expense = await FindExpenseById(expenseId);
+                var expense = await FindExpenseOrIncomeById(expenseId);
+
                 if (expense != null)
                 {
                     _context.ExpensesAndIncomes.Remove(expense);
@@ -107,7 +108,7 @@ namespace SmartManagement.Data.Repositories
             }
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoryExpenseAndIncome category)
+        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomeByCategoryAsync(CategoryExpenseAndIncome category)
         {
             _logger.LogInformation($"get expenses by category {category}");
 
@@ -117,19 +118,19 @@ namespace SmartManagement.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByDateRangeAsync(DateTime startDate, DateTime endDate, int userID)
+        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomeByDateRangeAsync(DateTime startDate, DateTime endDate, int userID, TransactionType type)
         {
-            _logger.LogInformation($"get expenses by date range {startDate} - {endDate}");
+            _logger.LogInformation($"get {type} by date range {startDate} - {endDate}");
 
-            return await _context.ExpensesAndIncomes.Where(e => e.UserId == userID && e.Date >= startDate && e.Date <= endDate).Include(e => e.Category).ToListAsync();
+            return await _context.ExpensesAndIncomes.Where(e => e.UserId == userID && e.TypeTransaction == type && e.Date >= startDate && e.Date <= endDate).Include(e => e.Category).ToListAsync();
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesByUserIdAsync(int userId)
+        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomeByUserIdAsync(int userId, TransactionType type)
         {
             _logger.LogInformation("userID: " + userId);
-
+            var rr = (int)type;
             var expenses = await _context.ExpensesAndIncomes
-            .Where(e => e.UserId == userId)
+            .Where(e => e.UserId == userId && (int)e.TypeTransaction == (int)type)
             .Include(e => e.Category)
             .Include(e => e.TransactionDocument)
              .ToListAsync(); // מבצע את השאילתה בפועל

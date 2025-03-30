@@ -10,22 +10,22 @@ using System.Threading.Tasks;
 
 namespace SmartManagement.Core.services
 {
-    public interface IExpenseService
+    public interface IExpenseAndIncomeService
     {
-        Task<int> AddExpenseAsync(DateTime date, string category, int userId, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId);
+        Task<int> AddExpenseOrIncomeAsync(DateTime date, string category, int userId, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId);
 
-        Task UpdateExpenseAsync(int expenseId, DateTime date, string category, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId);
+        Task UpdateExpenseOrIncomeAsync(int expenseId, DateTime date, string category, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId);
 
-        Task<ExpenseAndIncome> GetExpenseByIdAsync(int expenseId);
+        Task<ExpenseAndIncome> GetExpenseOrIncomeByIdAsync(int expenseId);
 
-        Task<IEnumerable<ExpenseAndIncome>> GetAllExpensesAsync();
+        Task<IEnumerable<ExpenseAndIncome>> GetAllExpensesOrIncomesAsync(TransactionType type);
 
-        Task DeleteExpenseAsync(int expenseId);
+        Task DeleteExpenseOrIncomeAsync(int expenseId);
 
-        Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoryExpenseAndIncome category);
+        Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomesByCategoryAsync(CategoryExpenseAndIncome category);
 
-        Task<IEnumerable<ExpenseAndIncome>> GetExpensesByDateRangeAsync(DateTime startDate, DateTime endDate, int userID);
+        Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomesByDateRangeAsync(DateTime startDate, DateTime endDate, int userID,TransactionType type);
 
-        Task<List<ExpenseRes>> GetExpensesByUserIdAsync(int userId);
+        Task<List<ExpenseRes>> GetExpensesOrIncomesByUserIdAsync(int userId, TransactionType type);
     }
 }

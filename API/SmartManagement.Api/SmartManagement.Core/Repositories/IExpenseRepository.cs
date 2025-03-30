@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace SmartManagement.Core.Repositories
 {
-    public interface IExpenseRepository
+    public interface IExpenseAndIncomeRepository
     {
-        Task<ExpenseAndIncome> AddExpenseAsynce(ExpenseAndIncome expenseAndIncome);
+        Task<ExpenseAndIncome> AddExpenseOrIncomeAsynce(ExpenseAndIncome expenseAndIncome);
 
-        Task<ExpenseAndIncome> FindExpenseById(int id);
+        Task<ExpenseAndIncome> FindExpenseOrIncomeById(int id);
 
-        Task UpdateExpenseAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId, TransactionDocument? resultFile);
+        Task UpdateExpenseOrIncomeAsync(int expenseId, DateTime date, CategoryExpenseAndIncome category, string description, TransactionType typeTransaction, decimal sum, int? fixedExpenseAndIncomeId, TransactionDocument? resultFile);
 
-        Task<IEnumerable<ExpenseAndIncome>> GetAllExpensesAsync();
+        Task<IEnumerable<ExpenseAndIncome>> GetAllExpensesOrIncomeAsync(TransactionType type);
 
-        Task<IEnumerable<ExpenseAndIncome>> GetExpensesByUserIdAsync(int userId);
+        Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomeByUserIdAsync(int userId, TransactionType type);
 
-        Task DeleteExpenseAsync(int expenseId);
+        Task DeleteExpenseOrIncomeAsync(int expenseId);
 
-        Task<IEnumerable<ExpenseAndIncome>> GetExpensesByCategoryAsync(CategoryExpenseAndIncome category);
+        Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomeByCategoryAsync(CategoryExpenseAndIncome category);
 
-        Task<IEnumerable<ExpenseAndIncome>> GetExpensesByDateRangeAsync(DateTime startDate, DateTime endDate, int userID);
+        Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomeByDateRangeAsync(DateTime startDate, DateTime endDate, int userID,TransactionType type);
     }
 }

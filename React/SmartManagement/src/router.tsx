@@ -4,8 +4,8 @@ import Login from "./components/Login";
 import AppLayout from "./components/AppLayout";
 import ExpenseTracker from "./components/Expenses/ExpenseTracker";
 import Reports from "./components/Expenses/Reports";
-import InComeTracker from "./components/InComeTracker";
 import Graphs from "./components/Graphs";
+import IncomeTracker from "./components/Expenses/IncomeTracker";
 
 
 export const router = createBrowserRouter([
@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
         children: [
 
             { path: "reports", element: <Reports /> },
-            { path: "income-management", element: <InComeTracker /> },
+            { path: "income-management", element: <IncomeTracker /> },
             { path: "expense-management", element: <ExpenseTracker /> },
             { path: "graphs", element: <Graphs /> },
         ],

@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import ExpenseForm from './ExpenseForm';
 import { AppDispatch, RootState } from '../../redux/store';
 import { useEffect } from 'react';
-import { fetchCategories } from '../../redux/categoriesSlice';
 import { addExpenseAsync, addWithFileExpenseAsync, loadExpenses } from '../../redux/ExpenseSlice';
-import { Expense } from '../../models/Expense';
+import { ExpenseAndIncome } from '../../models/Expense&Income';
 import { uploadFile } from '../../redux/FileSlice';
+import ExpenseOrIncomeForm from './ExpenseOrIncomeForm';
+import { fetchExpenseCategories } from '../../redux/categoriesSlice';
 
 // הגדרת הממשק המתאים ל-expenseData
 interface ExpenseData {
@@ -18,13 +18,15 @@ interface ExpenseData {
 
 const AddExpense = ({ onClose }: { onClose: () => void }) => {
   const dispatch = useDispatch<AppDispatch>();
-  const categories = useSelector((state: RootState) => state.categories.categories);
-  const status = useSelector((state: RootState) => state.categories.status);
+  const categories = useSelector((state: RootState) => state.categories.expenseCategories);
+  const status = useSelector((state: RootState) => state.categories.expenseStatus);
 
   // טוען את הקטגוריות כאשר הקומפוננטה נטענת
   useEffect(() => {
+    console.log("status add expense: ", status);
+    
     if (status === 'idle') {
-      dispatch(fetchCategories()).unwrap().catch(console.error); 
+      dispatch(fetchExpenseCategories()).unwrap().catch(console.error); 
     }
   }, [dispatch, status]);
 
@@ -46,7 +48,7 @@ const AddExpense = ({ onClose }: { onClose: () => void }) => {
             fileSize: expenseData.file.size, // File size
           };
   
-          const newExpense: Omit<Expense, 'id' | 'file'> = {
+          const newExpense: Omit<ExpenseAndIncome, 'id' | 'file'> = {
             date: expenseData.date,
             sum: expenseData.sum,
             category: expenseData.category,
@@ -69,7 +71,7 @@ const AddExpense = ({ onClose }: { onClose: () => void }) => {
       }
   
     } else {
-      const newExpense: Omit<Expense, 'id' | 'file'> = {
+      const newExpense: Omit<ExpenseAndIncome, 'id' | 'file'> = {
         date: expenseData.date,
         sum: expenseData.sum,
         category: expenseData.category,
@@ -88,7 +90,7 @@ const AddExpense = ({ onClose }: { onClose: () => void }) => {
   
 
   // החזרת טופס הוצאה
-  return <ExpenseForm onSubmit={handleAddExpense} categories={categories} />;
+  return <ExpenseOrIncomeForm onSubmit={handleAddExpense} categories={categories} />;
 };
 
 export default AddExpense;

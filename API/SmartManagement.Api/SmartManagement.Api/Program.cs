@@ -34,8 +34,8 @@ builder.Services.AddScoped<ITransactionDocumentService, TransactionDocumentServi
 builder.Services.AddScoped<Is3Service, S3Service>();
 builder.Services.AddScoped<ITransactionDocumentRepository, TransactionDocumentRepository>();
 builder.Services.AddScoped<ITransactionDocumentService, TransactionDocumentService>();
-builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
-builder.Services.AddScoped<IExpenseService, ExpenseService>();
+builder.Services.AddScoped<IExpenseAndIncomeRepository, ExpenseAndIncomeRepository>();
+builder.Services.AddScoped<IExpenseAndIncomeService, ExpenseAndIncomeService>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
