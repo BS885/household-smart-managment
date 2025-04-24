@@ -1,4 +1,4 @@
-import { Box, Typography, Paper, Tabs, Tab, Card, Grid, Divider, Container } from '@mui/material';
+import { Box, Typography, Paper, Tabs, Tab, Card, Grid, Container } from '@mui/material';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import ReceiptIcon from '@mui/icons-material/Receipt';
