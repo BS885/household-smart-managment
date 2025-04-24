@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { RootState } from "../../redux/store";
-import { ExpenseAndIncome } from "../../models/Expense&Income";
+import { Transaction } from "../../models/Expense&Income";
 import { fetchIncomeCategories } from "../../redux/categoriesSlice";
 import { AppDispatch } from "../../redux/store";
 import ExpenseForm from "./ExpenseOrIncomeForm";
@@ -17,7 +17,7 @@ interface IncomeData {
     file?: File;
 }
 
-const EditIncome = ({ onClose, transaction }: { onClose: Function, transaction: ExpenseAndIncome }) => {
+const EditIncome = ({ onClose, transaction }: { onClose: Function, transaction: Transaction }) => {
     const dispatch = useDispatch<AppDispatch>();
     const categories = useSelector((state: RootState) => state.categories.incomeCategories);
     const status = useSelector((state: RootState) => state.categories.incomeStatus);
@@ -52,7 +52,7 @@ const EditIncome = ({ onClose, transaction }: { onClose: Function, transaction: 
         }
     
         // יצירת אובייקט ההוצאה לעדכון
-        const updatedIncome: ExpenseAndIncome = {
+        const updatedIncome: Transaction = {
             id: incomeData.id,
             date: incomeData.date,
             sum: incomeData.sum,

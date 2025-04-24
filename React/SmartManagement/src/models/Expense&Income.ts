@@ -1,4 +1,4 @@
-export type ExpenseAndIncome = {
+export type Transaction = {
   id: number;
   date: string;
   category: string;
@@ -6,7 +6,7 @@ export type ExpenseAndIncome = {
   sum: number;
 
 };
-export type ExpenseAndIncomeToSave = {
+export type TransactionToSave = {
   id: number;
   date: string;
   category: string;

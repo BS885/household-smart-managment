@@ -11,13 +11,11 @@ namespace SmartManagement.Api.Controllers
     {
         private readonly Is3Service _s3Service;
 
-        // קונסטרקטור - Dependency Injection של השירות
         public S3Controller(Is3Service s3Service)
         {
             _s3Service = s3Service;
         }
 
-        // שלב 1: קבלת URL להעלאת קובץ ל-S3
         [HttpGet("upload-url")]
         public async Task<IActionResult> GetUploadUrl([FromQuery] string fileName, [FromQuery] string contentType)
             {
@@ -42,7 +40,6 @@ namespace SmartManagement.Api.Controllers
             }
         }
 
-        // שלב 2: קבלת URL להורדת קובץ מה-S3
         [HttpGet("download-url/{fileName}")]
         public async Task<IActionResult> GetDownloadUrl(string fileName)
         {
@@ -66,6 +63,31 @@ namespace SmartManagement.Api.Controllers
                 return StatusCode(500, $"Error generating download URL: {ex.Message}");
             }
         }
+
+        [HttpGet("extract-text/{fileName}")]
+        public async Task<IActionResult> ExtractTextFromFile(string fileName)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(fileName))
+                {
+                    return BadRequest("Missing file name");
+                }
+
+                var extractedText = await _s3Service.ExtractTextFromFileAsync(fileName);
+
+                return Ok(new
+                {
+                    fileName,
+                    extractedText
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error extracting text from file: {ex.Message}");
+            }
+        }
+
     }
 }
 

@@ -11,7 +11,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import useSortedTransactions from "../../CustemHooks/useSortedTransactions";
-import { ExpenseAndIncome } from "../../models/Expense&Income";
+import { Transaction } from "../../models/Expense&Income";
 import { downloadFile } from "../../redux/FileSlice";
 
 interface TransactionActions {
@@ -23,7 +23,7 @@ interface TransactionTrackerProps {
   type: "expense" | "income";
   actions: TransactionActions;
   AddComponent: React.FC<{ onClose: () => void }>;
-  EditComponent: React.FC<{ transaction: ExpenseAndIncome, onClose: () => void }>;
+  EditComponent: React.FC<{ transaction: Transaction, onClose: () => void }>;
   transactionsSelector: (state: RootState) => any[];
   statusSelector: (state: RootState) => string;
 }
@@ -40,7 +40,7 @@ const TransactionTracker: React.FC<TransactionTrackerProps> = ({
   const [transactionToDelete, setTransactionToDelete] = useState<any | null>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [transactionToEdit, setTransactionToEdit] = useState<ExpenseAndIncome | null>(null);
+  const [transactionToEdit, setTransactionToEdit] = useState<Transaction | null>(null);
 
   useEffect(() => {
     if (status === "idle") {

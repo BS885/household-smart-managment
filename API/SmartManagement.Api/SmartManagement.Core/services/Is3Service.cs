@@ -15,5 +15,8 @@ namespace SmartManagement.Core.services
 
         Task<string> GeneratePresignedUrlAsync(string fileName, string contentType);
 
+        Task<List<string>> ExtractTextFromFileAsync(string fileName);
+
+
     }
 }

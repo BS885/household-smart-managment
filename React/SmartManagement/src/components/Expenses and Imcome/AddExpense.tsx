@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
 import { useEffect } from 'react';
 import { addExpenseAsync, addWithFileExpenseAsync, loadExpenses } from '../../redux/ExpenseSlice';
-import { ExpenseAndIncome } from '../../models/Expense&Income';
+import { Transaction } from '../../models/Expense&Income';
 import { uploadFile } from '../../redux/FileSlice';
 import ExpenseOrIncomeForm from './ExpenseOrIncomeForm';
 import { fetchExpenseCategories } from '../../redux/categoriesSlice';
@@ -48,7 +48,7 @@ const AddExpense = ({ onClose }: { onClose: () => void }) => {
             fileSize: expenseData.file.size, // File size
           };
   
-          const newExpense: Omit<ExpenseAndIncome, 'id' | 'file'> = {
+          const newExpense: Omit<Transaction, 'id' | 'file'> = {
             date: expenseData.date,
             sum: expenseData.sum,
             category: expenseData.category,
@@ -71,7 +71,7 @@ const AddExpense = ({ onClose }: { onClose: () => void }) => {
       }
   
     } else {
-      const newExpense: Omit<ExpenseAndIncome, 'id' | 'file'> = {
+      const newExpense: Omit<Transaction, 'id' | 'file'> = {
         date: expenseData.date,
         sum: expenseData.sum,
         category: expenseData.category,

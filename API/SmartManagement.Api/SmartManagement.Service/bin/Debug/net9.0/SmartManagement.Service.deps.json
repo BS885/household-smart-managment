@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "SmartManagement.Service/1.0.0": {
         "dependencies": {
+          "AWSSDK.Textract": "3.7.400.137",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.3",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.3",
@@ -40,22 +41,33 @@
           }
         }
       },
-      "AWSSDK.Core/3.7.402.19": {
+      "AWSSDK.Core/3.7.402.43": {
         "runtime": {
           "lib/net8.0/AWSSDK.Core.dll": {
             "assemblyVersion": "3.3.0.0",
-            "fileVersion": "3.7.402.19"
+            "fileVersion": "3.7.402.43"
           }
         }
       },
       "AWSSDK.S3/3.7.415.18": {
         "dependencies": {
-          "AWSSDK.Core": "3.7.402.19"
+          "AWSSDK.Core": "3.7.402.43"
         },
         "runtime": {
           "lib/net8.0/AWSSDK.S3.dll": {
             "assemblyVersion": "3.3.0.0",
             "fileVersion": "3.7.415.18"
+          }
+        }
+      },
+      "AWSSDK.Textract/3.7.400.137": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.402.43"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.Textract.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.400.137"
           }
         }
       },
@@ -280,12 +292,12 @@
       "path": "automapper.extensions.microsoft.dependencyinjection/12.0.1",
       "hashPath": "automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512"
     },
-    "AWSSDK.Core/3.7.402.19": {
+    "AWSSDK.Core/3.7.402.43": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QNxPperAlN9LyZQ3XwQtGI3I3XeULucGzqI3PngR6jxNvwJTD++YyklL/6o2Q3CRfVmnj7noXh+nhiXuQbA/Ig==",
-      "path": "awssdk.core/3.7.402.19",
-      "hashPath": "awssdk.core.3.7.402.19.nupkg.sha512"
+      "sha512": "sha512-iAo889ehvfXCORxLF+o7BmKnBAtBTWD7aVMTP+P1sPlHlVqvIj4S3MUaDYjR7b1MGUTsE+UBNyj3tu+cj1MBqA==",
+      "path": "awssdk.core/3.7.402.43",
+      "hashPath": "awssdk.core.3.7.402.43.nupkg.sha512"
     },
     "AWSSDK.S3/3.7.415.18": {
       "type": "package",
@@ -293,6 +305,13 @@
       "sha512": "sha512-lTq+XOORliPaWETAOrsbFFaNu4Zjtd0YFrhBHQC+rIyK/yvTw0ma+v3Wl59thkNSR7wcTxcuMuqFfMaxPlQcag==",
       "path": "awssdk.s3/3.7.415.18",
       "hashPath": "awssdk.s3.3.7.415.18.nupkg.sha512"
+    },
+    "AWSSDK.Textract/3.7.400.137": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ECsF3MkUBAMEHrbibChlc4XAnxju0QCLN7MgGnspre38el4rP8zSvXejgvZNsGacdcFi4eGKxtaTrEQPKNUH2w==",
+      "path": "awssdk.textract/3.7.400.137",
+      "hashPath": "awssdk.textract.3.7.400.137.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/9.0.3": {
       "type": "package",

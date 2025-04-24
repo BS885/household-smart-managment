@@ -19,7 +19,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 import { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
 
-interface ExpenseAndIncomeFormProps {
+interface TransactionFormProps {
   onSubmit: (data: any) => Promise<void>;
   categories: string[];
   initialValues?: any;
@@ -27,7 +27,7 @@ interface ExpenseAndIncomeFormProps {
   isExpense?: boolean;
 }
 
-const ExpenseOrIncomeForm: FC<ExpenseAndIncomeFormProps> = ({ onSubmit, categories, initialValues = null, isEdit = false, isExpense=true }) => {
+const ExpenseOrIncomeForm: FC<TransactionFormProps> = ({ onSubmit, categories, initialValues = null, isEdit = false, isExpense=true }) => {
   const [formData, setFormData] = useState({
     date: new Date() as Date | null, // מאפשר גם null
     sum: "",

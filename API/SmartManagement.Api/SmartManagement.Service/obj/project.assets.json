@@ -31,7 +31,7 @@
           "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
-      "AWSSDK.Core/3.7.402.19": {
+      "AWSSDK.Core/3.7.402.43": {
         "type": "package",
         "compile": {
           "lib/net8.0/AWSSDK.Core.dll": {
@@ -56,6 +56,22 @@
         },
         "runtime": {
           "lib/net8.0/AWSSDK.S3.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "AWSSDK.Textract/3.7.400.137": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "[3.7.402.43, 4.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.Textract.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.Textract.dll": {
             "related": ".pdb;.xml"
           }
         }
@@ -438,15 +454,15 @@
         "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
       ]
     },
-    "AWSSDK.Core/3.7.402.19": {
-      "sha512": "QNxPperAlN9LyZQ3XwQtGI3I3XeULucGzqI3PngR6jxNvwJTD++YyklL/6o2Q3CRfVmnj7noXh+nhiXuQbA/Ig==",
+    "AWSSDK.Core/3.7.402.43": {
+      "sha512": "iAo889ehvfXCORxLF+o7BmKnBAtBTWD7aVMTP+P1sPlHlVqvIj4S3MUaDYjR7b1MGUTsE+UBNyj3tu+cj1MBqA==",
       "type": "package",
-      "path": "awssdk.core/3.7.402.19",
+      "path": "awssdk.core/3.7.402.43",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "awssdk.core.3.7.402.19.nupkg.sha512",
+        "awssdk.core.3.7.402.43.nupkg.sha512",
         "awssdk.core.nuspec",
         "images/AWSLogo.png",
         "lib/net35/AWSSDK.Core.dll",
@@ -495,6 +511,38 @@
         "lib/netstandard2.0/AWSSDK.S3.dll",
         "lib/netstandard2.0/AWSSDK.S3.pdb",
         "lib/netstandard2.0/AWSSDK.S3.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "AWSSDK.Textract/3.7.400.137": {
+      "sha512": "ECsF3MkUBAMEHrbibChlc4XAnxju0QCLN7MgGnspre38el4rP8zSvXejgvZNsGacdcFi4eGKxtaTrEQPKNUH2w==",
+      "type": "package",
+      "path": "awssdk.textract/3.7.400.137",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.Textract.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.textract.3.7.400.137.nupkg.sha512",
+        "awssdk.textract.nuspec",
+        "images/AWSLogo.png",
+        "lib/net35/AWSSDK.Textract.dll",
+        "lib/net35/AWSSDK.Textract.pdb",
+        "lib/net35/AWSSDK.Textract.xml",
+        "lib/net45/AWSSDK.Textract.dll",
+        "lib/net45/AWSSDK.Textract.pdb",
+        "lib/net45/AWSSDK.Textract.xml",
+        "lib/net8.0/AWSSDK.Textract.dll",
+        "lib/net8.0/AWSSDK.Textract.pdb",
+        "lib/net8.0/AWSSDK.Textract.xml",
+        "lib/netcoreapp3.1/AWSSDK.Textract.dll",
+        "lib/netcoreapp3.1/AWSSDK.Textract.pdb",
+        "lib/netcoreapp3.1/AWSSDK.Textract.xml",
+        "lib/netstandard2.0/AWSSDK.Textract.dll",
+        "lib/netstandard2.0/AWSSDK.Textract.pdb",
+        "lib/netstandard2.0/AWSSDK.Textract.xml",
         "tools/install.ps1",
         "tools/uninstall.ps1"
       ]
@@ -1086,6 +1134,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "AWSSDK.Textract >= 3.7.400.137",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 9.0.3",
       "Microsoft.Extensions.Logging.Abstractions >= 9.0.3",
@@ -1146,6 +1195,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "AWSSDK.Textract": {
+            "target": "Package",
+            "version": "[3.7.400.137, )"
+          },
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[12.0.1, )"

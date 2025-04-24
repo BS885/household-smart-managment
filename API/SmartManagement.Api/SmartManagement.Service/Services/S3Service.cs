@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SmartManagement.Core.services;
+using Amazon.Textract;
+using Amazon.Textract.Model;
+using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -15,12 +18,15 @@ namespace SmartManagement.Service.services
         private readonly IAmazonS3 _s3Client;
         private readonly string _bucketName;
         private readonly ILogger<S3Service> _logger;
+        private readonly IAmazonTextract _textractClient;
 
-        public S3Service(IAmazonS3 s3Client, IConfiguration configuration, ILogger<S3Service> logger)
+
+        public S3Service(IAmazonS3 s3Client, IConfiguration configuration, ILogger<S3Service> logger, IAmazonTextract textractClient)
         {
             _s3Client = s3Client; // שימוש בהזרקת תלות במקום יצירה ידנית
             _bucketName = configuration["AWS:BucketName"] ?? throw new InvalidOperationException("Bucket name is missing in configuration.");
             _logger = logger;
+            _textractClient = textractClient;
         }
 
         public async Task<string> GetDownloadUrlAsync(string fileName)
@@ -101,5 +107,45 @@ namespace SmartManagement.Service.services
                 throw;
             }
         }
+
+        public async Task<List<string>> ExtractTextFromFileAsync(string fileName)
+        {
+            try
+            {
+                var request = new DetectDocumentTextRequest
+                {
+                    Document = new Document
+                    {
+                        S3Object = new Amazon.Textract.Model.S3Object
+                        {
+                            Bucket = _bucketName,
+                            Name = fileName
+                        }
+                    }
+                };
+
+                var response = await _textractClient.DetectDocumentTextAsync(request);
+
+                List<string> lines = new List<string>();
+
+                foreach (var block in response.Blocks)
+                {
+                    if (block.BlockType == "LINE" && !string.IsNullOrEmpty(block.Text))
+                    {
+                        lines.Add(block.Text);
+                    }
+                }
+
+                _logger.LogInformation($"Extracted {lines.Count} lines of text from file: {fileName}");
+
+                return lines;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error extracting text from {fileName}: {ex.Message}");
+                throw;
+            }
+        }
+
     }
 }

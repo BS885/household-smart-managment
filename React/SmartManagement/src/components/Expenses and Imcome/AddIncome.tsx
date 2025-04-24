@@ -3,7 +3,7 @@ import ExpenseOrIncomeForm from './ExpenseOrIncomeForm';
 import { AppDispatch, RootState } from '../../redux/store';
 import { useEffect } from 'react';
 import { fetchIncomeCategories } from '../../redux/categoriesSlice';
-import { ExpenseAndIncome } from '../../models/Expense&Income';
+import { Transaction } from '../../models/Expense&Income';
 import { uploadFile } from '../../redux/FileSlice';
 import { addIncomeAsync, addWithFileIncomeAsync, loadIncomes } from '../../redux/IncomeSlices';
 
@@ -45,7 +45,7 @@ const AddIncome = ({ onClose }: { onClose: () => void }) => {
             fileSize: incomeData.file.size, // File size
           };
   
-          const newExpense: Omit<ExpenseAndIncome, 'id' | 'file'> = {
+          const newExpense: Omit<Transaction, 'id' | 'file'> = {
             date: incomeData.date,
             sum: incomeData.sum,
             category: incomeData.category,
@@ -68,7 +68,7 @@ const AddIncome = ({ onClose }: { onClose: () => void }) => {
       }
   
     } else {
-      const newExpense: Omit<ExpenseAndIncome, 'id' | 'file'> = {
+      const newExpense: Omit<Transaction, 'id' | 'file'> = {
         date: incomeData.date,
         sum: incomeData.sum,
         category: incomeData.category,
