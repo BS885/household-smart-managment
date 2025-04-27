@@ -1,17 +1,24 @@
+import { CircularProgress, Box, Typography } from '@mui/material';
+
 const LoadingPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50" dir="rtl">
-      <div className="text-center">
-        {/* סמן טעינה מסתובב */}
-        <div className="inline-block w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-6"></div>
-
-        {/* כותרת */}
-        <h2 className="text-xl font-medium text-gray-700 mb-2">טוען נתונים</h2>
-
-        {/* תיאור */}
-        <p className="text-gray-500">אנא המתן...</p>
-      </div>
-    </div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="100vh"
+      minWidth="100vw"
+      // bgcolor="#f5f5f5"
+      dir="rtl"
+    >
+      <CircularProgress color="primary" size={64} thickness={4} />
+      <Typography variant="h6" color="textSecondary" mt={2}>
+        טוען נתונים
+      </Typography>
+      <Typography color="textSecondary">אנא המתן...</Typography>
+    </Box>
   );
 }
+
 export default LoadingPage;
