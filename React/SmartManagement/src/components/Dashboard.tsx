@@ -8,11 +8,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadExpenses } from '../redux/ExpenseSlice';
 import { AppDispatch, RootState } from '../redux/store';
-import PageInBuild from './PageInBuild';
 import CakeGraph from './Graphs/cakeGragph';
 import CategoryMonthComparisonChart from './Graphs/CategoryMonthComparisonChartProps';
 import { generateCategoryPieData } from './Graphs/chartHelpers';
 import { Transaction } from '../models/Expense&Income';
+import LoadingPage from './LoadingPage';
 
 const Dashboard = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,7 +23,8 @@ const Dashboard = () => {
     if (status === 'idle') dispatch(loadExpenses());
   }, [status, dispatch]);
 
-  if (status === 'loading') return <PageInBuild />;
+  if (status === 'loading') 
+   return <LoadingPage />;
 
   // Data processing
   const monthlyData: Record<string, Transaction[]> = {};
