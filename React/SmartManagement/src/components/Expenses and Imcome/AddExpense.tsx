@@ -7,11 +7,10 @@ import { uploadFile } from '../../redux/FileSlice';
 import ExpenseOrIncomeForm from './ExpenseOrIncomeForm';
 import { fetchExpenseCategories } from '../../redux/categoriesSlice';
 
-// הגדרת הממשק המתאים ל-expenseData
 interface ExpenseData {
   date: string;
   sum: number;
-  category: string;
+  category?: string;
   description: string;
   file?: File;
 }
@@ -48,14 +47,13 @@ const AddExpense = ({ onClose }: { onClose: () => void }) => {
             fileSize: expenseData.file.size, // File size
           };
   
-          const newExpense: Omit<Transaction, 'id' | 'file'> = {
+          const newExpense: Omit<Transaction, 'id' | 'file' |'category'> = {
             date: expenseData.date,
             sum: expenseData.sum,
-            category: expenseData.category,
+            // category: expenseData.category,
             description: expenseData.description,
           };
   
-          // Wrap the newExpense inside an object with the 'expense' property
           try {
             await dispatch(addWithFileExpenseAsync({ expense: newExpense, file: fileData })).unwrap();
             await dispatch(loadExpenses()).unwrap();
@@ -66,19 +64,19 @@ const AddExpense = ({ onClose }: { onClose: () => void }) => {
   
         } catch (error) {
           console.error('File upload failed:', error);
-          return; // If the upload fails, we do not proceed
+          return;
         }
       }
   
     } else {
-      const newExpense: Omit<Transaction, 'id' | 'file'> = {
+      const newExpense: Omit<Transaction, 'id' | 'file'|'category'> = {
         date: expenseData.date,
         sum: expenseData.sum,
-        category: expenseData.category,
         description: expenseData.description,
       };
   
       try {
+
         await dispatch(addExpenseAsync(newExpense)).unwrap();
         await dispatch(loadExpenses()).unwrap();
         onClose();

@@ -20,17 +20,17 @@ export const loadExpenses = createAsyncThunk("expenses/loadExpenses", async () =
   return response.data.$values;
 });
 
-export const addExpenseAsync = createAsyncThunk("expenses/addExpense", async (expense: Omit<Transaction, "id">) => {
+export const addExpenseAsync = createAsyncThunk("expenses/addExpense", async (expense: Omit<Transaction, "id" | 'category'>) => {
   const response = await api.post("/expenses", expense);
   console.log(response.data);
   return response.data;
 });
 
-export const addWithFileExpenseAsync = createAsyncThunk("expenses/addExpense", async ({ expense, file }: { expense: Omit<Transaction, "id">; file: FileState }) => {
+export const addWithFileExpenseAsync = createAsyncThunk("expenses/addExpense", async ({ expense, file }: { expense: Omit<Transaction, "id" | 'category'>; file: FileState }) => {
   const expenseAndFile = {
 
     Date: new Date(expense.date).toISOString().split('T')[0],
-    Category: expense.category,
+    // Category: expense.category,
     Description: expense.description,
     Sum: expense.sum,
     file: true,
@@ -79,6 +79,34 @@ export const deleteExpenseAsync = createAsyncThunk("expenses/deleteExpense", asy
   return id;
 })
 
+export const filterExpensesByRngeDateAndCategoryAsync = createAsyncThunk(
+  "expenses/filterByBody",
+  async ({ from, to, category }: { from: string; to: string; category: string }) => {
+    const requestBody = {
+      StartDate: new Date(from).toISOString().split('T')[0],
+      EndDate: new Date(to).toISOString().split('T')[0],
+      CategoryName: category,
+    };
+    console.log("Request body filterExpensesByRngeDateAndCategoryAsync:", requestBody);
+
+    const response = await api.post("/Expenses/by-date-category-user", requestBody);
+    console.log("Filtered response:", response.data.$values);
+    return response.data.$values;
+  }
+);
+
+export const filterExpensesByYearAsync = createAsyncThunk(
+  "expenses/filterByYear",
+  async ({ year}: { year: number}) => {
+    console.log("Request body filterYear:", year);
+
+    const response = await api.get(`/Expenses/by-year-user/${year}`);
+
+    console.log("Filtered by year response:", response.data.$values);
+    return response.data.$values;
+  }
+);
+
 const expenseSlice = createSlice({
   name: "expenses",
   initialState,
@@ -116,7 +144,7 @@ const expenseSlice = createSlice({
       .addCase(addExpenseAsync.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message || "Failed to add expense";
-      });
+      })
   },
 });
 

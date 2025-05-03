@@ -27,5 +27,9 @@ namespace SmartManagement.Core.services
         Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomesByDateRangeAsync(DateTime startDate, DateTime endDate, int userID,TransactionType type);
 
         Task<List<ExpenseRes>> GetExpensesOrIncomesByUserIdAsync(int userId, TransactionType type);
+
+        Task<IEnumerable<ExpenseRes>> GetTransactionsByDateCategoryAndUserAsync(DateTime startDate, DateTime endDate, int userID, TransactionType type, string Namecategory);
+
+        Task<IEnumerable<ExpenseRes>> GetTransactionsAcordingYearAndUserAsync(int Year, int userID, TransactionType type);
     }
 }

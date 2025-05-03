@@ -27,13 +27,13 @@ namespace SmartManagement.Api.Controllers
         [Authorize(Policy = "Users.Update")]
         public IActionResult UpdateProfile([FromBody] UpdateUserDto updateProfileDto, string id)
         {
-            _logger.LogInformation("enter");
 
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (userId != id)
             {
-                _logger.LogInformation("userId" + id);
+                _logger.LogInformation("UpdateProfile userId" + id);
+
                 return Unauthorized("token not valid");
             }
             try

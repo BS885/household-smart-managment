@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SmartManagement.Core.DTOs;
 using SmartManagement.Core.Enums;
 using SmartManagement.Core.Models;
 using SmartManagement.Core.Repositories;
@@ -118,7 +119,7 @@ namespace SmartManagement.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomeByDateRangeAsync(DateTime startDate, DateTime endDate, int userID, TransactionType type)
+        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomeByDateRangeAndUserAsync(DateTime startDate, DateTime endDate, int userID, TransactionType type)
         {
             _logger.LogInformation($"get {type} by date range {startDate} - {endDate}");
 
@@ -144,6 +145,23 @@ namespace SmartManagement.Data.Repositories
             return expenses;
         }
 
+        public async Task<IEnumerable<ExpenseAndIncome>> GetTransactionsByDateCategoryAndUserAsync(DateTime startDate, DateTime endDate, TransactionType type, CategoryExpenseAndIncome category, int useID)
+        {
+            _logger.LogInformation($"in repository expense an income:: get {type} by date range startDate: {startDate} - endDate: {endDate}");
+            return await _context.ExpensesAndIncomes
+                .Where(e => e.Date >= startDate && e.Date <= endDate && e.TypeTransaction == type && e.UserId == useID && e.Category == category)
+                .Include(e => e.Category)
+                .ToListAsync();
+        }
 
+        public async Task<IEnumerable<ExpenseAndIncome>> GetTransactionsByYearAndUserAsync(int year,int userID,TransactionType type)
+        {
+            _logger.LogInformation($"get {type} of year: {year} to user {userID}");
+          return await _context.ExpensesAndIncomes
+               .Where(e=>e.TypeTransaction==type && e.UserId==userID && e.Date.Year==year)
+                .Include(e => e.Category)
+                .ToListAsync();
+            
+        }
     }
 }

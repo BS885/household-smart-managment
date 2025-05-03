@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SmartManagement.Core.services
 {
-    
-    public interface IS3FileService
+    public interface IAiService
     {
-         Task<string> GetPresignedUrlAsync(string fileName, string fileType);
+         Task<string> GetCategoryFromDescription(string description, string type);
+
     }
 }

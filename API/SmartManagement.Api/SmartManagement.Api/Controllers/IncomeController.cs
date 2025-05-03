@@ -15,37 +15,43 @@ namespace SmartManagement.Api.Controllers
     {
         private readonly IExpenseAndIncomeService _expenseService;
         private readonly IUserService _userService;
+        private readonly IAiService _aiService;
 
-        public IncomesController(IExpenseAndIncomeService expenseService, Is3Service S3FileService, IUserService userService)
+        public IncomesController(IExpenseAndIncomeService expenseService, Is3Service S3FileService, IUserService userService,IAiService aiService)
         {
             _expenseService = expenseService;
             _userService = userService;
+            _aiService = aiService;
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> AddExpense([FromBody] ExpenseDtoReq expenseDto)
+        public async Task<IActionResult> AddIncome([FromBody] ExpenseAndIncomeDtoReq IncomeDto)
         {
             try
             {
                 var userId = _userService.GetUserIdFromToken(User);
+                var category = await _aiService.GetCategoryFromDescription(IncomeDto.Description, "Income");
+                if (category == null)
+                {
+                    return BadRequest("Error in AI service");
+                }
+                var IncomeId = await _expenseService.AddExpenseOrIncomeAsync(
 
-                var expenseId = await _expenseService.AddExpenseOrIncomeAsync(
-
-                    expenseDto.Date,
-                    expenseDto.Category,
+                    IncomeDto.Date,
+                    category,
                     int.Parse(userId),
-                    expenseDto.Description,
+                    IncomeDto.Description,
                     TransactionType.UnFixIncome,
-                    expenseDto.Sum,
-                    expenseDto.file,
-                    expenseDto.FileType,
-                    expenseDto.FileName,
-                    expenseDto.Filesize,
+                    IncomeDto.Sum,
+                    IncomeDto.file,
+                    IncomeDto.FileType,
+                    IncomeDto.FileName,
+                    IncomeDto.Filesize,
                     null
                 );
 
-                return Ok(new { expenseId });
+                return Ok(new { IncomeId });
             }
             catch (Exception ex)
             {
@@ -55,23 +61,23 @@ namespace SmartManagement.Api.Controllers
 
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetExpenseById(int id)
+        public async Task<IActionResult> GetIncomeById(int id)
         {
             try
             {
-                var expense = await _expenseService.GetExpenseOrIncomeByIdAsync(id);
-                if (expense == null)
+                var income = await _expenseService.GetExpenseOrIncomeByIdAsync(id);
+                if (income == null)
                 {
                     return NotFound();
                 }
 
                 var userId = _userService.GetUserIdFromToken(User);
-                if (expense.UserId.ToString() != userId)
+                if (income.UserId.ToString() != userId)
                 {
-                    return Forbid("אין לך הרשאה לצפות בהוצאה זו.");
+                    return Forbid("אין לך הרשאה לצפות בהכנסה זו.");
                 }
 
-                return Ok(expense);
+                return Ok(income);
             }
             catch (Exception ex)
             {
@@ -80,7 +86,7 @@ namespace SmartManagement.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllExpensesByIDUser()
+        public async Task<IActionResult> GetAllIncomeByIDUser()
         {
             try
             {
@@ -97,7 +103,7 @@ namespace SmartManagement.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateExpense(int id, [FromBody] ExpenseDtoReq expenseDto)
+        public async Task<IActionResult> UpdateIncome(int id, [FromBody] ExpenseAndIncomeDtoReq IncomeDto)
         {
             try
             {
@@ -110,20 +116,20 @@ namespace SmartManagement.Api.Controllers
                 var userId = _userService.GetUserIdFromToken(User);
                 if (expense.UserId.ToString() != userId)
                 {
-                    return Forbid("אין לך הרשאה לעדכן הוצאה זו.");
+                    return Forbid("אין לך הרשאה לעדכן הכנסה זו.");
                 }
 
                 await _expenseService.UpdateExpenseOrIncomeAsync(
                     id,
-                    expenseDto.Date,
-                    expenseDto.Category,
-                    expenseDto.Description,
+                    IncomeDto.Date,
+                    IncomeDto.Category,
+                    IncomeDto.Description,
                     TransactionType.UnFixIncome,
-                    expenseDto.Sum,
-                    expenseDto.file,
-                    expenseDto.FileType,
-                    expenseDto.FileName,
-                    expenseDto.Filesize,
+                    IncomeDto.Sum,
+                    IncomeDto.file,
+                    IncomeDto.FileType,
+                    IncomeDto.FileName,
+                    IncomeDto.Filesize,
                     null
                 );
                 return Ok();
@@ -135,7 +141,7 @@ namespace SmartManagement.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteExpense(int id)
+        public async Task<IActionResult> DeleteIncome(int id)
         {
             try
             {

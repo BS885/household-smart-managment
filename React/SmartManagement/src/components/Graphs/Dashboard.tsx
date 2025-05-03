@@ -6,13 +6,13 @@ import CategoryIcon from '@mui/icons-material/Category';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadExpenses } from '../redux/ExpenseSlice';
-import { AppDispatch, RootState } from '../redux/store';
-import CakeGraph from './Graphs/cakeGragph';
-import CategoryMonthComparisonChart from './Graphs/CategoryMonthComparisonChartProps';
-import { generateCategoryPieData } from './Graphs/chartHelpers';
-import { Transaction } from '../models/Expense&Income';
-import LoadingPage from './LoadingPage';
+import { loadExpenses } from '../../redux/ExpenseSlice';
+import { AppDispatch, RootState } from '../../redux/store';
+import CakeGraph from '../Graphs/cakeGragph';
+import CategoryMonthComparisonChart from '../Graphs/CategoryMonthComparisonChartProps';
+import { generateCategoryPieData } from '../Graphs/chartHelpers';
+import { Transaction } from '../../models/Expense&Income';
+import LoadingPage from '../LoadingPage';
 
 const Dashboard = () => {
   const dispatch = useDispatch<AppDispatch>();

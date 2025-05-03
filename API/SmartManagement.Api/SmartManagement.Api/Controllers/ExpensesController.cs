@@ -15,25 +15,31 @@ namespace SmartManagement.Api.Controllers
     {
         private readonly IExpenseAndIncomeService _expenseService;
         private readonly IUserService _userService;
-
-        public ExpensesController(IExpenseAndIncomeService expenseService, Is3Service S3FileService, IUserService userService)
+        private readonly IAiService _aiService;
+        public ExpensesController(IExpenseAndIncomeService expenseService, Is3Service S3FileService, IUserService userService, IAiService aiService)
         {
             _expenseService = expenseService;
             _userService = userService;
+            _aiService = aiService;
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> AddExpense([FromBody] ExpenseDtoReq expenseDto)
+        public async Task<IActionResult> AddExpense([FromBody] ExpenseAndIncomeDtoReq expenseDto)
         {
             try
             {
                 var userId = _userService.GetUserIdFromToken(User);
-
+                var category = await _aiService.GetCategoryFromDescription(expenseDto.Description, "expense");
+                if (category == null)
+                {
+                    return BadRequest("Error in AI service");
+                }
                 var expenseId = await _expenseService.AddExpenseOrIncomeAsync(
 
                     expenseDto.Date,
-                    expenseDto.Category,
+                    //expenseDto.Category,
+                    category,
                     int.Parse(userId),
                     expenseDto.Description,
                     TransactionType.UnFixedExpense,
@@ -81,13 +87,13 @@ namespace SmartManagement.Api.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAllExpensesByIDUser()
-            {
+        {
             try
             {
-                var tyu= ((int)TransactionType.UnFixedExpense);
+                //var type = ((int)TransactionType.UnFixedExpense);
                 var userId = _userService.GetUserIdFromToken(User);
 
-                var filteredExpenses = await _expenseService.GetExpensesOrIncomesByUserIdAsync(int.Parse(userId),TransactionType.UnFixedExpense);
+                var filteredExpenses = await _expenseService.GetExpensesOrIncomesByUserIdAsync(int.Parse(userId), TransactionType.UnFixedExpense);
                 return Ok(filteredExpenses);
             }
             catch (Exception ex)
@@ -97,7 +103,7 @@ namespace SmartManagement.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateExpense(int id, [FromBody] ExpenseDtoReq expenseDto)
+        public async Task<IActionResult> UpdateExpense(int id, [FromBody] ExpenseAndIncomeDtoReq expenseDto)
         {
             try
             {
@@ -157,6 +163,43 @@ namespace SmartManagement.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("by-date-category-user")]
+        public async Task<IActionResult> GetByDateCategoryAndUser(
+            [FromBody] TransactionFilterDto request)
+        {
+            try
+            {
+                Console.WriteLine("expenses by-date-category-user " + request.StartDate);
+                var userId = _userService.GetUserIdFromToken(User);
+                
+                var result = await _expenseService.GetTransactionsByDateCategoryAndUserAsync(request.StartDate, request.EndDate, int.Parse(userId), TransactionType.UnFixedExpense, request.CategoryName);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "שגיאה בשרת: " + ex.Message);
+            }
+        }
+        [HttpGet("by-year-user/{year}")]
+        public async Task<IActionResult> GetByYearAndUser(int year)
+        {
+            try
+            {
+                var userId = _userService.GetUserIdFromToken(User);
+                var result = await _expenseService.GetTransactionsAcordingYearAndUserAsync(
+                    year,
+                    int.Parse(userId),
+                    TransactionType.UnFixedExpense
+                );
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                // כדאי להחזיר שגיאה ולא להשאיר את ה-catch ריק
+                return StatusCode(500, $"Error: {ex.Message}");
             }
         }
 

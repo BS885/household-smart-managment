@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Amazon.Runtime.Internal.Util;
+using AutoMapper;
 using Microsoft.Extensions.Logging;
 using SmartManagement.Core.DTOs;
 using SmartManagement.Core.Enums;
@@ -43,7 +44,7 @@ namespace SmartManagement.Service.Services
                 }
 
                 var categoryExpense = await _categoryRepository.GetByNameAsync(category);
-               
+
                 var expense = new ExpenseAndIncome
                 {
                     Date = date,
@@ -154,9 +155,9 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task<List<ExpenseRes>> GetExpensesOrIncomesByUserIdAsync(int userId,TransactionType type)
+        public async Task<List<ExpenseRes>> GetExpensesOrIncomesByUserIdAsync(int userId, TransactionType type)
         {
-            var result = await _expenseRepository.GetExpensesOrIncomeByUserIdAsync(userId,type);
+            var result = await _expenseRepository.GetExpensesOrIncomeByUserIdAsync(userId, type);
             var resultList = result.ToList();
 
             return _mapper.Map<List<ExpenseRes>>(result);
@@ -177,11 +178,11 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomesByDateRangeAsync(DateTime startDate, DateTime endDate, int userID,TransactionType type)
+        public async Task<IEnumerable<ExpenseAndIncome>> GetExpensesOrIncomesByDateRangeAsync(DateTime startDate, DateTime endDate, int userID, TransactionType type)
         {
             try
             {
-                var expenses = await _expenseRepository.GetExpensesOrIncomeByDateRangeAsync(startDate, endDate, userID,type);
+                var expenses = await _expenseRepository.GetExpensesOrIncomeByDateRangeAndUserAsync(startDate, endDate, userID, type);
                 _logger.LogInformation($"get expenses by date range {startDate} - {endDate}");
                 return expenses;
             }
@@ -192,7 +193,37 @@ namespace SmartManagement.Service.Services
             }
         }
 
+        public async Task<IEnumerable<ExpenseRes>> GetTransactionsByDateCategoryAndUserAsync(DateTime startDate, DateTime endDate, int userID, TransactionType type, string Namecategory)
+        {
+            try
+            {
+                var category = await _categoryRepository.GetByNameAsync(Namecategory);
 
+                var expenses = await _expenseRepository.GetTransactionsByDateCategoryAndUserAsync(startDate, endDate, type, category, userID);
+                _logger.LogInformation($"get expenses by date range {startDate} - {endDate} and category {Namecategory} ");
+                return _mapper.Map<List<ExpenseRes>>(expenses);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"שגיאה באיתור הוצאות לפי טווח תאריכים: {ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<ExpenseRes>> GetTransactionsAcordingYearAndUserAsync(int Year,int userID,TransactionType type)
+        {
+            try
+            {
+                var result=await _expenseRepository.GetTransactionsByYearAndUserAsync(Year,userID,type);
+                _logger.LogInformation($"in service:: get {type} by year: {Year} ");
+                return _mapper.Map<List<ExpenseRes>>(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"שגיאה באיתור הוצאות לפי טווח תאריכים: {ex.Message}");
+                throw;
+            }
+        }
     }
 }
 

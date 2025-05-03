@@ -28,10 +28,6 @@ const EditExpense = ({ onClose, transaction }: { onClose: Function, transaction:
         }
     }, [dispatch, status]);
 
-
-    // const handleEditExpense = (expenseData: ExpenseData) => {
-    //     console.log('updating expense:', expenseData);
-
     //     const newExpense: Expense = {
     //         id: expenseData.id,
     //         date: expenseData.date,

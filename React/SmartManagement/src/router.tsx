@@ -3,9 +3,9 @@ import RegistrationForm from "./components/RegistrationForm";
 import Login from "./components/Login";
 import AppLayout from "./components/AppLayout";
 import ExpenseTracker from "./components/Expenses and Imcome/ExpenseTracker";
-import Reports from "./components/Expenses and Imcome/Reports";
 import IncomeTracker from "./components/Expenses and Imcome/IncomeTracker";
-import Dashboard from "./components/Dashboard";
+import ReportsScreen from "./components/reports/ReportsScreen";
+import Dashboard from "./components/Graphs/Dashboard";
 
 
 export const router = createBrowserRouter([
@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
         errorElement: <h1>Error</h1>,
         children: [
 
-            { path: "reports", element: <Reports /> },
+            { path: "reports", element: <ReportsScreen /> },
             { path: "income-management", element: <IncomeTracker /> },
             { path: "expense-management", element: <ExpenseTracker /> },
             { path: "graphs", element: <Dashboard /> },

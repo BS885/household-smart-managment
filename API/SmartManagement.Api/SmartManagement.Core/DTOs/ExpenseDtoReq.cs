@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace SmartManagement.Core.DTOs
 {
-    public class ExpenseDtoReq
+    public class ExpenseAndIncomeDtoReq
     {
         public DateTime Date { get; set; }
-        public string Category { get; set; }
+        public string? Category { get; set; }
         public string Description { get; set; }
         public decimal Sum { get; set; }
         public bool file { get; set; } = false;

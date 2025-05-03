@@ -27,7 +27,7 @@ interface TransactionFormProps {
   isExpense?: boolean;
 }
 
-const ExpenseOrIncomeForm: FC<TransactionFormProps> = ({ onSubmit, categories, initialValues = null, isEdit = false, isExpense=true }) => {
+const ExpenseOrIncomeForm: FC<TransactionFormProps> = ({ onSubmit, categories, initialValues = null, isEdit = false, isExpense = true }) => {
   const [formData, setFormData] = useState({
     date: new Date() as Date | null, // מאפשר גם null
     sum: "",
@@ -82,20 +82,40 @@ const ExpenseOrIncomeForm: FC<TransactionFormProps> = ({ onSubmit, categories, i
     setErrors({});
   };
 
+  
+  //   const newErrors: Record<string, string> = {};
+  //   if (!formData.sum) newErrors.sum = 'שדה חובה';
+  //   else if (parseFloat(formData.sum) <= 0) newErrors.sum = 'הסכום חייב להיות גדול מאפס';
+
+  //   // if (!formData.category) newErrors.category = 'שדה חובה';
+
+  //   if (formData.file instanceof File && formData.file.size > 5 * 1024 * 1024) {
+  //     newErrors.general = 'גודל הקובץ חייב להיות קטן מ-5MB';
+  //   }
+
+  //   return newErrors;
+  // };
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    if (!formData.sum) newErrors.sum = 'שדה חובה';
-    else if (parseFloat(formData.sum) <= 0) newErrors.sum = 'הסכום חייב להיות גדול מאפס';
-
-    if (!formData.category) newErrors.category = 'שדה חובה';
-
+  
+    if (!formData.sum) {
+      newErrors.sum = 'שדה חובה';
+    } else if (parseFloat(formData.sum) <= 0) {
+      newErrors.sum = 'הסכום חייב להיות גדול מאפס';
+    }
+  
+    // בדיקת קטגוריה רק אם מדובר בעריכה
+    if (isEdit && !formData.category) {
+      newErrors.category = 'שדה חובה';
+    }
+  
     if (formData.file instanceof File && formData.file.size > 5 * 1024 * 1024) {
       newErrors.general = 'גודל הקובץ חייב להיות קטן מ-5MB';
     }
-
+  
     return newErrors;
   };
-
+  
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const validationErrors = validateForm();
@@ -156,24 +176,26 @@ const ExpenseOrIncomeForm: FC<TransactionFormProps> = ({ onSubmit, categories, i
             margin="normal"
           />
 
-          <TextField
-            fullWidth
-            required
-            select
-            label="קטגוריה"
-            name="category"
-            value={formData.category}
-            onChange={handleInputChange}
-            error={!!errors.category}
-            helperText={errors.category}
-            margin="normal"
-          >
-            {categories.map(category => (
-              <MenuItem key={category} value={category}>
-                {category}
-              </MenuItem>
-            ))}
-          </TextField>
+          {
+            isEdit && <TextField
+              fullWidth
+              required
+              select
+              label="קטגוריה"
+              name="category"
+              value={formData.category}
+              onChange={handleInputChange}
+              error={!!errors.category}
+              helperText={errors.category}
+              margin="normal"
+            >
+              {categories.map(category => (
+                <MenuItem key={category} value={category}>
+                  {category}
+                </MenuItem>
+              ))}
+            </TextField>
+          }
 
           <TextField
             fullWidth

@@ -1,7 +1,8 @@
 import PageInBuild from "../PageInBuild";
+import ReportsScreen from "../reports/ReportsScreen";
 
 const Reports = () => {
-    return <PageInBuild />
+    return <ReportsScreen />
 }
 
 export default Reports
