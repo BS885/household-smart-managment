@@ -57,5 +57,26 @@ namespace SmartManagement.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Authorize(Policy = "Roles.Permission")]
+        [HttpPost("update-role")]
+        public async Task<IActionResult> UpdateUserRole([FromBody] UpdateUserRoleDto request)
+        {
+            try
+            {
+
+                var updatedUser = await _userService.UpdateRoleToUserAsync(request);
+                return Ok(updatedUser);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to update user role");
+                return StatusCode(500, "An error occurred while updating the user's role.");
+            }
+        }
     }
 }

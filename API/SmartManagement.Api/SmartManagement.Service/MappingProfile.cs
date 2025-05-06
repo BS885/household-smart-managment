@@ -39,6 +39,9 @@ namespace SmartManagement.Service
               .ForMember(dest => dest.FileType, opt => opt.MapFrom(src => src.TypeFile))
               .ForMember(dest => dest.Size, opt => opt.MapFrom(src => src.Size))
               .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+
+
+            CreateMap<Permission, PermissionDto>().ReverseMap();
         }
 
 

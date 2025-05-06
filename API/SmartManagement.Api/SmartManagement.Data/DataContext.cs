@@ -54,15 +54,15 @@ namespace SmartManagement.Data
             // הכנסת קטגוריות כלליות להוצאות והכנסות
             modelBuilder.Entity<CategoryExpenseAndIncome>().HasData(
                 // קטגוריות הוצאות
-                new CategoryExpenseAndIncome { Id = 1, Name = "אוכל", Description = "קניות בסופר, מסעדות ובתי קפה", ISExpense = true, IsIncome = false },
+                new CategoryExpenseAndIncome { Id = 1, Name = "אוכל", Description = "קניות בסופר, משנת יוסף", ISExpense = true, IsIncome = false },
                 new CategoryExpenseAndIncome { Id = 2, Name = "תחבורה", Description = "דלק, תחבורה ציבורית, רכב", ISExpense = true, IsIncome = false },
                 new CategoryExpenseAndIncome { Id = 3, Name = "דיור", Description = "שכר דירה, משכנתא, חשבונות בית", ISExpense = true, IsIncome = false },
                 new CategoryExpenseAndIncome { Id = 4, Name = "ביגוד והנעלה", Description = "קניית בגדים, נעליים ואביזרים", ISExpense = true, IsIncome = false },
                 new CategoryExpenseAndIncome { Id = 5, Name = "בריאות", Description = "ביטוח רפואי, תרופות, טיפולי שיניים", ISExpense = true, IsIncome = false },
-                new CategoryExpenseAndIncome { Id = 6, Name = "בילויים ופנאי", Description = "קולנוע, תיאטרון, טיולים", ISExpense = true, IsIncome = false },
+                new CategoryExpenseAndIncome { Id = 6, Name = "בילויים ופנאי", Description = "טיולים", ISExpense = true, IsIncome = false },
                 new CategoryExpenseAndIncome { Id = 7, Name = "חינוך", Description = "שכר לימוד, ספרים, קורסים", ISExpense = true, IsIncome = false },
                 new CategoryExpenseAndIncome { Id = 8, Name = "מוצרים לבית", Description = "ריהוט, כלי בית, תחזוקה", ISExpense = true, IsIncome = false },
-                new CategoryExpenseAndIncome { Id = 9, Name = "תשלומים חודשיים", Description = "ארנונה, חשמל, מים, גז, אינטרנט", ISExpense = true, IsIncome = false },
+                new CategoryExpenseAndIncome { Id = 9, Name = "תשלומים חודשיים", Description = "ארנונה, חשמל, מים, גז, ", ISExpense = true, IsIncome = false },
                 new CategoryExpenseAndIncome { Id = 10, Name = "שונות", Description = "הוצאות בלתי צפויות", ISExpense = true, IsIncome = false },
 
                 // קטגוריות הכנסות

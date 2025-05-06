@@ -71,6 +71,8 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
 builder.Services.AddScoped<IAiService, AiService>();
+builder.Services.AddScoped<IPermissionService, PermissionService>();
+builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
 
 // הגדרת EF Core
 builder.Services.AddDbContext<DataContext>(options =>
@@ -98,6 +100,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
         };
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    AuthorizationPolicies.AddPolicies(options);
+});
+
 
 // CORS
 builder.Services.AddCors(options =>

@@ -36,9 +36,9 @@ namespace SmartManagement.Service.Services
             _roleRepository = roleRepository;
         }
 
-        public LoginResult Login(LoginRequest loginRequest)
+        public async Task<LoginResult>  Login(LoginRequest loginRequest)
         {
-            User user = _userRepository.GetUserByEmail(loginRequest.Email);
+            User user = await _userRepository.GetUserByEmailAsync(loginRequest.Email);
 
             if (user != null && user.Password == loginRequest.Password)
             {
@@ -57,20 +57,19 @@ namespace SmartManagement.Service.Services
             return null;
         }
 
-        public User Register(RegisterUserDto userRegister)
+        public async Task<User> Register(RegisterUserDto userRegister)
         {
             if (userRegister == null)
                 throw new ArgumentNullException(nameof(userRegister), "User cannot be null.");
 
             // בדיקה אם המשתמש כבר קיים
-            var existingUser = _userRepository.GetUserByEmail(userRegister.Email);
+            var existingUser =await  _userRepository.GetUserByEmailAsync(userRegister.Email);
             if (existingUser != null)
             {
                 _logger.LogError("A user with this email already exists: {Email}", userRegister.Email);
                 throw new InvalidOperationException("A user with this email already exists.");
             }
 
-            // קביעת תפקיד למשתמש (ברירת מחדל: "User")
             var roleName = string.IsNullOrEmpty(userRegister.RoleName) ? "User" : userRegister.RoleName;
             _logger.LogInformation("Registering user with Role {RoleName}", roleName);
 

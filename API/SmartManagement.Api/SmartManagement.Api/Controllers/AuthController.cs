@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using SmartManagement.Core.Exceptios;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SmartManagement.Api.Controllers
 {
@@ -25,11 +26,11 @@ namespace SmartManagement.Api.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginRequest loginRequest)
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
             try
             {
-                LoginResult result = _authService.Login(loginRequest);
+                var result =await _authService.Login(loginRequest);
 
                 if (result != null)
                 {
@@ -50,11 +51,31 @@ namespace SmartManagement.Api.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] RegisterUserDto userRegister)
+        public async Task<IActionResult> Register([FromBody] RegisterUserDto userRegister)
         {
             try
             {
-                var user = _authService.Register(userRegister);
+                var user = await _authService.Register(userRegister);
+
+                return CreatedAtAction(nameof(Register), new { email = user.Email}, user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error occurred: {ex.Message}");
+            }
+        }
+
+        [Authorize(Policy= "Users.AddAdmin")]
+        [HttpPost("register/Manager")]
+        public async Task<IActionResult> RegisterManager([FromBody] RegisterUserDto userRegister)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                userRegister.RoleName = "Admin";
+                var user = await _authService.Register(userRegister);
 
                 return CreatedAtAction(nameof(Register), new { email = user.Email }, user);
             }

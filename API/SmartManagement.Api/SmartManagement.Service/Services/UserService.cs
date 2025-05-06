@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using SmartManagement.Core.DTOs;
 using SmartManagement.Core.Exceptios;
+using SmartManagement.Core.Models;
 using SmartManagement.Core.Repositories;
 using SmartManagement.Core.services;
 using System;
@@ -15,11 +17,13 @@ namespace SmartManagement.Service.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly ILogger<UserService> _logger;
+        private readonly IPermissionService _permissionService;
 
-        public UserService(IUserRepository userRepository, ILogger<UserService> logger)
+        public UserService(IUserRepository userRepository, ILogger<UserService> logger, IPermissionService permissionService)
         {
             _userRepository = userRepository;
             _logger = logger;
+            _permissionService = permissionService;
         }
         public void UpdateUser(int id, string name, string address, string city, string phone)
         {
@@ -38,9 +42,74 @@ namespace SmartManagement.Service.Services
             _logger.LogInformation($"user update: id {user.UserId} to {user}");
             _userRepository.UpdateUser(user);
         }
+
         public string GetUserIdFromToken(ClaimsPrincipal user)
         {
-            return user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (user == null)
+            {
+                _logger.LogError("User is null");
+                throw new ArgumentNullException(nameof(user));
+            }
+            var userIdClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                _logger.LogError("User ID claim not found");
+                throw new InvalidOperationException("User ID claim not found");
+            }
+            return userIdClaim.Value;
         }
+
+        //public async Task<User> UpdateRoleToUserAsync(UpdateUserRoleDto updateUser)
+        //{
+        //    var user = await _userRepository.GetUserByEmailAsync(updateUser.Usereemail);
+
+        //    if (user == null)
+        //    {
+        //        _logger.LogError($"User not found {updateUser.Usereemail}");
+        //        throw new UserNotFoundException("User not found");
+        //    }
+        //    var role = await _permissionService.GetRoleByNameAsync(updateUser.RoleName);
+        //    if (role == null)
+        //    {
+        //        _logger.LogError($"Role not found {updateUser.RoleName}");
+        //        throw new Exception("Role not found");
+        //    }
+        //    user.Roles.Add(role);
+        //    _userRepository.UpdateUser(user);
+        //    return user;
+        //}
+
+        public async Task<User> UpdateRoleToUserAsync(UpdateUserRoleDto updateUser)
+        {
+            var user = await _userRepository.GetUserByEmailAsync(updateUser.UserEmail);
+            if (user == null)
+            {
+                _logger.LogError($"User not found: {updateUser.UserEmail}");
+                throw new UserNotFoundException("User not found");
+            }
+
+            var role = await _permissionService.GetRoleByNameAsync(updateUser.RoleName);
+            if (role == null)
+            {
+                _logger.LogError($"Role not found: {updateUser.RoleName}");
+                throw new Exception("Role not found");
+            }
+
+            // מחיקת כל התפקידים הקודמים
+            user.Roles.Clear();
+
+            // הוספת התפקיד החדש
+            user.Roles.Add(role);
+
+            _userRepository.UpdateUser(user);
+
+            return user;
+        }
+
+
+
+
+
+
     }
 }

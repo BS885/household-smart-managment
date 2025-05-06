@@ -28,6 +28,7 @@ namespace SmartManagement.Core.DTOs
         [Required]
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters long.")]
         public string Password { get; set; }
+
         public string RoleName { get; set; } = "User";
     }
 

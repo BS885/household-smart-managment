@@ -19,12 +19,12 @@ namespace SmartManagement.Data.Repositories
             _context = context;
         }
 
-        public User GetUserByEmail(string email)
+        public async Task<User> GetUserByEmailAsync(string email)
         {
-            return _context.Users
+            return await _context.Users
           .Include(ur => ur.Roles)
            .ThenInclude(r => r.Permissions)
-           .FirstOrDefault(u => u.Email == email);
+           .FirstOrDefaultAsync(u => u.Email == email);
         }
 
         public User GetUserById(int id)
