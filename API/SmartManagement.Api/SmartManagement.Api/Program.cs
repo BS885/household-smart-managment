@@ -21,7 +21,7 @@ using Amazon.Textract;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ÷øéàú äâãøåú AWS
+// Ã·Ã¸Ã©Ã Ãº Ã¤Ã¢Ã£Ã¸Ã¥Ãº AWS
 var awsOptions = builder.Configuration.GetSection("AWS");
 string region = awsOptions["Region"] ?? "us-east-1";
 string accessKeyId = awsOptions["AccessKey"];
@@ -32,7 +32,7 @@ if (string.IsNullOrEmpty(accessKeyId) || string.IsNullOrEmpty(secretAccessKey))
     throw new InvalidOperationException("AWS credentials are missing from appsettings.json.");
 }
 
-// äâãøú IAmazonS3 òí credentials
+// Ã¤Ã¢Ã£Ã¸Ãº IAmazonS3 Ã²Ã­ credentials
 builder.Services.AddSingleton<IAmazonS3>(sp =>
 {
     var config = new AmazonS3Config
@@ -44,7 +44,7 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
     return new AmazonS3Client(credentials, config);
 });
 
-// äâãøú IAmazonTextract òí credentials
+// Ã¤Ã¢Ã£Ã¸Ãº IAmazonTextract Ã²Ã­ credentials
 builder.Services.AddSingleton<IAmazonTextract>(sp =>
 {
     var config = new AmazonTextractConfig
@@ -57,7 +57,7 @@ builder.Services.AddSingleton<IAmazonTextract>(sp =>
 });
 builder.Services.AddHttpClient();
 
-// øéùåí ùéøåúéí ôğéîééí
+// Ã¸Ã©Ã¹Ã¥Ã­ Ã¹Ã©Ã¸Ã¥ÃºÃ©Ã­ Ã´Ã°Ã©Ã®Ã©Ã©Ã­
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -74,7 +74,7 @@ builder.Services.AddScoped<IAiService, AiService>();
 builder.Services.AddScoped<IPermissionService, PermissionService>();
 builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
 
-// äâãøú EF Core
+// Ã¤Ã¢Ã£Ã¸Ãº EF Core
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     new MySqlServerVersion(new Version(8, 0, 41))));
@@ -82,11 +82,25 @@ builder.Services.AddDbContext<DataContext>(options =>
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// ìåâéí
+// Ã¬Ã¥Ã¢Ã©Ã­
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
 // JWT
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//     .AddJwtBearer(options =>
+//     {
+//         options.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             ValidateIssuer = true,
+//             ValidateAudience = true,
+//             ValidateLifetime = true,
+//             ValidIssuer = builder.Configuration["JWT:Issuer"],
+//             ValidAudience = builder.Configuration["JWT:Audience"],
+//             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
+//         };
+//     });
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -95,11 +109,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
-            ValidIssuer = builder.Configuration["JWT:Issuer"],
-            ValidAudience = builder.Configuration["JWT:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
+            ValidIssuer = jwtIssuer,
+            ValidAudience = jwtAudience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
+                logger.LogError("JWT Authentication Failed: {Message}", context.Exception.Message);
+                return Task.CompletedTask;
+            }
         };
     });
+
 
 builder.Services.AddAuthorization(options =>
 {
