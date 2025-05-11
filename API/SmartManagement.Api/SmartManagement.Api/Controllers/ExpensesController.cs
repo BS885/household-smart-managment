@@ -38,7 +38,6 @@ namespace SmartManagement.Api.Controllers
                 var expenseId = await _expenseService.AddExpenseOrIncomeAsync(
 
                     expenseDto.Date,
-                    //expenseDto.Category,
                     category,
                     int.Parse(userId),
                     expenseDto.Description,

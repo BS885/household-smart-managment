@@ -25,6 +25,7 @@ namespace SmartManagement.Service.Services
             _logger = logger;
             _permissionService = permissionService;
         }
+        
         public void UpdateUser(int id, string name, string address, string city, string phone)
         {
             var user = _userRepository.GetUserById(id);
@@ -59,25 +60,6 @@ namespace SmartManagement.Service.Services
             return userIdClaim.Value;
         }
 
-        //public async Task<User> UpdateRoleToUserAsync(UpdateUserRoleDto updateUser)
-        //{
-        //    var user = await _userRepository.GetUserByEmailAsync(updateUser.Usereemail);
-
-        //    if (user == null)
-        //    {
-        //        _logger.LogError($"User not found {updateUser.Usereemail}");
-        //        throw new UserNotFoundException("User not found");
-        //    }
-        //    var role = await _permissionService.GetRoleByNameAsync(updateUser.RoleName);
-        //    if (role == null)
-        //    {
-        //        _logger.LogError($"Role not found {updateUser.RoleName}");
-        //        throw new Exception("Role not found");
-        //    }
-        //    user.Roles.Add(role);
-        //    _userRepository.UpdateUser(user);
-        //    return user;
-        //}
 
         public async Task<User> UpdateRoleToUserAsync(UpdateUserRoleDto updateUser)
         {
@@ -95,10 +77,8 @@ namespace SmartManagement.Service.Services
                 throw new Exception("Role not found");
             }
 
-            // מחיקת כל התפקידים הקודמים
             user.Roles.Clear();
 
-            // הוספת התפקיד החדש
             user.Roles.Add(role);
 
             _userRepository.UpdateUser(user);
@@ -106,7 +86,19 @@ namespace SmartManagement.Service.Services
             return user;
         }
 
-
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            try
+            {
+                var users = await _userRepository.GetUsers();
+                return users;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to get users");
+                return Enumerable.Empty<User>();
+            }
+        }
 
 
 

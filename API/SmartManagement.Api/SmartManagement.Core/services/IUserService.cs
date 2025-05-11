@@ -14,6 +14,7 @@ namespace SmartManagement.Core.services
         void UpdateUser(int id, string name, string address, string city, string phone);
         string GetUserIdFromToken(ClaimsPrincipal user);
         Task<User> UpdateRoleToUserAsync(UpdateUserRoleDto updateUser);
+        Task<IEnumerable<User>> GetUsers();
 
     }
 }

@@ -47,5 +47,11 @@ namespace SmartManagement.Data.Repositories
             _context.SaveChanges();
         }
 
+
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            return await _context.Users.ToListAsync();
+        }
+
     }
 }

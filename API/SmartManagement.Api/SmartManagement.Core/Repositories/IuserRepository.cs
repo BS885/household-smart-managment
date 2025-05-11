@@ -18,5 +18,7 @@ namespace SmartManagement.Core.Repositories
         User GetUserById(int id);
 
         void UpdateUser(User user);
+
+        Task<IEnumerable<User>> GetUsers();
     }
 }

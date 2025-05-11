@@ -78,5 +78,23 @@ namespace SmartManagement.Api.Controllers
                 return StatusCode(500, "An error occurred while updating the user's role.");
             }
         }
+
+        [Authorize(Policy = "Roles.Permission")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            try
+            {
+                _logger.LogInformation("Getting all users");
+
+                var users = await _userService.GetUsers(); // קריאה לשירות
+                return Ok(users); // מחזיר 200 OK עם הנתונים
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to get all users");
+                return StatusCode(500, "An error occurred while retrieving users.");
+            }
+        }
     }
 }
