@@ -87,6 +87,11 @@ builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
 //JWT
+var jwtOptions = builder.Configuration.GetSection("JWT");
+string issuer = jwtOptions["Issuer"] ?? throw new InvalidOperationException("Missing JWT Issuer");
+string audience = jwtOptions["Audience"] ?? throw new InvalidOperationException("Missing JWT Audience");
+string key = jwtOptions["Key"] ?? throw new InvalidOperationException("Missing JWT Key");
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -95,12 +100,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
-            ValidIssuer = builder.Configuration["JWT:Issuer"],
-            ValidAudience = builder.Configuration["JWT:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
+            ValidIssuer = issuer,
+            ValidAudience = audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
         };
     });
-
 
 
 builder.Services.AddAuthorization(options =>
