@@ -24,103 +24,13 @@ namespace SmartManagement.Service.Services
         {
             _httpClient = new HttpClient();
             _apiKey = configuration["ApiSettings:ApiKey"];
-            _categoryService = categoryService;
+            if (string.IsNullOrWhiteSpace(_apiKey))
+            {
+                Console.WriteLine("error  with ApiSettings:ApiKey");
+                throw new ArgumentNullException(nameof(_apiKey));
+            }
+                _categoryService = categoryService;
         }
-
-        //public async Task<string> GetCategoryFromDescription(string description, string type)
-        //{
-        //    try
-        //    {
-        //        var ListCategory = await _categoryService.GetAllCategoriesListNameAsync(type);
-        //        var client = _httpClientFactory.CreateClient();  // פה זה HttpClient
-        //        client.DefaultRequestHeaders.Authorization =
-        //            new AuthenticationHeaderValue("Bearer", _apiKey);
-
-        //        // שליחת הבקשה ל־AI
-        //        var body = new
-        //        {
-        //            model = "gpt-3.5-turbo",  // דגם המודל
-        //            messages = new[]
-        //        {
-        //        new
-        //        {
-        //            role = "user",
-        //            content = $"This is a description of an {type}: {description}. Which of the following is the appropriate category {string.Join(", ", ListCategory)}"
-        //        }
-        //        },
-        //            max_tokens = 100,  // כמות המילים המרבית בתשובה
-        //            temperature = 0.2
-        //        };
-        //        var json = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
-        //        var res = await client.PostAsync("https://api-inference.huggingface.co/models/facebook/bart-large-mnli", json);
-
-        //        if (!res.IsSuccessStatusCode)
-        //        {
-        //            throw new Exception($"AI API returned error: {res.StatusCode}");
-        //        }
-
-        //        // פענוח התשובה
-        //        var responseContent = await res.Content.ReadAsStringAsync();
-        //        var apiResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);
-        //        var content = apiResponse
-        //            .GetProperty("choices")[0]
-        //            .GetProperty("message")
-        //            .GetProperty("content")
-        //            .GetString();
-
-        //        // חיפוש והתאמה לקטגוריה הנכונה מתוך התשובה
-        //        // נניח שהתשובה מכילה את שם הקטגוריה ישירות, אחרת תצטרך לבצע פענוח נוסף
-        //        return content.Trim();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // טיפול בשגיאות
-        //        throw new Exception("Error while calling AI API", ex);
-        //    }
-        //}
-
-
-        //public async Task<string> GetCategoryFromDescription(string description, string type)
-        //{
-        //    var url = "https://openrouter.ai/api/v1/chat/completions";
-
-        //    try
-        //    {
-        //        var ListCategory = await _categoryService.GetAllCategoriesListNameAsync(type);
-        //        var client = _httpClientFactory.CreateClient();  // HttpClient
-        //        client.DefaultRequestHeaders.Authorization =
-        //            new AuthenticationHeaderValue("Bearer", _apiKey);
-
-        //        // שליחת הבקשה ל־AI (Hugging Face)
-        //        var body = new
-        //        {
-        //            inputs = $"This is a description of an {type}: {description}. Which of the following is the appropriate category {string.Join(", ", ListCategory)}"
-        //        };
-
-        //        var json = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
-        //        var res = await client.PostAsync(url, json);
-
-        //        if (!res.IsSuccessStatusCode)
-        //        {
-        //            throw new Exception($"AI API returned error: {res.StatusCode}");
-        //        }
-
-        //        // פענוח התשובה
-        //        var responseContent = await res.Content.ReadAsStringAsync();
-        //        var apiResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);
-
-        //        // תשובה מסווגת מכילה את הקטגוריה שנבחרה, תחפש אותה בתשובה (בהנחה שהיא בפורמט של מענה ישיר)
-        //        var content = apiResponse.GetProperty("label").GetString();
-
-        //        return content.Trim();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // טיפול בשגיאות
-        //        throw new Exception("Error while calling AI API", ex);
-        //    }
-        //}
-
 
         public async Task<string> GetCategoryFromDescription(string description, string type)
         {
