@@ -92,10 +92,6 @@ string issuer = jwtOptions["Issuer"] ?? throw new InvalidOperationException("Mis
 string audience = jwtOptions["Audience"] ?? throw new InvalidOperationException("Missing JWT Audience");
 string key = jwtOptions["Key"] ?? throw new InvalidOperationException("Missing JWT Key");
 
-Console.WriteLine($"JWT Issuer: {issuer}");
-Console.WriteLine($"JWT Audience: {audience}");
-Console.WriteLine($"JWT Key: {key}");
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {

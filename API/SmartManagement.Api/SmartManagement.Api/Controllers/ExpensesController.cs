@@ -29,6 +29,7 @@ namespace SmartManagement.Api.Controllers
         {
             try
             {
+                Console.WriteLine("enter AddExpense");
                 var userId = _userService.GetUserIdFromToken(User);
                 var category = await _aiService.GetCategoryFromDescription(expenseDto.Description, "expense");
                 if (category == null)
