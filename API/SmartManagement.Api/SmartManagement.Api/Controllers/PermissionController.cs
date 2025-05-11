@@ -31,13 +31,12 @@ namespace SmartManagement.Api.Controllers
             catch (ApplicationException ex)
             {
                 _logger.LogWarning(ex, "Custom error occurred while adding a permission.");
-                return BadRequest(ex.Message); // שגיאה מותאמת (למשל, אם הרשאה כבר קיימת)
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                // במקרה של שגיאה פנימית או לא צפויה
                 _logger.LogError(ex, "Error occurred while adding a permission.");
-                return StatusCode(500, "An error occurred while processing your request."); // שגיאה כללית
+                return StatusCode(500, "An error occurred while processing your request.");
             }
         }
 
