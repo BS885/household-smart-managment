@@ -27,6 +27,7 @@ namespace SmartManagement.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> AddExpense([FromBody] ExpenseAndIncomeDtoReq expenseDto)
         {
+        console.log("enter AddExpense");
             try
             {
                 var userId = _userService.GetUserIdFromToken(User);
