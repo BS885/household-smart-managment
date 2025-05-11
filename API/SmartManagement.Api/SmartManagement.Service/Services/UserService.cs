@@ -48,6 +48,7 @@ namespace SmartManagement.Service.Services
         {
             if (user == null)
             {
+
                 _logger.LogError("User is null");
                 throw new ArgumentNullException(nameof(user));
             }
