@@ -26,34 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Program.cs",
-              "RelativeDocumentMoniker": "SmartManagement.Api\\Program.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Program.cs",
-              "RelativeToolTip": "SmartManagement.Api\\Program.cs",
-              "ViewState": "AgIAAHUAAAAAAAAAAAAiwJAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T15:05:43.869Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\appsettings.json",
-              "RelativeDocumentMoniker": "SmartManagement.Api\\appsettings.json",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\appsettings.json",
-              "RelativeToolTip": "SmartManagement.Api\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-11T14:57:05.272Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -72,6 +46,31 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Program.cs",
+              "RelativeDocumentMoniker": "SmartManagement.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Program.cs",
+              "RelativeToolTip": "SmartManagement.Api\\Program.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAiwFgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T15:05:43.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "SmartManagement.Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\appsettings.json",
+              "RelativeToolTip": "SmartManagement.Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-11T14:57:05.272Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "ExpensesController.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Controllers\\ExpensesController.cs",
@@ -80,8 +79,7 @@
               "RelativeToolTip": "SmartManagement.Api\\Controllers\\ExpensesController.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAAAoAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T14:39:00.46Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-11T14:39:00.46Z"
             },
             {
               "$type": "Document",
@@ -93,8 +91,7 @@
               "RelativeToolTip": "SmartManagement.Api\\Controllers\\UserController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T12:52:31.281Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-11T12:52:31.281Z"
             }
           ]
         }

@@ -86,7 +86,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
-JWT
+//JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
