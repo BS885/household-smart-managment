@@ -15,10 +15,10 @@ namespace SmartManagement.Core.Repositories
 
         void AddUser(User user);
 
-        User GetUserById(int id);
+        Task<User> GetUserById(int id);
 
         void UpdateUser(User user);
 
-        Task<IEnumerable<User>> GetUsers();
+        Task<IEnumerable<UserDto>> GetUsers();
     }
 }

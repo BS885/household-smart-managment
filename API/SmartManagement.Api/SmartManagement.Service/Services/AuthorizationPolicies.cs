@@ -29,6 +29,9 @@ namespace SmartManagement.Service.Services
 
             options.AddPolicy("Users.AddAdmin", policy =>
                 policy.Requirements.Add(new PermissionRequirement("Users.AddAdmin")));
+
+            options.AddPolicy("Category.Manage", policy =>
+            policy.Requirements.Add(new PermissionRequirement("Category.Manage")));
         }
     }
 }

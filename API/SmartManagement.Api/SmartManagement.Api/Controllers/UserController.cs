@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SmartManagement.Core.DTOs;
@@ -15,6 +16,7 @@ namespace SmartManagement.Api.Controllers
     {
         private readonly IUserService _userService;
         private readonly ILogger<UserController> _logger;
+        
         public UserController(IUserService userService, ILogger<UserController> logger)
         {
 
@@ -59,13 +61,13 @@ namespace SmartManagement.Api.Controllers
         }
 
         [Authorize(Policy = "Roles.Permission")]
-        [HttpPost("update-role")]
-        public async Task<IActionResult> UpdateUserRole([FromBody] UpdateUserRoleDto request)
+        [HttpPut("{userId}/role")]
+        public async Task<IActionResult> UpdateUserRole([FromBody] UpdateUserRoleDto request,int userId)
         {
+            _logger.LogInformation($"enter UpdateUserRole {userId}");
             try
             {
-
-                var updatedUser = await _userService.UpdateRoleToUserAsync(request);
+                var updatedUser = await _userService.UpdateRoleToUserAsync(request, userId);
                 return Ok(updatedUser);
             }
             catch (UserNotFoundException ex)
@@ -78,6 +80,7 @@ namespace SmartManagement.Api.Controllers
                 return StatusCode(500, "An error occurred while updating the user's role.");
             }
         }
+
 
         [Authorize(Policy = "Roles.Permission")]
         [HttpGet]

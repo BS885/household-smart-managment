@@ -23,7 +23,7 @@ namespace SmartManagement.Service.services
 
         public S3Service(IAmazonS3 s3Client, IConfiguration configuration, ILogger<S3Service> logger, IAmazonTextract textractClient)
         {
-            _s3Client = s3Client; // שימוש בהזרקת תלות במקום יצירה ידנית
+            _s3Client = s3Client;
             _bucketName = configuration["AWS:BucketName"] ?? throw new InvalidOperationException("Bucket name is missing in configuration.");
             _logger = logger;
             _textractClient = textractClient;

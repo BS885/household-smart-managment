@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SmartManagement.Core.DTOs;
 using SmartManagement.Core.Models;
 using SmartManagement.Core.Repositories;
 using System;
@@ -29,9 +30,16 @@ namespace SmartManagement.Data.Repositories
             _logger.LogInformation("PermissionRepository instantiated successfully with a valid DataContext.");
         }
 
+        //public async Task<IEnumerable<Permission>> GetAllPermissionsAsync()
+        //{
+        //    return await _context.Permissions.Include(p=>p.Roles).ToListAsync();
+        //}
+
         public async Task<IEnumerable<Permission>> GetAllPermissionsAsync()
         {
-            return await _context.Permissions.ToListAsync();
+            return await _context.Permissions
+                .Include(p => p.Roles)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Permission>> GetPermissionsByRoleIdAsync(int roleId)

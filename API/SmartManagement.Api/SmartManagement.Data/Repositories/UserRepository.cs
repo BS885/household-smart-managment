@@ -5,6 +5,7 @@ using SmartManagement.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,9 +28,12 @@ namespace SmartManagement.Data.Repositories
            .FirstOrDefaultAsync(u => u.Email == email);
         }
 
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            var user = _context.Users.FirstOrDefault(u => u.UserId == id);
+            var user = await _context.Users
+               .Include(u => u.Roles)
+                //.ThenInclude(ur => ur.RoleName)
+                .FirstOrDefaultAsync(u => u.UserId == id);
             return user;
         }
 
@@ -48,9 +52,24 @@ namespace SmartManagement.Data.Repositories
         }
 
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<UserDto>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            var users = await _context.Users
+                .Include(u => u.Roles)
+                .Select(u => new UserDto
+                {
+                    Id = u.UserId,
+                    Name = u.Name,
+                    Email = u.Email,
+                    Address = u.Address,
+                    City = u.City,
+                    CreateIn = DateOnly.FromDateTime(u.CreatedDate),
+                    Phone = u.Phone,
+                    Roles = u.Roles.Select(r => r.RoleName).ToList()
+                })
+                .ToListAsync();
+
+            return users;
         }
 
     }

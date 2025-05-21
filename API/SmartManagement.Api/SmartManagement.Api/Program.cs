@@ -21,7 +21,6 @@ using Amazon.Textract;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ÷øéàú äâãøåú AWS
 var awsOptions = builder.Configuration.GetSection("AWS");
 string region = awsOptions["Region"] ?? "us-east-1";
 string accessKeyId = awsOptions["AccessKey"];
@@ -32,7 +31,6 @@ if (string.IsNullOrEmpty(accessKeyId) || string.IsNullOrEmpty(secretAccessKey))
     throw new InvalidOperationException("AWS credentials are missing from appsettings.json.");
 }
 
-// äâãøú IAmazonS3 òí credentials
 builder.Services.AddSingleton<IAmazonS3>(sp =>
 {
     var config = new AmazonS3Config
@@ -44,7 +42,6 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
     return new AmazonS3Client(credentials, config);
 });
 
-// äâãøú IAmazonTextract òí credentials
 builder.Services.AddSingleton<IAmazonTextract>(sp =>
 {
     var config = new AmazonTextractConfig
@@ -57,7 +54,6 @@ builder.Services.AddSingleton<IAmazonTextract>(sp =>
 });
 builder.Services.AddHttpClient();
 
-// øéùåí ùéøåúéí ôðéîééí
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -74,15 +70,12 @@ builder.Services.AddScoped<IAiService, AiService>();
 builder.Services.AddScoped<IPermissionService, PermissionService>();
 builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
 
-// äâãøú EF Core
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     new MySqlServerVersion(new Version(8, 0, 41))));
 
-// AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// ìåâéí
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 

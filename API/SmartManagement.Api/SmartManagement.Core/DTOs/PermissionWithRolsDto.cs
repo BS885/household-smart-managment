@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartManagement.Core.Models
+namespace SmartManagement.Core.DTOs
 {
-    public class Permission
+    public class PermissionWithRolesDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-
-        public ICollection<Role> Roles { get; set; }
+        public List<string> Roles { get; set; }
 
     }
 }

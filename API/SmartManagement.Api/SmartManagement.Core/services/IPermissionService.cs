@@ -12,7 +12,7 @@ namespace SmartManagement.Core.services
     public interface IPermissionService
     {
         Task<PermissionDto> AddPermissionAsync(string name, string description);
-        Task<IEnumerable<PermissionDto>> GetAllPermissionsAsync();
+        Task<IEnumerable<PermissionWithRolesDto>> GetAllPermissionsAsync();
         Task<Permission> GetPermissionByIdAsync(int id);
         Task DeletePermissionAsync(int id);
         Task<IEnumerable<PermissionDto>> GetPermissionsByRoleIdAsync(int roleId);

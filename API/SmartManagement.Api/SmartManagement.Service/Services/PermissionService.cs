@@ -45,7 +45,7 @@ namespace SmartManagement.Service.Services
             }
             catch (ApplicationException ex)
             {
-               
+
                 _logger.LogWarning($"Custom error occurred: {ex.Message}");
                 throw new ApplicationException($"Custom error: {ex.Message}", ex);
             }
@@ -78,13 +78,14 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task<IEnumerable<PermissionDto>> GetAllPermissionsAsync()
+        public async Task<IEnumerable<PermissionWithRolesDto>> GetAllPermissionsAsync()
         {
             try
             {
                 var permissions = await _permissionRepository.GetAllPermissionsAsync();
                 _logger.LogInformation($"Retrieved {permissions.Count()} permissions.");
-                return _mapper.Map<IEnumerable<PermissionDto>>(permissions);
+                return _mapper.Map<IEnumerable<PermissionWithRolesDto>>(permissions);
+
             }
             catch (Exception ex)
             {

@@ -41,31 +41,6 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        //public async Task<TransactionDocument> GetTransactionDocumentByTransactionIdAsync(int transactionID)
-        //{
-        //    var expens = await _expenseService.GetExpenseByIdAsync(transactionID);
-        //    if (expens == null)
-        //    {
-        //        var errorMessage = $"Expense not found for transaction ID: {transactionID}";
-        //        _logger.LogError(errorMessage);
-        //        throw new Exception(errorMessage);
-        //    }
-        //    if (expens.TransactionDocument==null)
-        //    {
-        //        var errorMessage = $"Transaction document ID is null for expense with ID: {expens.Id}";
-        //        _logger.LogError(errorMessage);
-        //        throw new Exception(errorMessage);
-        //    }
-        //    // file = await _transactionDocumentRepository.GetByIdAsync(expens.TransactionDocument.Value);
-        //    if (file == null)
-        //    {
-        //        var errorMessage = $"Transaction document not found for ID: {expens.IdTransactionDocument}";
-        //        _logger.LogError(errorMessage);
-        //        throw new Exception(errorMessage);
-        //    }
-
-        //    return file;
-        //}
 
         public async Task<TransactionDocument> AddTransactionDocumentAsync(FileDto transactionDocument)
         {

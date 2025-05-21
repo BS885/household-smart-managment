@@ -1,4 +1,5 @@
-﻿using SmartManagement.Core.Models;
+﻿using SmartManagement.Core.DTOs;
+using SmartManagement.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace SmartManagement.Core.Repositories
         Task<CategoryExpenseAndIncome> GetByNameAsync(string name);
         Task<IEnumerable<CategoryExpenseAndIncome>> GetAllAsync(string type);
         Task<CategoryExpenseAndIncome> GetByIdAsync(int id);
-        Task UpdateAsync(CategoryExpenseAndIncome category);
+        Task<CategoryExpenseAndIncome?> UpdateAsync(int id, CategoryDto categoryDto);
         Task DeleteAsync(int id);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartManagement.Core.DTOs;
 using SmartManagement.Core.Models;
 using SmartManagement.Core.Repositories;
 using System;
@@ -44,20 +45,32 @@ namespace SmartManagement.Data.Repositories
 
         }
 
-        public async Task UpdateAsync(CategoryExpenseAndIncome category)
+        public async Task<CategoryExpenseAndIncome?> UpdateAsync(int id, CategoryDto categoryDto)
         {
-            _context.CategoriesExpenseAndIncome.Update(category);
-            await _context.SaveChangesAsync();
-        }
+            var existingCategory = await GetByIdAsync(id);
+            if (existingCategory == null)
+               throw new KeyNotFoundException($"Category with ID {id} not found.");
 
+
+            existingCategory.Name = categoryDto.Name;
+            existingCategory.Description = categoryDto.Description;
+            existingCategory.IsIncome = categoryDto.Type == "income";
+            existingCategory.ISExpense = categoryDto.Type != "income";
+
+            await _context.SaveChangesAsync();
+            return existingCategory;
+        }
+        
         public async Task DeleteAsync(int id)
         {
             var category = await GetByIdAsync(id);
-            if (category != null)
+            if (category == null)
             {
-                _context.CategoriesExpenseAndIncome.Remove(category);
-                await _context.SaveChangesAsync();
+                throw new KeyNotFoundException($"Category with ID {id} not found.");
             }
+
+            _context.CategoriesExpenseAndIncome.Remove(category);
+            await _context.SaveChangesAsync();
         }
     }
 }

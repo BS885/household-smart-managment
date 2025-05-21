@@ -29,7 +29,7 @@ namespace SmartManagement.Service.Services
                 Console.WriteLine("error  with ApiSettings:ApiKey");
                 throw new ArgumentNullException(nameof(_apiKey));
             }
-                _categoryService = categoryService;
+            _categoryService = categoryService;
         }
 
         public async Task<string> GetCategoryFromDescription(string description, string type)
@@ -83,9 +83,6 @@ namespace SmartManagement.Service.Services
             return content;
         }
     }
-
-
-
 }
 
 

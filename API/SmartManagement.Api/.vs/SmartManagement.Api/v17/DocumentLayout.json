@@ -3,28 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.service\\services\\aiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|solutionrelative:smartmanagement.service\\services\\aiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.service\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|solutionrelative:smartmanagement.service\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.service\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|solutionrelative:smartmanagement.service\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F92332C7-777E-4FEA-8680-B1FA9D8131C3}|SmartManagement.Core\\SmartManagement.Core.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.core\\dtos\\permissionwithrolsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F92332C7-777E-4FEA-8680-B1FA9D8131C3}|SmartManagement.Core\\SmartManagement.Core.csproj|solutionrelative:smartmanagement.core\\dtos\\permissionwithrolsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|solutionrelative:smartmanagement.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.service\\services\\permissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|solutionrelative:smartmanagement.service\\services\\permissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.api\\controllers\\expensescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|solutionrelative:smartmanagement.api\\controllers\\expensescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F92332C7-777E-4FEA-8680-B1FA9D8131C3}|SmartManagement.Core\\SmartManagement.Core.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.core\\services\\ipermissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F92332C7-777E-4FEA-8680-B1FA9D8131C3}|SmartManagement.Core\\SmartManagement.Core.csproj|solutionrelative:smartmanagement.core\\services\\ipermissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.api\\controllers\\permissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|solutionrelative:smartmanagement.api\\controllers\\permissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|solutionrelative:smartmanagement.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5165D9C5-A7BC-4FC6-B5BC-40C3CB981A5C}|SmartManagement.Data\\SmartManagement.Data.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.data\\repositories\\permissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5165D9C5-A7BC-4FC6-B5BC-40C3CB981A5C}|SmartManagement.Data\\SmartManagement.Data.csproj|solutionrelative:smartmanagement.data\\repositories\\permissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,21 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AiService.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\AiService.cs",
-              "RelativeDocumentMoniker": "SmartManagement.Service\\Services\\AiService.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\AiService.cs",
-              "RelativeToolTip": "SmartManagement.Service\\Services\\AiService.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABwAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T20:23:23.046Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -67,65 +50,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "SmartManagement.Service\\Services\\UserService.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\UserService.cs",
-              "RelativeToolTip": "SmartManagement.Service\\Services\\UserService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "SmartManagement.Service\\MappingProfile.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\MappingProfile.cs",
+              "RelativeToolTip": "SmartManagement.Service\\MappingProfile.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAC8AAABlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T19:55:34.563Z",
+              "WhenOpened": "2025-05-20T21:34:29.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IPermissionService.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\services\\IPermissionService.cs",
+              "RelativeDocumentMoniker": "SmartManagement.Core\\services\\IPermissionService.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\services\\IPermissionService.cs",
+              "RelativeToolTip": "SmartManagement.Core\\services\\IPermissionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T21:32:30.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PermissionWithRolsDto.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\DTOs\\PermissionWithRolsDto.cs",
+              "RelativeDocumentMoniker": "SmartManagement.Core\\DTOs\\PermissionWithRolsDto.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\DTOs\\PermissionWithRolsDto.cs",
+              "RelativeToolTip": "SmartManagement.Core\\DTOs\\PermissionWithRolsDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T21:25:12.187Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "PermissionController.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Controllers\\PermissionController.cs",
-              "RelativeDocumentMoniker": "SmartManagement.Api\\Controllers\\PermissionController.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Controllers\\PermissionController.cs",
-              "RelativeToolTip": "SmartManagement.Api\\Controllers\\PermissionController.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAgwAkAAAAFAAAAAAAAAA==",
+              "Title": "PermissionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\Repositories\\PermissionRepository.cs",
+              "RelativeDocumentMoniker": "SmartManagement.Data\\Repositories\\PermissionRepository.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\Repositories\\PermissionRepository.cs",
+              "RelativeToolTip": "SmartManagement.Data\\Repositories\\PermissionRepository.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACcAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T16:52:35.247Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Program.cs",
-              "RelativeDocumentMoniker": "SmartManagement.Api\\Program.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Program.cs",
-              "RelativeToolTip": "SmartManagement.Api\\Program.cs",
-              "ViewState": "AgIAAHsAAAAAAAAAAAAgwJYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T15:05:43.869Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ExpensesController.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Controllers\\ExpensesController.cs",
-              "RelativeDocumentMoniker": "SmartManagement.Api\\Controllers\\ExpensesController.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Controllers\\ExpensesController.cs",
-              "RelativeToolTip": "SmartManagement.Api\\Controllers\\ExpensesController.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACgAAABNAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T14:39:00.46Z",
+              "WhenOpened": "2025-05-20T20:49:33.096Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "SmartManagement.Api\\Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\Controllers\\UserController.cs",
-              "RelativeToolTip": "SmartManagement.Api\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGMAAAABAAAAAAAAAA==",
+              "Title": "PermissionService.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\PermissionService.cs",
+              "RelativeDocumentMoniker": "SmartManagement.Service\\Services\\PermissionService.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\PermissionService.cs",
+              "RelativeToolTip": "SmartManagement.Service\\Services\\PermissionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T12:52:31.281Z",
+              "WhenOpened": "2025-05-20T18:43:37.399Z",
               "EditorCaption": ""
             }
           ]

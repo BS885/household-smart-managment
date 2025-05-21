@@ -21,15 +21,16 @@ namespace SmartManagement.Service
             CreateMap<User, LoginResult>()
                  .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.Roles.Select(r => r.RoleName).ToList()));
 
+            CreateMap<User, UserDto>().ReverseMap();
 
 
             CreateMap<ExpenseAndIncome, ExpenseRes>()
-                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.Date))) // המרה מ- DateTime ל- DateOnly
-                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name)) // מיפוי שם הקטגוריה מתוך CategoryExpenseAndIncome
-                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description)) // מיפוי תיאור
-                .ForMember(dest => dest.Sum, opt => opt.MapFrom(src => src.Sum)) // מיפוי סכום
-                .ForMember(dest => dest.FileType, opt => opt.MapFrom(src => src.TransactionDocument.FileType)) // מיפוי סוג הקובץ אם קיים
-                .ForMember(dest => dest.FileName, opt => opt.MapFrom(src => src.TransactionDocument.FileName)) // מיפוי שם הקובץ אם קיים
+                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.Date)))
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description)) 
+                .ForMember(dest => dest.Sum, opt => opt.MapFrom(src => src.Sum))
+                .ForMember(dest => dest.FileType, opt => opt.MapFrom(src => src.TransactionDocument.FileType))
+                .ForMember(dest => dest.FileName, opt => opt.MapFrom(src => src.TransactionDocument.FileName))
                 .ForMember(dest => dest.Filesize, opt => opt.MapFrom(src => src.TransactionDocument != null ? FormatFileSize(src.TransactionDocument.Size) : null)); // מיפוי גודל הקובץ אם קיים
 
             CreateMap<CategoryExpenseAndIncome, string>().ConvertUsing(src => src.Name);
@@ -42,6 +43,9 @@ namespace SmartManagement.Service
 
 
             CreateMap<Permission, PermissionDto>().ReverseMap();
+
+            CreateMap<Permission, PermissionWithRolesDto>()
+            .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.Roles.Select(r => r.RoleName)));
         }
 
 

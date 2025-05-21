@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using SmartManagement.Core.DTOs;
 using SmartManagement.Core.Exceptios;
 using SmartManagement.Core.Models;
@@ -18,17 +19,19 @@ namespace SmartManagement.Service.Services
         private readonly IUserRepository _userRepository;
         private readonly ILogger<UserService> _logger;
         private readonly IPermissionService _permissionService;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository, ILogger<UserService> logger, IPermissionService permissionService)
+        public UserService(IUserRepository userRepository, ILogger<UserService> logger, IPermissionService permissionService,IMapper mapper)
         {
             _userRepository = userRepository;
             _logger = logger;
             _permissionService = permissionService;
+            _mapper = mapper;
         }
         
-        public void UpdateUser(int id, string name, string address, string city, string phone)
+        public async Task UpdateUser(int id, string name, string address, string city, string phone)
         {
-            var user = _userRepository.GetUserById(id);
+            var user = await _userRepository.GetUserById(id);
             if (user == null)
             {
                 _logger.LogError($"User not found {id}");
@@ -62,12 +65,38 @@ namespace SmartManagement.Service.Services
         }
 
 
-        public async Task<User> UpdateRoleToUserAsync(UpdateUserRoleDto updateUser)
+        //public async Task<UserDto> UpdateRoleToUserAsync(UpdateUserRoleDto updateUser,int id)
+        //{
+        //    var user = await _userRepository.GetUserById(id);
+        //    if (user == null)
+        //    {
+        //        _logger.LogError($"User not found: {id}");
+        //        throw new UserNotFoundException("User not found");
+        //    }
+
+        //    var role = await _permissionService.GetRoleByNameAsync(updateUser.RoleName);
+        //    if (role == null)
+        //    {
+        //        _logger.LogError($"Role not found: {updateUser.RoleName}");
+        //        throw new Exception("Role not found");
+        //    }
+
+        //    user.Roles.Add(role);
+
+        //    _userRepository.UpdateUser(user);
+
+        //    var updatedUser = await _userRepository.GetUserById(id);
+        //    var UserDto = _mapper.Map<User, UserDto>(updatedUser);
+        //    return UserDto;
+        //}
+
+
+        public async Task<UserDto> UpdateRoleToUserAsync(UpdateUserRoleDto updateUser, int id)
         {
-            var user = await _userRepository.GetUserByEmailAsync(updateUser.UserEmail);
+            var user = await _userRepository.GetUserById(id);
             if (user == null)
             {
-                _logger.LogError($"User not found: {updateUser.UserEmail}");
+                _logger.LogError($"User not found: {id}");
                 throw new UserNotFoundException("User not found");
             }
 
@@ -78,16 +107,33 @@ namespace SmartManagement.Service.Services
                 throw new Exception("Role not found");
             }
 
-            user.Roles.Clear();
+            // אם נשלח תפקיד "User", נסיר את Admin ונשאיר רק את User
+            if (updateUser.RoleName == "User")
+            {
+                // מסיר את כל התפקידים הקיימים
+                user.Roles.Clear();
 
-            user.Roles.Add(role);
+                // מוסיף רק את התפקיד החדש (User)
+                user.Roles.Add(role);
+            }
+            // אם נשלח "Admin", נוסיף אותו אם עדיין לא קיים
+            else if (updateUser.RoleName == "Admin")
+            {
+                // מוסיף Admin רק אם לא קיים
+                if (!user.Roles.Any(r => r.RoleName == "Admin"))
+                {
+                    user.Roles.Add(role);
+                }
+            }
 
             _userRepository.UpdateUser(user);
 
-            return user;
+            var updatedUser = await _userRepository.GetUserById(id);
+            var userDto = _mapper.Map<User, UserDto>(updatedUser);
+            return userDto;
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<UserDto>> GetUsers()
         {
             try
             {
@@ -97,7 +143,7 @@ namespace SmartManagement.Service.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to get users");
-                return Enumerable.Empty<User>();
+                return Enumerable.Empty<UserDto>();
             }
         }
 
