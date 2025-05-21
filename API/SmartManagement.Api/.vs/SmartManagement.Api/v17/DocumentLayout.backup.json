@@ -54,8 +54,8 @@
               "Title": "MappingProfile.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\MappingProfile.cs",
               "RelativeDocumentMoniker": "SmartManagement.Service\\MappingProfile.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\MappingProfile.cs*",
-              "RelativeToolTip": "SmartManagement.Service\\MappingProfile.cs*",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\MappingProfile.cs",
+              "RelativeToolTip": "SmartManagement.Service\\MappingProfile.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAAAC8AAABlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-20T21:34:29.96Z",
@@ -71,8 +71,7 @@
               "RelativeToolTip": "SmartManagement.Core\\services\\IPermissionService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T21:32:30.383Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-20T21:32:30.383Z"
             },
             {
               "$type": "Document",
@@ -80,12 +79,11 @@
               "Title": "PermissionWithRolsDto.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\DTOs\\PermissionWithRolsDto.cs",
               "RelativeDocumentMoniker": "SmartManagement.Core\\DTOs\\PermissionWithRolsDto.cs",
-              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\DTOs\\PermissionWithRolsDto.cs*",
-              "RelativeToolTip": "SmartManagement.Core\\DTOs\\PermissionWithRolsDto.cs*",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\DTOs\\PermissionWithRolsDto.cs",
+              "RelativeToolTip": "SmartManagement.Core\\DTOs\\PermissionWithRolsDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T21:25:12.187Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-20T21:25:12.187Z"
             },
             {
               "$type": "Document",
@@ -97,8 +95,7 @@
               "RelativeToolTip": "SmartManagement.Data\\Repositories\\PermissionRepository.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAAACcAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T20:49:33.096Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-20T20:49:33.096Z"
             },
             {
               "$type": "Document",
@@ -110,8 +107,7 @@
               "RelativeToolTip": "SmartManagement.Service\\Services\\PermissionService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T18:43:37.399Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-20T18:43:37.399Z"
             }
           ]
         }

@@ -71,8 +71,7 @@
               "RelativeToolTip": "SmartManagement.Core\\services\\IPermissionService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T21:32:30.383Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-20T21:32:30.383Z"
             },
             {
               "$type": "Document",
@@ -84,8 +83,7 @@
               "RelativeToolTip": "SmartManagement.Core\\DTOs\\PermissionWithRolsDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T21:25:12.187Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-20T21:25:12.187Z"
             },
             {
               "$type": "Document",
@@ -97,8 +95,7 @@
               "RelativeToolTip": "SmartManagement.Data\\Repositories\\PermissionRepository.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAAACcAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T20:49:33.096Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-20T20:49:33.096Z"
             },
             {
               "$type": "Document",
@@ -110,8 +107,7 @@
               "RelativeToolTip": "SmartManagement.Service\\Services\\PermissionService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T18:43:37.399Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-20T18:43:37.399Z"
             }
           ]
         }
