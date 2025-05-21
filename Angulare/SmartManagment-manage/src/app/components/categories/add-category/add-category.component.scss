@@ -1,0 +1,102 @@
+@import '../../../../styles/variables';
+
+
+.add-category-section {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background-color: $color-white;
+    border-radius: $radius-md;
+    box-shadow: $shadow-soft;
+    border-top: 3px solid $color-accent;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height $transition-slow, opacity $transition-medium, padding $transition-medium;
+
+    &.active {
+        max-height: 500px;
+        opacity: 1;
+        padding: 1.5rem;
+    }
+
+    h3 {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: $color-tertiary;
+    }
+}
+
+.form-group {
+    margin-bottom: 2rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $color-dark;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 80%;
+        padding: 0.875rem 1rem;
+        border: 1px solid $color-gray-light;
+        border-radius: $radius-md;
+        font-size: 1rem;
+        transition: border-color $transition-fast, box-shadow $transition-fast;
+        background-color: $color-white;
+
+        &:focus {
+            outline: none;
+            border-color: $color-primary;
+            box-shadow: 0 0 0 3px rgba($color-primary, 0.15);
+        }
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    select {
+        appearance: none;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat;
+        background-position: left 1rem center;
+        background-color: $color-white;
+        padding-left: 2.5rem;
+    }
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.add-category-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+.btn-primary {
+    background-color: $color-primary;
+    color: $color-white;
+    box-shadow: $shadow-soft;
+
+    &:hover:not(:disabled) {
+        background-color: darken($color-primary, 7%);
+        box-shadow: $shadow-medium;
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(1px);
+    }
+}

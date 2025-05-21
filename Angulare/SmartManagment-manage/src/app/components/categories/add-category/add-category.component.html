@@ -1,0 +1,31 @@
+<div class="add-category-section" [class.active]="isVisible">
+    <h3>הוספת קטגוריה חדשה</h3>
+    <form (ngSubmit)="onSave()" #addForm="ngForm">
+        <div class="add-category-inputs">
+            <div class="form-group">
+                <label for="new-name">שם</label>
+                <input type="text" id="new-name" name="name" [(ngModel)]="newCategory.name" required
+                    placeholder="שם הקטגוריה" />
+            </div>
+
+            <div class="form-group">
+                <label for="new-description">תיאור</label>
+                <input type="text" id="new-description" name="description" [(ngModel)]="newCategory.description"
+                    placeholder="תיאור קצר" />
+            </div>
+
+            <div class="form-group">
+                <label for="new-type">סוג</label>
+                <select id="new-type" name="type" [(ngModel)]="newCategory.type" required>
+                    <option value="" disabled selected>בחר סוג</option>
+                    <option value="income">הכנסה</option>
+                    <option value="expense">הוצאה</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!addForm.valid">
+            <i class="fas fa-plus"></i> הוסף קטגוריה
+        </button>
+    </form>
+</div>

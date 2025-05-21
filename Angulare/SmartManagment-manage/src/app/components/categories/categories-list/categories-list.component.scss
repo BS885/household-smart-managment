@@ -11,9 +11,6 @@
   margin: 2%;
 }
 
-/* ===== כותרת וכפתורי סינון ===== */
-
-
 /* ===== רשימת קטגוריות עם פגינציה ===== */
 .categories-list {
   display: grid;
@@ -284,32 +281,6 @@
   margin-top: 2rem;
 }
 
-.add-category-section {
-  margin-top: 2.5rem;
-  padding: 1.5rem;
-  background-color: $color-white;
-  border-radius: $radius-md;
-  box-shadow: $shadow-soft;
-  border-top: 3px solid $color-accent;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height $transition-slow, opacity $transition-medium, padding $transition-medium;
-  
-  &.active {
-    max-height: 500px;
-    opacity: 1;
-    padding: 1.5rem;
-  }
-  
-  h3 {
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: $color-tertiary;
-  }
-}
 
 .toggle-add-form {
   margin: 2rem 0 0.5rem;
@@ -339,12 +310,7 @@
   }
 }
 
-.add-category-inputs {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
+
 
 /* ===== כפתורים ===== */
 .btn {

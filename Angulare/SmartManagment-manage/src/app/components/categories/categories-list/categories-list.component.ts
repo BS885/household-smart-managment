@@ -8,11 +8,12 @@ import * as CategoriesActions from '../../../store/Category/categories.actions';
 import * as fromCategories from '../../../store/Category/categories.selectors';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoriesHeaderComponent } from '../categories-header/categories-header.component';
+import { AddCategoryComponent } from '../add-category/add-category.component';
 
 @Component({
   selector: 'app-categories-list',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule,CategoriesHeaderComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule,CategoriesHeaderComponent,AddCategoryComponent],
   templateUrl: './categories-list.component.html',
   styleUrl: './categories-list.component.scss'
 })
