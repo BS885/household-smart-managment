@@ -9,11 +9,13 @@ import * as fromCategories from '../../../store/Category/categories.selectors';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoriesHeaderComponent } from '../categories-header/categories-header.component';
 import { AddCategoryComponent } from '../add-category/add-category.component';
+import { EditCategoryComponent } from '../edit-category/edit-category.component';
 
 @Component({
   selector: 'app-categories-list',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule,CategoriesHeaderComponent,AddCategoryComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule,
+    CategoriesHeaderComponent,AddCategoryComponent,EditCategoryComponent],
   templateUrl: './categories-list.component.html',
   styleUrl: './categories-list.component.scss'
 })
@@ -143,10 +145,9 @@ export class CategoriesListComponent implements OnInit {
     this.isAddFormVisible = false;
   }
 
-  onSaveEdit(): void {
-    if (!this.editCategory.id) return;
-
-    this.store.dispatch(CategoriesActions.updateCategory({ category: this.editCategory }));
+  onSaveEdit(category: CategoryPut): void {
+    if (!category.id) return;
+    this.store.dispatch(CategoriesActions.updateCategory({ category }));
     this.editCategory = { id: 0, name: '', description: '', type: '' };
     this.selectedCategory = null;
   }

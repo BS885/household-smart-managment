@@ -1,0 +1,105 @@
+@import '../../../../styles/variables';
+
+.edit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($color-dark, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1001;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    background-color: $color-white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-hard;
+    z-index: 1002;
+    overflow: hidden;
+}
+
+.modal-header {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $color-gray-light;
+    background-color: $color-light;
+
+    h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: $color-tertiary;
+    }
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $color-dark;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 80%;
+        padding: 0.875rem 1rem;
+        border: 1px solid $color-gray-light;
+        border-radius: $radius-md;
+        font-size: 1rem;
+        transition: border-color $transition-fast, box-shadow $transition-fast;
+        background-color: $color-white;
+
+        &:focus {
+            outline: none;
+            border-color: $color-primary;
+            box-shadow: 0 0 0 3px rgba($color-primary, 0.15);
+        }
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    select {
+        appearance: none;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat;
+        background-position: left 1rem center;
+        background-color: $color-white;
+        padding-left: 2.5rem;
+    }
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
