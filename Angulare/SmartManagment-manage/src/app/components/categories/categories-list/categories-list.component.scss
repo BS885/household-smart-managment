@@ -1,5 +1,59 @@
 @import '../../../../styles/variables';
 
+// מיקסין לסקרולבר אחיד
+@mixin scrollbar-style {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-gray-light;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-gray;
+    border-radius: 10px;
+  }
+}
+
+// מיקסין לכפתור
+@mixin btn-style($bg, $color, $hover-bg, $hover-color: null, $border: none) {
+  background-color: $bg;
+  color: $color;
+  border: $border;
+  padding: 0.75rem 1.5rem;
+  border-radius: $radius-md;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $transition-fast;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: $shadow-soft;
+
+  &:hover:not(:disabled) {
+    background-color: $hover-bg;
+    color: if($hover-color !=null, $hover-color, $color);
+    box-shadow: $shadow-medium;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  i {
+    font-size: 0.9375rem;
+  }
+}
+
 .categories-container {
   font-family: 'Heebo', 'Rubik', sans-serif;
   direction: rtl;
@@ -11,7 +65,6 @@
   margin: 2%;
 }
 
-/* ===== רשימת קטגוריות עם פגינציה ===== */
 .categories-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -19,54 +72,21 @@
   margin-bottom: 2rem;
   max-height: 800px;
   overflow-y: auto;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: $color-gray-light;
-    border-radius: 10px;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: $color-gray;
-    border-radius: 10px;
-  }
+  padding: 0 0.5rem;
+  @include scrollbar-style;
 }
 
 .load-more-container {
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin: 1rem 0 2rem;
 }
 
 .btn-load-more {
-  padding: 0.75rem 1.5rem;
-  border-radius: $radius-md;
-  background-color: $color-light;
-  border: 1px solid $color-gray-light;
-  color: $color-tertiary;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  transition: all $transition-fast;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  
-  &:hover {
-    background-color: $color-gray-light;
-  }
-  
-  i {
-    transition: transform $transition-fast;
-  }
-  
+  @include btn-style($color-light, $color-tertiary, $color-gray-light, null, 1px solid $color-gray-light);
+
   &:hover i {
     transform: translateY(2px);
+    transition: transform $transition-fast;
   }
 }
 
@@ -98,13 +118,13 @@
   font-size: 0.75rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
-  
+
   &.income {
     background-color: rgba($color-secondary, 0.15);
     color: $color-secondary;
     border-right: 3px solid $color-secondary;
   }
-  
+
   &.expense {
     background-color: rgba($color-primary, 0.15);
     color: $color-primary;
@@ -143,19 +163,18 @@
   color: $color-gray;
   cursor: pointer;
   transition: all $transition-fast;
-  
+
   &:hover {
     background-color: $color-gray-light;
     color: $color-tertiary;
   }
-  
+
   &.delete:hover {
     background-color: #fde8e8;
     color: #e53e3e;
   }
 }
 
-/* ===== מצב ריק ===== */
 .empty-state {
   grid-column: 1 / -1;
   padding: 3rem 1rem;
@@ -163,13 +182,13 @@
   background-color: $color-white;
   border-radius: $radius-md;
   box-shadow: $shadow-soft;
-  
+
   i {
     font-size: 2.5rem;
     color: $color-gray-light;
     margin-bottom: 1rem;
   }
-  
+
   p {
     font-size: 1rem;
     color: $color-gray;
@@ -177,7 +196,6 @@
   }
 }
 
-/* ===== מודל עריכה ===== */
 .edit-modal {
   position: fixed;
   top: 0;
@@ -219,7 +237,7 @@
   align-items: center;
   border-bottom: 1px solid $color-gray-light;
   background-color: $color-light;
-  
+
   h3 {
     margin: 0;
     font-size: 1.25rem;
@@ -232,10 +250,9 @@
   padding: 1.5rem;
 }
 
-/* ===== טפסים ===== */
 .form-group {
   margin-bottom: 2rem;
-  
+
   label {
     display: block;
     margin-bottom: 0.75rem;
@@ -243,8 +260,10 @@
     font-weight: 500;
     color: $color-dark;
   }
-  
-  input, textarea, select {
+
+  input,
+  textarea,
+  select {
     width: 80%;
     padding: 0.875rem 1rem;
     border: 1px solid $color-gray-light;
@@ -252,19 +271,19 @@
     font-size: 1rem;
     transition: border-color $transition-fast, box-shadow $transition-fast;
     background-color: $color-white;
-    
+
     &:focus {
       outline: none;
       border-color: $color-primary;
       box-shadow: 0 0 0 3px rgba($color-primary, 0.15);
     }
   }
-  
+
   textarea {
     resize: vertical;
     min-height: 100px;
   }
-  
+
   select {
     appearance: none;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat;
@@ -281,7 +300,6 @@
   margin-top: 2rem;
 }
 
-
 .toggle-add-form {
   margin: 2rem 0 0.5rem;
   display: inline-flex;
@@ -296,68 +314,16 @@
   padding: 0.5rem 1rem;
   border-radius: $radius-md;
   transition: all $transition-fast;
-  
+
   &:hover {
     background-color: rgba($color-primary, 0.1);
   }
-  
+
   i {
     transition: transform $transition-fast;
   }
-  
+
   &.active i {
     transform: rotate(45deg);
-  }
-}
-
-
-
-/* ===== כפתורים ===== */
-.btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: $radius-md;
-  border: none;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all $transition-fast;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  
-  &:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-  }
-  
-  i {
-    font-size: 0.9375rem;
-  }
-}
-
-.btn-primary {
-  background-color: $color-primary;
-  color: $color-white;
-  box-shadow: $shadow-soft;
-  
-  &:hover:not(:disabled) {
-    background-color: darken($color-primary, 7%);
-    box-shadow: $shadow-medium;
-  }
-  
-  &:active:not(:disabled) {
-    transform: translateY(1px);
-  }
-}
-
-.btn-outline {
-  background-color: transparent;
-  border: 1px solid $color-gray-light;
-  color: $color-gray;
-  
-  &:hover:not(:disabled) {
-    background-color: $color-gray-light;
-    color: $color-dark;
   }
 }
