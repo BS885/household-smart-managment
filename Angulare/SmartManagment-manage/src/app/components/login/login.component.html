@@ -1,0 +1,53 @@
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="mat-card-header">
+            <h1 class="mat-card-title">התחברות</h1>
+        </div>
+        <div class="mat-card-content">
+            <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" novalidate>
+                <div class="mat-form-field full-width">
+                    <label class="mat-label" for="email">אימייל</label>
+                    <input id="email" name="email" [(ngModel)]="email" class="mat-input-element" type="email" required
+                        email #emailInput="ngModel" />
+                    @if(emailInput.invalid && emailInput.touched)
+                    {
+                    <span class="mat-error">
+                        {{ getEmailError() }}
+                    </span>
+                    }
+                </div>
+                <div class="mat-form-field full-width password-field">
+                    <label class="mat-label" for="password">סיסמה</label>
+                    <div class="password-input-container">
+                        <input id="password" name="password" [(ngModel)]="password" class="mat-input-element"
+                            [type]="showPassword ? 'text' : 'password'" required minlength="6"
+                            #passwordInput="ngModel" /> <button type="button" (click)="showPassword = !showPassword"
+                            aria-label="הצג/הסתר סיסמה">
+                            <span mat-icon class="visibility">visibility</span>
+                        </button>
+
+                    </div>
+                    @if(passwordInput.invalid && passwordInput.touched)
+                    { <span class="mat-error">
+                        {{ getPasswordError() }}
+                    </span>
+                    }
+                </div>
+                <div class="form-actions">
+                    <button mat-raised-button color="primary" class="login-button"
+                        [disabled]="loginForm.invalid || loading">
+                        <ng-container>התחבר</ng-container>
+                        @if(loading){
+                        <mat-spinner diameter="20"></mat-spinner>
+                        }
+                    </button>
+                </div>
+                @if (errorMessage)
+                {<div class="error-message" role="alert">
+                    {{ errorMessage }}
+                </div>
+                }
+            </form>
+        </div>
+    </div>
+</div>

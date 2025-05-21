@@ -1,0 +1,76 @@
+<div class="container">
+    <h2>ניהול הרשאות</h2>
+
+    <div class="card">
+        <div class="section-title">
+            <span class="icon">+</span>
+            הוספת הרשאה חדשה
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="שם הרשאה" [(ngModel)]="newPermission.name" />
+            <input type="text" placeholder="תיאור" [(ngModel)]="newPermission.description" />
+            <button class="btn-add" (click)="addPermission()">
+                <span class="icon">+</span>
+                הוסף הרשאה
+            </button>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="section-title">
+            <span class="icon">↔️</span>
+            שיוך הרשאה לתפקיד
+        </div>
+        <div class="form-group">
+            <div class="select-wrapper">
+                <select [(ngModel)]="roleName" class="role-select">
+                    <option value="" disabled selected>בחר תפקיד</option>
+                    <option value="admin">מנהל מערכת (Admin)</option>
+                    <option value="user">משתמש רגיל (User)</option>
+                    <option value="custom">תפקיד מותאם אישית</option>
+                </select>
+            </div>
+            @if (roleName === 'custom') {
+            <input type="text" placeholder="שם תפקיד מותאם" [(ngModel)]="customRoleName" />
+            }
+            <input type="text" placeholder="בחר הרשאה" [(ngModel)]="permissionName" class="permission-input" />
+
+            <button class="btn-assign" (click)="assignPermissionToRole()">
+                <span class="icon">↔️</span>
+                שייך הרשאה לתפקיד
+            </button>
+        </div>
+    </div>
+
+    <div class="permission-list">
+        @if ((permission$ | async)?.length) {
+        @for(permission of permission$ | async; track permission.id) {
+        <div class="permission-item" (click)="selectPermission(permission.name)">
+            <div class="permission-content">
+                <div class="permission-name">{{ permission.name }}</div>
+                <div class="permission-description">{{ permission.description }}</div>
+                @if(permission.roleNames?.length) {
+                <div class="permission-roles">
+                    @for(role of permission.roleNames; track role.roleName) {
+                    <div class="role-item">
+                        {{ role.roleName }}
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+            <div class="permission-actions">
+                <button class="btn-delete" (click)="$event.stopPropagation(); deletePermission(permission.id)"
+                    title="מחק הרשאה">
+                    <span class="icon">🗑️</span>
+                </button>
+            </div>
+        </div>
+        }
+        } @else {
+        <div class="empty-state">
+            לא נמצאו הרשאות במערכת. אנא הוסף הרשאה חדשה.
+        </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,109 @@
+import { Component, OnInit } from '@angular/core';
+import { Observable, combineLatest } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from '../../../models/User.model';
+import { Store } from '@ngrx/store';
+import * as UsersActions from '../../../store/Users/users.actions';
+import {
+  selectAllUsers, selectUsersLoading, selectUsersError
+} from '../../../store/Users/users.selectors';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { UserDetailsCardComponent } from '../user-details-card/user-details-card.component';
+
+@Component({
+  selector: 'app-users-list',
+  standalone: true,
+  imports: [
+    // Angular Material & Forms
+    MatIconModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatBadgeModule,
+    MatMenuModule,
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    UserDetailsCardComponent
+
+  ],
+  templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.scss']
+})
+export class UsersListComponent implements OnInit {
+  searchControl = new FormControl('');
+  roleControl = new FormControl('');
+  expandedUserId: number | null;
+
+  // מה-Store
+  users$: Observable<User[]>;
+  loading$: Observable<boolean>;
+  error$: Observable<any>;
+
+  // התוצאה אחרי סינון ומיון
+  filteredUsers$: Observable<User[]>;
+
+  constructor(
+    private store: Store,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    console.log('Dispatching loadUsers');
+    // 1. קריאה ראשונית
+    this.store.dispatch(UsersActions.loadUsers());
+
+    // 2. גישה ל־state
+    this.users$ = this.store.select(selectAllUsers);
+    this.loading$ = this.store.select(selectUsersLoading);
+    this.error$ = this.store.select(selectUsersError);
+
+    // 3. בניית ה-filteredUsers$
+    this.filteredUsers$ = combineLatest([
+      this.users$,
+      this.searchControl.valueChanges.pipe(startWith('')),
+      this.roleControl.valueChanges.pipe(startWith(''))
+    ]).pipe(
+      map(([users, search, role]) =>
+        users.filter(user => {
+          const matchesSearch = user.name.toLowerCase().includes((search ?? '').toLowerCase())
+            || user.email.toLowerCase().includes((search ?? '').toLowerCase());
+          const matchesRole =
+            !role || (user.role?.toLowerCase() ?? '') === role;
+          return matchesSearch && matchesRole;
+        })
+      )
+    );
+    console.log(this.filteredUsers$);
+
+  }
+  clearFilters(): void {
+    this.searchControl.setValue('');
+    this.roleControl.setValue('');
+    // this.filterStatus$.next('');
+  }
+  openAddAdminModal(): void {
+    this.router.navigate(['add-admin']);
+  }
+  promoteUserToAdmin(id: number): void {
+    this.store.dispatch(UsersActions.changeRole({ id, roleName: 'Admin' }));
+    this.snackBar.open('המשתמש הוגדר כמנהל', 'סגור', { duration: 2000, panelClass: ['success-snackbar'] });
+  }
+  demoteAdminToUser(id: number): void {
+    this.store.dispatch(UsersActions.changeRole({ id, roleName: 'User' }));
+    this.snackBar.open('המשתמש הוגדר כמשתמש', 'סגור', { duration: 2000, panelClass: ['success-snackbar'] });
+  }
+
+  viewUserDetails(id: number): void {
+    this.expandedUserId = this.expandedUserId === id ? null : id;
+
+  }
+}

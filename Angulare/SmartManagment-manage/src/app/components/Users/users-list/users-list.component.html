@@ -1,0 +1,123 @@
+<div class="user-list-container">
+    <div class="header-card">
+        <div class="user-list-title">
+            <h2>ניהול משתמשים</h2>
+            <button class="btn btn-primary add-btn" (click)="openAddAdminModal()">
+                <i class="fas fa-plus"></i> הוסף מנהל חדש
+            </button>
+        </div>
+
+        <div class="user-list-filters">
+            <div class="search-box">
+                <input type="text" placeholder="חיפוש משתמשים..." [formControl]="searchControl" />
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </div>
+
+            <div class="filter-dropdown">
+                <select [formControl]="roleControl">
+                    <option value="">כל התפקידים</option>
+                    <option value="admin">מנהל</option>
+                    <option value="user">משתמש</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-card">
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>שם משתמש</th>
+                        <th>אימייל</th>
+                        <th>כתובת</th>
+                        <th>תפקיד</th>
+                        <th>פעולות</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ((filteredUsers$ | async)?.length) {
+                    @for(user of filteredUsers$ | async ; track user.email) {
+                    <tr class="user-row">
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.address }} {{ user.city }}</td>
+                        <td>
+                            <span [ngClass]="user.role === 'Admin' ? 'badge badge-primary' : 'badge badge-secondary'">
+                                {{ user.role === 'Admin' ? 'מנהל' : 'משתמש' }}
+                            </span>
+                        </td>
+                        <td class="actions-column">
+                            <div class="action-buttons">
+                                <button class="btn btn-sm btn-info" title="צפייה בפרטים" (click)="viewUserDetails(user.id)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-eye" viewBox="0 0 16 16">
+                                        <path
+                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                        <path
+                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                    </svg>
+                                </button>
+
+                                @if(user.role === 'Admin'){
+                                <button class="btn btn-sm btn-outline" title="הסר הרשאות מנהל"
+                                    (click)="demoteAdminToUser(user.id)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-person-dash" viewBox="0 0 16 16">
+                                        <path
+                                            d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1Zm0-7a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+                                        <path
+                                            d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
+                                    </svg>
+                                </button>
+                                }
+                                @else{
+                                <button class="btn btn-sm btn-accent" title="הפוך למנהל"
+                                    (click)="promoteUserToAdmin(user.id)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-person-plus" viewBox="0 0 16 16">
+                                        <path
+                                            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                        <path fill-rule="evenodd"
+                                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                    </svg>
+                                </button>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                    @if(expandedUserId === user.id){
+                    <tr class="expanded-row">
+                        <td colspan="5">
+                            <app-user-details-card [user]="user"></app-user-details-card>
+                        </td>
+                    </tr>
+                    }
+                    }
+                    }
+                    @else {
+                    <tr>
+                        <td colspan="5" class="no-results">
+                            <div class="empty-state">
+                                <div class="empty-state-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zM2 1a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm0 8a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2H2zm.854-3.646a.5.5 0 0 1-.708 0l-1-1a.5.5 0 1 1 .708-.708l.646.647 1.646-1.647a.5.5 0 1 1 .708.708l-2 2zm0 8a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647 1.646-1.647a.5.5 0 0 1 .708.708l-2 2zM7 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zm0-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
+                                </div>
+                                <h4 class="empty-state-title">אין משתמשים להצגה</h4>
+                                <p class="empty-state-message">לא נמצאו משתמשים התואמים את הסינון הנוכחי או שאין משתמשים
+                                    במערכת</p>
+                                <button class="btn btn-accent" (click)="clearFilters()">
+                                    נקה סינון
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="sidebar">
+    <div class="logo-container">
+        <img src="/assets/images/home-management-logo.png" alt="Logo" class="logo">
+        <h2>HomeAdmin</h2>
+    </div>
+
+    <div class="menu">
+        <div class="menu-item active" (click)="switchTab('dashboard')">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </div>
+        <div class="menu-item" (click)="switchTab('users')">
+            <i class="fas fa-users"></i>
+            <span>User Management</span>
+        </div>
+        <div class="menu-item" (click)="switchTab('permissions')">
+            <i class="fas fa-lock"></i>
+            <span>Permissions</span>
+        </div>
+        <div class="menu-item" (click)="switchTab('categories')">
+            <i class="fas fa-tags"></i>
+            <span>Categories</span>
+        </div>
+        <div class="menu-item" (click)="switchTab('settings')">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </div>
+    </div>
+
+    <div class="user-profile">
+        <div class="avatar">
+            <img src="/assets/images/admin-avatar.png" alt="Admin">
+        </div>
+        <div class="user-info">
+            <h4>Admin User</h4>
+            <p>Super Admin</p>
+        </div>
+        <div class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+        </div>
+    </div>
+</div>

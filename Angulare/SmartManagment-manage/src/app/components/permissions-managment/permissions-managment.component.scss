@@ -1,0 +1,240 @@
+@import '../../../styles/variables';
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: $color-white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-medium;
+
+    h2 {
+        color: $color-tertiary;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        font-weight: 600;
+        position: relative;
+        padding-bottom: 0.75rem;
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, $color-primary, $color-accent);
+            border-radius: $radius-sm;
+        }
+    }
+}
+
+.card {
+    background-color: $color-white;
+    border-radius: $radius-md;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: $shadow-soft;
+    transition: transform $transition-fast, box-shadow $transition-fast;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: $shadow-medium;
+    }
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    color: $color-tertiary;
+    margin-bottom: 1rem;
+    font-weight: 600;
+
+    .icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+.form-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+
+    input {
+        flex: 1;
+        min-width: 100px;
+        padding: 0.75rem 1rem;
+        border: 1px solid $color-gray-light;
+        border-radius: $radius-sm;
+        font-size: 1rem;
+        transition: border $transition-fast, box-shadow $transition-fast;
+
+        &:focus {
+            outline: none;
+            border-color: $color-primary;
+            box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.15);
+        }
+    }
+
+    .role-select {
+        min-width: 100px;
+        border: 1px solid $color-gray-light;
+
+    }
+}
+
+button {
+    background-color: $color-primary;
+    color: $color-white;
+    border: none;
+    border-radius: $radius-sm;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color $transition-fast, transform $transition-fast;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:hover {
+        background-color: darken($color-primary, 10%);
+        transform: translateY(-2px);
+    }
+}
+
+.btn-add {
+    background-color: $color-secondary;
+
+    &:hover {
+        background-color: darken($color-secondary, 10%);
+    }
+}
+
+.btn-assign {
+    background-color: $color-accent;
+
+    &:hover {
+        background-color: darken($color-accent, 10%);
+    }
+}
+
+.btn-delete {
+    background-color: transparent;
+    color: $color-error;
+    padding: 0.5rem;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background-color: rgba($color-error, 0.1);
+        transform: none;
+    }
+}
+
+.permission-list {
+    list-style: none;
+    margin-top: 2rem;
+}
+
+.permission-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background-color: $color-white;
+    border-radius: $radius-md;
+    margin-bottom: 0.75rem;
+    border-right: 4px solid $color-primary;
+    box-shadow: $shadow-soft;
+    transition: transform $transition-fast;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: $shadow-medium;
+    }
+
+    &:nth-child(3n+1) {
+        border-right-color: $color-primary;
+    }
+
+    &:nth-child(3n+2) {
+        border-right-color: $color-secondary;
+    }
+
+    &:nth-child(3n+3) {
+        border-right-color: $color-accent;
+    }
+}
+.permission-roles {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    position: relative;
+    top: -1rem; /* מרים את האלמנט */
+    right: -1.5rem;
+    
+    .role-item {
+      background-color: $color-gray-light;
+      padding: 0.5rem 1rem;
+      border-radius: $radius-sm;
+      font-size: 0.9rem;
+      color: $color-tertiary;
+    }
+  }
+  
+.permission-content {
+    flex: 1;
+}
+
+.permission-name {
+    font-weight: 600;
+    color: $color-tertiary;
+    margin-bottom: 0.25rem;
+}
+
+.permission-description {
+    color: $color-gray;
+    font-size: 0.9rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: $color-gray;
+    font-style: italic;
+}
+
+.select-wrapper {
+    flex: 1;
+    min-width: 150px;
+    position: relative;
+
+    &::after {
+        content: "▼";
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        font-size: 12px;
+        color: #666;
+    }
+
+    select {
+        width: 100%;
+        appearance: none;
+        padding-left: 30px;
+        height: 2.5rem;
+    }
+}

@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    direction: rtl;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    direction: rtl;
+}
+
+.success-snackbar {
+    background-color: rgb(140, 255, 175) !important;
+    color: rgb(0, 199, 60) !important;
+    border: 2px solid rgb(0, 199, 60) !important;
+    box-shadow: none !important;
+    font-weight: bold;
+
+    .mat-mdc-snack-bar-actions:hover {
+        color: rgba($color: #9fff76, $alpha: 0.5) !important;
+        /* או כל צבע שתרצה במקום אדום */
+        background-color: transparent !important;
+    }
+}
+
+.error-snackbar {
+    background-color: rgb(255, 255, 255) !important;
+    color: red !important;
+    border: 2px solid red !important;
+    box-shadow: none !important;
+    font-weight: bold;
+
+    .mat-mdc-snack-bar-actions:hover {
+        color: rgba($color: #ff6c6c, $alpha: 0.5) !important;
+        /* או כל צבע שתרצה במקום אדום */
+        background-color: transparent !important;
+    }
+}

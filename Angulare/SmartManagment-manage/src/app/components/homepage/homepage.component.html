@@ -1,0 +1,54 @@
+
+<!-- Main Content -->
+<main class="main-content">
+    <h2 class="dashboard-title">לוח בקרה ניהולי</h2>
+    <div class="cards-container">
+        <!-- User Management Card -->
+        <div class="card fade-in" (click)="openModule('users')" style="animation-delay: 0.1s;">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+                <h3 class="card-title">ניהול משתמשים</h3>
+            </div>
+            <div class="card-content">
+                ניהול חשבונות משתמשים, הרשאות ופעילויות. יצירת  מנהלים חדשים, עדכון קיימים .
+            </div>
+            <div class="card-actions">
+                <button class="card-button">ניהול משתמשים</button>
+            </div>
+        </div>
+
+        <!-- Category Management Card -->
+        <div class="card fade-in" (click)="openModule('categories')" style="animation-delay: 0.2s;">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <h3 class="card-title">ניהול קטגוריות</h3>
+            </div>
+            <div class="card-content">
+                יצירה, ארגון ותחזוקה של קטגוריות למוצרים.
+            </div>
+            <div class="card-actions">
+                <button class="card-button">ניהול קטגוריות</button>
+            </div>
+        </div>
+
+        <!-- Permissions Management Card -->
+        <div class="card fade-in" (click)="openModule('permissions')" style="animation-delay: 0.3s;">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h3 class="card-title">ניהול הרשאות</h3>
+            </div>
+            <div class="card-content">
+                הגדרה וקביעת זכויות גישה עבור תפקידי משתמשים שונים. שליטה במי יכול לצפות, לערוך או למחוק תוכן.
+            </div>
+            <div class="card-actions">
+                <button class="card-button">ניהול הרשאות</button>
+            </div>
+        </div>
+    </div>
+</main>

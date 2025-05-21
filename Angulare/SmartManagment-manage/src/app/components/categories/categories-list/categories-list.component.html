@@ -1,0 +1,129 @@
+<div class="categories-container">
+    <div class="categories-header">
+        <h2>ניהול קטגוריות</h2>
+        <div class="filter-buttons">
+            <button class="btn-filter" [class.active]="categoryFilter === 'all'"
+                (click)="filterCategories('all')">הכל</button>
+            <button class="btn-filter" [class.active]="categoryFilter === 'income'"
+                (click)="filterCategories('income')">הכנסות</button>
+            <button class="btn-filter" [class.active]="categoryFilter === 'expense'"
+                (click)="filterCategories('expense')">הוצאות</button>
+        </div>
+
+
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="חפש קטגוריות..." [formControl]="searchControl" />
+        </div>
+    </div>
+    <div class="categories-list">
+        @for (category of visibleCategories; track category.id) {
+        <div class="category-card">
+            <div class="category-info">
+                <div class="category-badge" [ngClass]="category.isIncome ? 'income' : 'expense'">
+                    {{ category.isIncome ? 'הכנסה' : 'הוצאה' }}
+                </div>
+                <h3 class="category-name">{{ category.name }}</h3>
+                <p class="category-description">{{ category.description }}</p>
+            </div>
+            <div class="category-actions">
+                <button class="btn-icon" (click)="onEdit(category)" title="עריכה">
+                    <i class="fas fa-pen"></i>
+                </button>
+            </div>
+        </div>
+        } @empty {
+        <div class="empty-state">
+            <i class="fas fa-folder-open"></i>
+            <p>לא נמצאו קטגוריות</p>
+        </div>
+        }
+    </div>
+
+    <!-- כפתור טעינת עוד קטגוריות -->
+    <div class="load-more-container" *ngIf="hasMoreCategories">
+        <button class="btn-load-more" (click)="loadMoreCategories()">
+            טען עוד קטגוריות <i class="fas fa-chevron-down"></i>
+        </button>
+    </div>
+
+    <!-- כפתור להוספת קטגוריה -->
+    <button class="toggle-add-form" [class.active]="isAddFormVisible" (click)="toggleAddForm()">
+        <i class="fas fa-plus"></i> {{ isAddFormVisible ? 'סגור טופס' : 'הוסף קטגוריה חדשה' }}
+    </button>
+
+    <!-- הוספת קטגוריה חדשה -->
+    <div class="add-category-section" [class.active]="isAddFormVisible">
+        <h3>הוספת קטגוריה חדשה</h3>
+        <form (ngSubmit)="onSaveNew()" #addForm="ngForm">
+            <div class="add-category-inputs">
+                <div class="form-group">
+                    <label for="new-name">שם</label>
+                    <input type="text" id="new-name" name="name" [(ngModel)]="newCategory.name" required
+                        placeholder="שם הקטגוריה" />
+                </div>
+
+                <div class="form-group">
+                    <label for="new-description">תיאור</label>
+                    <input type="text" id="new-description" name="description" [(ngModel)]="newCategory.description"
+                        placeholder="תיאור קצר" />
+                </div>
+
+                <div class="form-group">
+                    <label for="new-type">סוג</label>
+                    <select id="new-type" name="type" [(ngModel)]="newCategory.type" required>
+                        <option value="" disabled selected>בחר סוג</option>
+                        <option value="income">הכנסה</option>
+                        <option value="expense">הוצאה</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!addForm.valid">
+                <i class="fas fa-plus"></i> הוסף קטגוריה
+            </button>
+        </form>
+    </div>
+
+    <!-- חלון עריכה -->
+    @if (selectedCategory) {
+    <div class="edit-modal">
+        <div class="modal-overlay" (click)="onCancel()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>עריכת קטגוריה</h3>
+                <button class="btn-icon" (click)="onCancel()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onSaveEdit()">
+                    <div class="form-group">
+                        <label for="edit-name">שם</label>
+                        <input type="text" id="edit-name" name="name" [(ngModel)]="editCategory.name" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-description">תיאור</label>
+                        <textarea id="edit-description" name="description" [(ngModel)]="editCategory.description"
+                            rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-type">סוג</label>
+                        <select id="edit-type" name="type" [(ngModel)]="editCategory.type" required>
+                            <option value="income">הכנסה</option>
+                            <option value="expense">הוצאה</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" (click)="onCancel()">ביטול</button>
+                        <button type="submit" class="btn btn-primary">שמור שינויים</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    }
+</div>
