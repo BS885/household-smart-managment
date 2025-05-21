@@ -1,29 +1,6 @@
 <div class="user-list-container">
-    <div class="header-card">
-        <div class="user-list-title">
-            <h2>ניהול משתמשים</h2>
-            <button class="btn btn-primary add-btn" (click)="openAddAdminModal()">
-                <i class="fas fa-plus"></i> הוסף מנהל חדש
-            </button>
-        </div>
-
-        <div class="user-list-filters">
-            <div class="search-box">
-                <input type="text" placeholder="חיפוש משתמשים..." [formControl]="searchControl" />
-                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-            </div>
-
-            <div class="filter-dropdown">
-                <select [formControl]="roleControl">
-                    <option value="">כל התפקידים</option>
-                    <option value="admin">מנהל</option>
-                    <option value="user">משתמש</option>
-                </select>
-            </div>
-        </div>
-    </div>
+    <app-user-list-header (searchChanged)="onSearchChanged($event)" (roleChanged)="onRoleChanged($event)"
+        (addAdminClicked)="openAddAdminModal()"></app-user-list-header>
 
     <div class="content-card">
         <div class="table-container">
@@ -51,7 +28,8 @@
                         </td>
                         <td class="actions-column">
                             <div class="action-buttons">
-                                <button class="btn btn-sm btn-info" title="צפייה בפרטים" (click)="viewUserDetails(user.id)">
+                                <button class="btn btn-sm btn-info" title="צפייה בפרטים"
+                                    (click)="viewUserDetails(user.id)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-eye" viewBox="0 0 16 16">
                                         <path
@@ -102,12 +80,15 @@
                         <td colspan="5" class="no-results">
                             <div class="empty-state">
                                 <div class="empty-state-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                                        <path d="M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zM2 1a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm0 8a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2H2zm.854-3.646a.5.5 0 0 1-.708 0l-1-1a.5.5 0 1 1 .708-.708l.646.647 1.646-1.647a.5.5 0 1 1 .708.708l-2 2zm0 8a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647 1.646-1.647a.5.5 0 0 1 .708.708l-2 2zM7 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zm0-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M7 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zM2 1a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm0 8a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2H2zm.854-3.646a.5.5 0 0 1-.708 0l-1-1a.5.5 0 1 1 .708-.708l.646.647 1.646-1.647a.5.5 0 1 1 .708.708l-2 2zm0 8a.5.5 0 0 1-.708 0l-1-1a.5.5 0 0 1 .708-.708l.646.647 1.646-1.647a.5.5 0 0 1 .708.708l-2 2zM7 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-1zm0-5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
                                     </svg>
                                 </div>
                                 <h4 class="empty-state-title">אין משתמשים להצגה</h4>
-                                <p class="empty-state-message">לא נמצאו משתמשים התואמים את הסינון הנוכחי או שאין משתמשים
+                                <p class="empty-state-message">לא נמצאו משתמשים התואמים את הסינון הנוכחי או שאין
+                                    משתמשים
                                     במערכת</p>
                                 <button class="btn btn-accent" (click)="clearFilters()">
                                     נקה סינון

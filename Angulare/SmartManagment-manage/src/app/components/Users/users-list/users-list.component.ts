@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,12 +17,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserDetailsCardComponent } from '../user-details-card/user-details-card.component';
+import { UserListHeaderComponent } from '../user-list-header/user-list-header.component';
 
 @Component({
   selector: 'app-users-list',
   standalone: true,
   imports: [
-    // Angular Material & Forms
     MatIconModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -31,16 +31,18 @@ import { UserDetailsCardComponent } from '../user-details-card/user-details-card
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    UserDetailsCardComponent
-
+    UserDetailsCardComponent,
+    UserListHeaderComponent
   ],
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
-  searchControl = new FormControl('');
-  roleControl = new FormControl('');
+  private searchTerm: string = '';
+  private selectedRole: string = '';
   expandedUserId: number | null;
+
+  @ViewChild(UserListHeaderComponent) headerComponent!: UserListHeaderComponent;
 
   // מה-Store
   users$: Observable<User[]>;
@@ -56,40 +58,60 @@ export class UsersListComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-    console.log('Dispatching loadUsers');
-    // 1. קריאה ראשונית
-    this.store.dispatch(UsersActions.loadUsers());
+  // ngOnInit(): void {
+  //   console.log('Dispatching loadUsers');
+  //   // 1. קריאה ראשונית
+  //   this.store.dispatch(UsersActions.loadUsers());
 
-    // 2. גישה ל־state
+  //   // 2. גישה ל־state
+  //   this.users$ = this.store.select(selectAllUsers);
+  //   this.loading$ = this.store.select(selectUsersLoading);
+  //   this.error$ = this.store.select(selectUsersError);
+
+  //   // 3. בניית ה-filteredUsers$
+  //   this.filteredUsers$ = combineLatest([
+  //     this.users$,
+  //     this.searchControl.valueChanges.pipe(startWith('')),
+  //     this.roleControl.valueChanges.pipe(startWith(''))
+  //   ]).pipe(
+  //     map(([users, search, role]) =>
+  //       users.filter(user => {
+  //         const matchesSearch = user.name.toLowerCase().includes((search ?? '').toLowerCase())
+  //           || user.email.toLowerCase().includes((search ?? '').toLowerCase());
+  //         const matchesRole =
+  //           !role || (user.role?.toLowerCase() ?? '') === role;
+  //         return matchesSearch && matchesRole;
+  //       })
+  //     )
+  //   );
+  //   console.log(this.filteredUsers$);
+
+  // }
+
+  ngOnInit(): void {
+    this.store.dispatch(UsersActions.loadUsers());
+  
     this.users$ = this.store.select(selectAllUsers);
     this.loading$ = this.store.select(selectUsersLoading);
     this.error$ = this.store.select(selectUsersError);
-
-    // 3. בניית ה-filteredUsers$
-    this.filteredUsers$ = combineLatest([
-      this.users$,
-      this.searchControl.valueChanges.pipe(startWith('')),
-      this.roleControl.valueChanges.pipe(startWith(''))
-    ]).pipe(
-      map(([users, search, role]) =>
+  
+    this.applyFilters();
+  }
+  
+  applyFilters(): void {
+    this.filteredUsers$ = this.users$.pipe(
+      map(users =>
         users.filter(user => {
-          const matchesSearch = user.name.toLowerCase().includes((search ?? '').toLowerCase())
-            || user.email.toLowerCase().includes((search ?? '').toLowerCase());
-          const matchesRole =
-            !role || (user.role?.toLowerCase() ?? '') === role;
+          const matchesSearch = user.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+            || user.email.toLowerCase().includes(this.searchTerm.toLowerCase());
+          const matchesRole = !this.selectedRole || (user.role?.toLowerCase() ?? '') === this.selectedRole;
           return matchesSearch && matchesRole;
         })
       )
     );
-    console.log(this.filteredUsers$);
-
   }
-  clearFilters(): void {
-    this.searchControl.setValue('');
-    this.roleControl.setValue('');
-    // this.filterStatus$.next('');
-  }
+  
+ 
   openAddAdminModal(): void {
     this.router.navigate(['add-admin']);
   }
@@ -105,5 +127,19 @@ export class UsersListComponent implements OnInit {
   viewUserDetails(id: number): void {
     this.expandedUserId = this.expandedUserId === id ? null : id;
 
+  }
+
+  onSearchChanged(value: string): void {
+    this.searchTerm = value;
+    this.applyFilters();
+  }
+  
+  onRoleChanged(value: string): void {
+    this.selectedRole = value;
+    this.applyFilters();
+  }
+
+  clearFilters(): void {
+    this.headerComponent.clearFilters();
   }
 }

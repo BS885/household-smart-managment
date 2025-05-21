@@ -1,0 +1,152 @@
+@import '../../../../styles/variables.scss';
+
+.header-card {
+  background: linear-gradient(135deg, $color-primary, $color-tertiary);
+  color: $color-white;
+  border-radius: $radius-md $radius-md 0 0;
+  box-shadow: $shadow-medium;
+  padding: 1.75rem 2rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .user-list-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.75rem;
+    position: relative;
+    z-index: 1;
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .user-list-filters {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+
+      input {
+        width: 80%;
+        padding: 0.85rem 1.25rem 0.85rem 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: $radius-sm;
+        transition: $transition-fast;
+        color: $color-white;
+        background-color: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        &:focus {
+          outline: none;
+          border-color: rgba(255, 255, 255, 0.4);
+          box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+          background-color: rgba(255, 255, 255, 0.18);
+        }
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 12rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    .filter-dropdown {
+      min-width: 180px;
+
+      select {
+        width: 100%;
+        padding: 0.85rem 1.25rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: $radius-sm;
+        background-color: rgba(255, 255, 255, 0.12);
+        color: $color-white;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: left 0.75rem center;
+        background-size: 1rem;
+        padding-left: 2.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+        &:focus {
+          outline: none;
+          border-color: rgba(255, 255, 255, 0.4);
+          box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      option {
+        background-color: $color-white;
+        color: $color-dark;
+      }
+    }
+  }
+
+
+}
+
+.add-btn {
+  border-radius: 50px;
+  padding: 0.7rem 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: $radius-sm;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  transition: $transition-fast;
+  gap: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.btn-primary {
+  background-color: $color-accent;
+  color: $color-white;
+}
+
+.btn-primary:hover {
+  background-color: darken($color-accent, 5%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
