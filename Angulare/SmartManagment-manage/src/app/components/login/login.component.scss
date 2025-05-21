@@ -309,24 +309,6 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
-
-// .forgot-password {
-//     display: block;
-//     text-align: left;
-//     margin-top: 16px;
-//     color: var(--color-primary);
-//     text-decoration: none;
-//     font-size: 14px;
-//     transition: var(--transition-fast);
-// }
-
-// .forgot-password:hover {
-//     color: var(--color-tertiary);
-//     text-decoration: underline;
-// }
-
-
-
 /* Responsive adjustments */
 @media (max-width: 480px) {
     .auth-card {

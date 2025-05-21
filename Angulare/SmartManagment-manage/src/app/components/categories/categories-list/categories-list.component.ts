@@ -7,11 +7,12 @@ import { Store } from '@ngrx/store';
 import * as CategoriesActions from '../../../store/Category/categories.actions';
 import * as fromCategories from '../../../store/Category/categories.selectors';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CategoriesHeaderComponent } from '../categories-header/categories-header.component';
 
 @Component({
   selector: 'app-categories-list',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule,CategoriesHeaderComponent],
   templateUrl: './categories-list.component.html',
   styleUrl: './categories-list.component.scss'
 })

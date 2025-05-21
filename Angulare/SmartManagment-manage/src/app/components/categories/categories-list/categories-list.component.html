@@ -1,21 +1,8 @@
 <div class="categories-container">
-    <div class="categories-header">
-        <h2>ניהול קטגוריות</h2>
-        <div class="filter-buttons">
-            <button class="btn-filter" [class.active]="categoryFilter === 'all'"
-                (click)="filterCategories('all')">הכל</button>
-            <button class="btn-filter" [class.active]="categoryFilter === 'income'"
-                (click)="filterCategories('income')">הכנסות</button>
-            <button class="btn-filter" [class.active]="categoryFilter === 'expense'"
-                (click)="filterCategories('expense')">הוצאות</button>
-        </div>
+    <app-categories-header [categoryFilter]="categoryFilter" [searchControl]="searchControl"
+        (filterCategories)="filterCategories($event)">
+    </app-categories-header>
 
-
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="חפש קטגוריות..." [formControl]="searchControl" />
-        </div>
-    </div>
     <div class="categories-list">
         @for (category of visibleCategories; track category.id) {
         <div class="category-card">

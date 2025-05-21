@@ -1,0 +1,15 @@
+<div class="categories-header">
+    <h2>ניהול קטגוריות</h2>
+    <div class="filter-buttons">
+        <button class="btn-filter" [class.active]="categoryFilter === 'all'"
+            (click)="filterCategories.emit('all')">הכל</button>
+        <button class="btn-filter" [class.active]="categoryFilter === 'income'"
+            (click)="filterCategories.emit('income')">הכנסות</button>
+        <button class="btn-filter" [class.active]="categoryFilter === 'expense'"
+            (click)="filterCategories.emit('expense')">הוצאות</button>
+    </div>
+    <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="חפש קטגוריות..." [formControl]="searchControl" />
+    </div>
+</div>
