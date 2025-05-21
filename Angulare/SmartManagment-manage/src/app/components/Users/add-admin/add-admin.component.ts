@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } 
 import { UserWithPassword } from '../../../models/User.model';
 import { UsersService } from '../../../services/users.service';
 import { Router } from '@angular/router';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import {
   MatSnackBar,
   MatSnackBarAction,
@@ -12,7 +14,7 @@ import {
 } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-add-admin',
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule,MatSnackBarModule],
   templateUrl: './add-admin.component.html',
   styleUrl: './add-admin.component.scss'
 })
