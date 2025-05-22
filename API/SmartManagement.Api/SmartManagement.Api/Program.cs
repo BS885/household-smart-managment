@@ -112,7 +112,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigin", policy =>
     {
         policy.WithOrigins("http://localhost:5173", "https://household-smart-managment.onrender.com", "http://localhost:4200"
-            , "https://household-smart-managment-manage.onrender.com/")
+            , "https://household-smart-managment-manage.onrender.com")
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
