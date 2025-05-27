@@ -9,7 +9,6 @@ const LoadingPage = () => {
       justifyContent="center"
       minHeight="100vh"
       minWidth="100vw"
-      // bgcolor="#f5f5f5"
       dir="rtl"
     >
       <CircularProgress color="primary" size={64} thickness={4} />

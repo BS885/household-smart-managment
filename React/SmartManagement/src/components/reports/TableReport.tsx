@@ -1,5 +1,5 @@
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, alpha, ThemeProvider, Paper } from "@mui/material"
-import { theme } from "../Theme"
+import { theme } from "../../Style/Theme"
 
 interface TableColumn<T> {
     key: keyof T;

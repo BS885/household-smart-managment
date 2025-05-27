@@ -1,4 +1,4 @@
-import{ SyntheticEvent, useState, useEffect } from 'react';
+import { SyntheticEvent, useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Button, Tabs, Tab, Box, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -6,22 +6,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { logout } from '../redux/userSlice';
+import { HDate } from "@hebcal/core";
 
 const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch<AppDispatch>();
-    // Map routes to tab indices
-    const routeToTabIndex: { [key: string]: number } = {
-        '/reports': 0,
-        '/income-management': 1,
-        '/expense-management': 2,
-        '/graphs': 3
-    };
+    const routes = ['/graphs', '/income-management', '/expense-management', '/reports'];
 
-    // Determine initial tab value based on current route
+    const routeToTabIndex = routes.reduce((acc, route, index) => {
+        acc[route] = index;
+        return acc;
+    }, {} as { [key: string]: number });
+
     const [value, setValue] = useState(routeToTabIndex[location.pathname] || 0);
-    
+
+    const formatHebrewLoginDate = (dateString: string): string => {
+        const date = new Date(dateString);
+        const hDate = new HDate(date);
+        const hebrewDate = hDate.renderGematriya();
+
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const time = `${hours}:${minutes}`;
+
+        return `כניסתך האחרונה הייתה ב־${hebrewDate} בשעה ${time}`;
+    };
     // Use effect to update tab when route changes (including browser back/forward)
     useEffect(() => {
         const currentTabIndex = routeToTabIndex[location.pathname];
@@ -31,12 +41,9 @@ const Header = () => {
     }, [location.pathname]);
 
     const user = useSelector((state: RootState) => state.auth.user);
-    
+
     const handleChange = (_event: SyntheticEvent, newValue: number) => {
         setValue(newValue);
-        
-        // Navigate based on tab selection
-        const routes = ['/reports', '/income-management', '/expense-management', '/graphs'];
         navigate(routes[newValue]);
     };
 
@@ -71,10 +78,10 @@ const Header = () => {
                 <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
                     <Box>
                         <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
-                            {user?.name} ברוך הבאה
+                            {user?.name} שלום!
                         </Typography>
                         <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>
-                            כניסתך האחרונה הייתה בי"ב שבט תשפ"ה בשעה 17:00
+                            {user?.lastLogin && formatHebrewLoginDate(user.lastLogin.toString())}
                         </Typography>
                     </Box>
                     <Button
@@ -83,8 +90,8 @@ const Header = () => {
                         sx={{ color: '#2C3E50' }}
                         endIcon={<LogoutIcon />}
                         onClick={() => dispatch(logout())}
-                        > התנתק
-                        
+                    > התנתק
+
                     </Button>
                 </Toolbar>
                 <StyledTabs
@@ -92,10 +99,11 @@ const Header = () => {
                     onChange={handleChange}
                     variant="fullWidth"
                     sx={{ mt: 2 }}>
-                    <StyledTab label="דוחות" />
+                    <StyledTab label="גרפים" />
                     <StyledTab label="ניהול הכנסות" />
                     <StyledTab label="ניהול הוצאות" />
-                    <StyledTab label="גרפים" />
+                    <StyledTab label="דוחות" />
+
                 </StyledTabs>
             </Container>
         </AppBar>

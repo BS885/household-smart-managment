@@ -3,5 +3,6 @@ export type User = {
     address: string;
     city: string;
     phone: string;
+    lastLogin:Date;
     roles: string[];
 }

@@ -1,25 +1,24 @@
 import { ChangeEvent, useState } from 'react';
 import {
-    Box, Container, Typography, TextField, Button, Paper, Divider, FormControlLabel, Checkbox,
-    FormHelperText, Stepper, Step, StepLabel, Stack, Alert, InputAdornment, IconButton, Snackbar,
-    Link
-} from '@mui/material';
+    Box, Container, Typography, TextField, Button, Paper, FormControlLabel, Checkbox,
+    FormHelperText, Stepper, Step, StepLabel, Stack, Alert, InputAdornment, IconButton,
+    Snackbar, Link, useTheme, ThemeProvider } from '@mui/material';
 import { Visibility, VisibilityOff, AccountCircle, Email, Phone, Lock, ArrowBack, ArrowForward, Home, LocationOn } from '@mui/icons-material';
-import { AppDispatch } from '../redux/store';
+import { AppDispatch } from '../../redux/store';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../redux/userSlice';
+import { registerUser } from '../../redux/userSlice';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 const RegistrationForm = () => {
     const dispatch: AppDispatch = useDispatch();
-    // ניהול שלבי הרשמה
+
     const [activeStep, setActiveStep] = useState(0);
     const steps = ['פרטים אישיים', 'פרטי חשבון', 'אימות ואישור'];
+    const theme = useTheme();
 
-    // ניהול הודעות מהשרת
     const [serverError, setServerError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [openSnackbar, setOpenSnackbar] = useState(false);
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -28,7 +27,6 @@ const RegistrationForm = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    // ניהול תצוגת סיסמה
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -187,17 +185,18 @@ const RegistrationForm = () => {
         switch (step) {
             case 0: // פרטים אישיים
                 return (
-                    <Stack spacing={3}>
-                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                    <Stack spacing={3} >
+                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} >
                             <TextField
                                 fullWidth
                                 label="שם מלא"
                                 name="Name"
+                                dir="rtl"
                                 value={formData.Name}
                                 onChange={handleChange}
                                 error={!!errors.Name}
                                 helperText={errors.Name}
-                                InputProps={{ // Using for backward compatibility 
+                                InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <AccountCircle color="primary" />
@@ -394,96 +393,100 @@ const RegistrationForm = () => {
     };
 
     return (
-        <Container maxWidth="lg"> {/* שינוי ל-lg להרחבה */}
-            <Paper
-                elevation={3}
-                sx={{
-                    p: 4,
-                    mt: 4,
-                    mb: 4,
-                    borderRadius: 2,
-                    border: '1px solid',
-                    borderColor: 'primary.light',
-                    width: '100%', // מאפשר ניצול מלא של הקונטיינר
-                    maxWidth: '900px', // מגביל גודל מקסימלי
-                    mx: 'auto' // ממרכז את ה-Paper
-                }}
-            >
-                <Typography
-
-                    variant="h4"
-                    component="h1"
-                    align="center"
-                    gutterBottom
-                    color="primary.main"
-                    sx={{ fontWeight: 'bold' }}
+        <ThemeProvider theme={theme}>
+            <Container maxWidth="sm" sx={{ mt: 8, mb: 4 }}>
+                <Paper
+                    elevation={3}
+                    sx={{
+                        p: 4,
+                        mt: 4,
+                        mb: 4,
+                        borderRadius: 2,
+                        border: '1px solid',
+                        borderColor: theme.palette.primary.light,
+                        width: '100%',
+                        maxWidth: '900px',
+                        mx: 'auto'
+                    }}
                 >
-                    הרשמה למערכת
-                </Typography>
+                    {/* <Typography
 
-                <Divider sx={{ mb: 4 }} />
+                        variant="h4"
+                        component="h1"
+                        align="center"
+                        gutterBottom
+                        color={theme.palette.primary.main}
+                        sx={{ fontWeight: 'bold' }}
+                    >
+                        הרשמה למערכת
+                    </Typography> */}
 
-                <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4 }}>
-                    {steps.map((label) => (
-                        <Step key={label}>
-                            <StepLabel>{label}</StepLabel>
-                        </Step>
-                    ))}
-                </Stepper>
+                    {/* <Divider sx={{ mb: 4 }} /> */}
 
-                {/* הצגת שגיאות מהשרת */}
-                {serverError && (
-                    <Alert severity="error" sx={{ mb: 3 }}>
-                        {serverError}
-                    </Alert>
-                )}
+                    <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 4 }} connector={null} >
+                        {steps.map((label) => (
+                            <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
+                            </Step>
+                        ))}
+                    </Stepper>
 
-                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                    {getStepContent(activeStep)}
+                    {serverError && (
+                        <Alert severity="error" sx={{ mb: 3 }}>
+                            {serverError}
+                        </Alert>
+                    )}
 
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-                        <Button
-                            disabled={activeStep === 0}
-                            onClick={handleBack}
-                            startIcon={<ArrowForward />}
-                            sx={{ mr: 1 }}
-                        >
-                            חזרה
-                        </Button>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                            endIcon={activeStep === steps.length - 1 ? null : <ArrowBack />}
-                        >
-                            {activeStep === steps.length - 1 ? 'סיום הרשמה' : 'המשך'}
-                        </Button>
+                    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                        {getStepContent(activeStep)}
+
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
+                            <Button
+                                disabled={activeStep === 0}
+                                onClick={handleBack}
+                                startIcon={<ArrowForward />}
+                                sx={{ mr: 1 }}
+                            >
+                                חזרה
+                            </Button>
+                            <Button
+                                sx={{
+                                    bgcolor: theme.palette.shadows
+                                }}
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                endIcon={activeStep === steps.length - 1 ? null : <ArrowBack />}
+                            >
+                                {activeStep === steps.length - 1 ? 'סיום הרשמה' : 'המשך'}
+                            </Button>
+                        </Box>
                     </Box>
-                </Box>
 
-                <Box sx={{ mt: 3, textAlign: 'center' }}>
-                    <Typography variant="body2" color="text.secondary">
-                        כבר יש לך חשבון?{' '}
-                        <Link component={RouterLink} to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            התחבר כאן
-                        </Link>
-                    </Typography>
-                </Box>
-            </Paper>
+                    <Box sx={{ mt: 3, textAlign: 'center' }}>
+                        <Typography variant="body2" color="text.secondary">
+                            כבר יש לך חשבון?{' '}
+                            <Link component={RouterLink} to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                                התחבר כאן
+                            </Link>
+                        </Typography>
+                    </Box>
+                </Paper>
 
-            {/* Snackbar להודעות הצלחה */}
-            <Snackbar
-                open={openSnackbar}
-                autoHideDuration={6000}
-                onClose={handleCloseSnackbar}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            >
-                <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
-                    {successMessage}
-                </Alert>
-            </Snackbar>
-        </Container>
+                <Snackbar
+                    open={openSnackbar}
+                    autoHideDuration={6000}
+                    onClose={handleCloseSnackbar}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                >
+                    <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+                        {successMessage}
+                    </Alert>
+                </Snackbar>
+            </Container>
+        </ThemeProvider>
     );
 };
 
 export default RegistrationForm;
+

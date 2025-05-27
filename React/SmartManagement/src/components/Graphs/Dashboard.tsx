@@ -99,7 +99,7 @@ const Dashboard = () => {
   });
 
   return (
-    <Container maxWidth="xl" sx={{ py: 4, marginTop: '20%' }}>
+    <Container maxWidth="xl" sx={{ py: 4, marginTop: '6%' }}>
       <Box sx={{ direction: "rtl" }}>
 
         <Paper
@@ -133,7 +133,6 @@ const Dashboard = () => {
 
         {activeTab === 0 && (
           <>
-            {/* שלושת הקלפים בראש הדף */}
             <Grid container spacing={4} sx={{ mb: 5 }}>
               <Grid item xs={12} md={4}>
                 <Card elevation={2} sx={cardAccentStyle('primary.main')}>

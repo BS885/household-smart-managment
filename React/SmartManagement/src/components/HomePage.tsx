@@ -1,7 +1,7 @@
 import { Box,Button, Container, Typography, Grid, Paper,  Divider, ThemeProvider, CssBaseline} from '@mui/material';
 import { AttachMoney as MoneyIcon, TrendingUp as TrendingUpIcon, Receipt as ReceiptIcon, Savings as SavingsIcon,} from '@mui/icons-material';
-import { theme } from './Theme';
-import Login from './Login';
+import { theme } from '../Style/Theme';
+import Login from './Auth/Login';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -52,7 +52,6 @@ const HomePage = () => {
           </Container>
         </Box>
 
-        {/* חלק עליון - כותרת ראשית וטופס כניסה */}
         <Container maxWidth="lg" sx={{ mt: 8, mb: 8 }}>
           <Grid container spacing={6} alignItems="center">
             <Grid item xs={12} md={7}>
@@ -85,7 +84,6 @@ const HomePage = () => {
           </Grid>
         </Container>
 
-        {/* תכונות המערכת */}
         <Box sx={{ py: 8, bgcolor: theme.palette.secondary.light }}>
           <Container>
             <Typography variant="h3" align="center" color="primary.dark" fontWeight="bold" gutterBottom>
