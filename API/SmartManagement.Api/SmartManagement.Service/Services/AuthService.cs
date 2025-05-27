@@ -38,7 +38,7 @@ namespace SmartManagement.Service.Services
             _logger = logger;
             _configuration = configuration;
             _roleRepository = roleRepository;
-            _resetPasswordUrl = configuration["Frontend:ResetPasswordUrl"] ?? throw new InvalidOperationException("ResetPasswordUrl is missing in configuration.");
+            _resetPasswordUrl = configuration["FRONTED:ResetPasswordUrl"] ?? throw new InvalidOperationException("ResetPasswordUrl is missing in configuration.");
 
         }
 
