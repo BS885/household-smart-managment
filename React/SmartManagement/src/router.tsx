@@ -1,5 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
-// import RegistrationForm from "./components/Auth/RegistrationForm";
+// import { createBrowserRouter, createHashRouter } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import AppLayout from "./components/AppLayout";
 import ExpenseTracker from "./components/Expenses and Imcome/ExpenseTracker";
@@ -9,9 +8,10 @@ import Dashboard from "./components/Graphs/Dashboard";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPasswordForm from "./components/Auth/ResetPasswordForm";
 import Registr from "./components/Auth/Registr";
+import { createHashRouter } from "react-router-dom";
 
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
     {
         path: "/",
         element: <AppLayout />,
