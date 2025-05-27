@@ -10,8 +10,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import BackgroundAuth from "./BackgroundAuth";
 
 const ResetPassword = () => {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
+    // const params = new URLSearchParams(window.location.search);
+    // const token = params.get("token");
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -27,6 +27,14 @@ const ResetPassword = () => {
     const [resetError, setResetError] = useState<string | null>(null);
     const [resetSuccess, setResetSuccess] = useState(false);
 
+    const extractTokenFromHash = () => {
+    const hash = window.location.hash;
+    const queryIndex = hash.indexOf('?');
+    if (queryIndex === -1) return null;
+    const query = hash.substring(queryIndex);
+    const params = new URLSearchParams(query);
+    return params.get("token");
+};
     const getPasswordStrength = (password: string) => {
         let strength = 0;
         const checks = {
@@ -112,10 +120,10 @@ const ResetPassword = () => {
         if (!validateForm()) {
             return;
         }
-
+        const token=extractTokenFromHash();
         if (!token) {
             console.log("לא נמצא טוקן");
-            console.log(params);
+            console.log(token);
             setResetError("קישור לא תקין או פג תוקף");
             return;
         }
