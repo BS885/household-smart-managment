@@ -32,7 +32,8 @@ namespace SmartManagement.Data.Repositories
 
 
         public async Task<ExpenseAndIncome> AddExpenseOrIncomeAsynce(ExpenseAndIncome expenseAndIncome)
-        {
+        { 
+            _logger.LogInformation($"{expenseAndIncome.Description} {expenseAndIncome.Category}");
             await _context.ExpensesAndIncomes.AddAsync(expenseAndIncome);
             await _context.SaveChangesAsync();
             return expenseAndIncome;
@@ -154,14 +155,14 @@ namespace SmartManagement.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<ExpenseAndIncome>> GetTransactionsByYearAndUserAsync(int year,int userID,TransactionType type)
+        public async Task<IEnumerable<ExpenseAndIncome>> GetTransactionsByYearAndUserAsync(int year, int userID, TransactionType type)
         {
             _logger.LogInformation($"get {type} of year: {year} to user {userID}");
-          return await _context.ExpensesAndIncomes
-               .Where(e=>e.TypeTransaction==type && e.UserId==userID && e.Date.Year==year)
-                .Include(e => e.Category)
-                .ToListAsync();
-            
+            return await _context.ExpensesAndIncomes
+                 .Where(e => e.TypeTransaction == type && e.UserId == userID && e.Date.Year == year)
+                  .Include(e => e.Category)
+                  .ToListAsync();
+
         }
     }
 }

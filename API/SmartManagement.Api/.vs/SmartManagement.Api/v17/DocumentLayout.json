@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|solutionrelative:smartmanagement.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{5165D9C5-A7BC-4FC6-B5BC-40C3CB981A5C}|SmartManagement.Data\\SmartManagement.Data.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.data\\repositories\\expenseandincomerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5165D9C5-A7BC-4FC6-B5BC-40C3CB981A5C}|SmartManagement.Data\\SmartManagement.Data.csproj|solutionrelative:smartmanagement.data\\repositories\\expenseandincomerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.service\\services\\emailsenderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|solutionrelative:smartmanagement.service\\services\\emailsenderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.service\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|solutionrelative:smartmanagement.service\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.service\\services\\emailsenderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|solutionrelative:smartmanagement.service\\services\\emailsenderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{10AA5F6A-FE81-4BD7-A841-D5EFA66FEE7D}|SmartManagement.Api\\SmartManagement.Api.csproj|solutionrelative:smartmanagement.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9103813F-9F7C-46C8-B6C8-3FD1A0795090}|SmartManagement.Service\\SmartManagement.Service.csproj|c:\\users\\user1\\documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 fullstack\\household-management\\api\\smartmanagement.api\\smartmanagement.service\\services\\s3service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -47,6 +51,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ExpenseAndIncomeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\Repositories\\ExpenseAndIncomeRepository.cs",
+              "RelativeDocumentMoniker": "SmartManagement.Data\\Repositories\\ExpenseAndIncomeRepository.cs",
+              "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\Repositories\\ExpenseAndIncomeRepository.cs",
+              "RelativeToolTip": "SmartManagement.Data\\Repositories\\ExpenseAndIncomeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T20:34:10.881Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Api\\appsettings.Development.json",
               "RelativeDocumentMoniker": "SmartManagement.Api\\appsettings.Development.json",
@@ -59,20 +76,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "SmartManagement.Service\\Services\\AuthService.cs",
               "ToolTip": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\AuthService.cs",
               "RelativeToolTip": "SmartManagement.Service\\Services\\AuthService.cs",
-              "ViewState": "AgIAAIsAAAAAAAAAAAAAAJsAAABOAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJsAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-27T08:32:48.201Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "S3Service.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\S3Service.cs",
               "RelativeDocumentMoniker": "SmartManagement.Service\\Services\\S3Service.cs",
@@ -84,7 +101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "EmailSenderservice.cs",
               "DocumentMoniker": "C:\\Users\\user1\\Documents\\\u05EA\u05DB\u05E0\u05D5\u05EA\\\u05E9\u05E0\u05D4 \u05D1\u0027\\\u05E4\u05E8\u05D5\u05D9\u05E7\u05D8 Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\Services\\EmailSenderservice.cs",
               "RelativeDocumentMoniker": "SmartManagement.Service\\Services\\EmailSenderservice.cs",
@@ -92,7 +109,8 @@
               "RelativeToolTip": "SmartManagement.Service\\Services\\EmailSenderservice.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T07:25:30.664Z"
+              "WhenOpened": "2025-05-27T07:25:30.664Z",
+              "EditorCaption": ""
             }
           ]
         }
