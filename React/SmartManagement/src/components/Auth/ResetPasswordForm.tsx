@@ -114,6 +114,8 @@ const ResetPassword = () => {
         }
 
         if (!token) {
+            console.log("לא נמצא טוקן");
+            console.log(params);
             setResetError("קישור לא תקין או פג תוקף");
             return;
         }
