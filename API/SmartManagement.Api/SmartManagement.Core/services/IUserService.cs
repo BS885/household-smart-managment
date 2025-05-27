@@ -11,7 +11,7 @@ namespace SmartManagement.Core.services
 {
     public interface IUserService
     {
-        Task UpdateUser(int id, string name, string address, string city, string phone);
+        Task UpdateUserAsync(int id, string name, string address, string city, string phone);
         string GetUserIdFromToken(ClaimsPrincipal user);
         Task<UserDto> UpdateRoleToUserAsync(UpdateUserRoleDto updateUser,int id);
         Task<IEnumerable<UserDto>> GetUsers();

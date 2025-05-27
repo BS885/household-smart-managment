@@ -17,8 +17,10 @@ namespace SmartManagement.Core.Repositories
 
         Task<User> GetUserById(int id);
 
-        void UpdateUser(User user);
+        Task UpdateUserAsync(User user);
 
         Task<IEnumerable<UserDto>> GetUsers();
+
+        Task UpdateUserLogin(User user);
     }
 }

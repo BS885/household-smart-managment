@@ -15,6 +15,7 @@ namespace SmartManagement.Core.DTOs
         public string Address { get; set; }
         public string City { get; set; }
         public string Phone { get; set; }
+        public DateTime LastLogin { get; set; }
         public ICollection<string> Roles { get; set; }
     }
 }

@@ -22,18 +22,24 @@ namespace SmartManagement.Service.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly IPasswordResetTokensRepository _passwordResetTokensRepository;
+        private readonly IEmailSenderService _emailSender;
         private readonly IMapper _mapper;
         private readonly ILogger<AuthService> _logger;
         private readonly IConfiguration _configuration;
-        
+        private readonly string _resetPasswordUrl;
 
-        public AuthService(IUserRepository userRepository, IMapper mapper, ILogger<AuthService> logger, IConfiguration configuration, IRoleRepository roleRepository)
+        public AuthService(IUserRepository userRepository, IMapper mapper, ILogger<AuthService> logger, IConfiguration configuration, IRoleRepository roleRepository,IPasswordResetTokensRepository passwordResetTokensRepository, IEmailSenderService emailSender)
         {
             _userRepository = userRepository;
+            _emailSender = emailSender;
+            _passwordResetTokensRepository = passwordResetTokensRepository;
             _mapper = mapper;
             _logger = logger;
             _configuration = configuration;
             _roleRepository = roleRepository;
+            _resetPasswordUrl = configuration["Frontend:ResetPasswordUrl"] ?? throw new InvalidOperationException("ResetPasswordUrl is missing in configuration.");
+
         }
 
         public async Task<LoginResult>  Login(LoginRequest loginRequest)
@@ -44,7 +50,7 @@ namespace SmartManagement.Service.Services
             {
                 var loginResult = _mapper.Map<LoginResult>(user);
                 loginResult.Token = GenerateJwtToken(user);
-
+                _userRepository.UpdateUserLogin(user);
                 return loginResult;
             }
             if (user == null)
@@ -132,5 +138,52 @@ namespace SmartManagement.Service.Services
 
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
+
+        public async Task ForgotPassword(ForgotPasswordRequest request)
+        {
+            var user = await _userRepository.GetUserByEmailAsync(request.Email);
+            if (user != null)
+            {
+
+
+
+                var token = Guid.NewGuid().ToString();
+                var expiry = DateTime.UtcNow.AddHours(1);
+
+
+                await _passwordResetTokensRepository.AddTokenAsync(request.Email, token, expiry);
+                var link = $"{_resetPasswordUrl}?token={token}";
+
+                await _emailSender.SendEmailAsync(
+                    user.Email,
+                    "איפוס סיסמה",
+                    $"לחץ כאן כדי לאפס את הסיסמה: <a href='{link}'>לאיפוס</a>"
+                );
+            }
+
+        }
+
+        public async Task ResetPassword(ResetPasswordRequest request)
+        {
+            if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Token) || string.IsNullOrEmpty(request.NewPassword))
+            {
+                throw new ArgumentException("Email, Token, and NewPassword are required.");
+            }
+            var token = await _passwordResetTokensRepository.GetTokenAsync(request.Token);
+
+            if (token == null || token.Email != request.Email)
+            {
+                throw new InvalidOperationException("Invalid or expired password reset token.");
+            }
+            var user = await _userRepository.GetUserByEmailAsync(request.Email);
+            if (user == null)
+            {
+                throw new UserNotFoundException("User not found.");
+            }
+            user.Password = request.NewPassword;
+            await _userRepository.UpdateUserAsync(user);
+            await _passwordResetTokensRepository.RemoveTokenAsync(token.Token);
+        }
+
     }
 }

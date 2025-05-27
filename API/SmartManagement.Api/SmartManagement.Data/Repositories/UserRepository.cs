@@ -45,10 +45,10 @@ namespace SmartManagement.Data.Repositories
             _context.SaveChanges();
         }
 
-        public void UpdateUser(User user)
+        public async Task UpdateUserAsync(User user)
         {
             _context.Users.Update(user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
 
@@ -70,6 +70,13 @@ namespace SmartManagement.Data.Repositories
                 .ToListAsync();
 
             return users;
+        }
+
+        public async Task UpdateUserLogin(User user)
+        {
+            user.LastLogin = DateTime.Now;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
         }
 
     }

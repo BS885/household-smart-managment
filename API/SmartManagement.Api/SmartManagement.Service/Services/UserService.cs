@@ -19,17 +19,18 @@ namespace SmartManagement.Service.Services
         private readonly IUserRepository _userRepository;
         private readonly ILogger<UserService> _logger;
         private readonly IPermissionService _permissionService;
+        
         private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository, ILogger<UserService> logger, IPermissionService permissionService,IMapper mapper)
+        public UserService(IUserRepository userRepository, ILogger<UserService> logger, IPermissionService permissionService, IMapper mapper)
         {
             _userRepository = userRepository;
             _logger = logger;
             _permissionService = permissionService;
             _mapper = mapper;
         }
-        
-        public async Task UpdateUser(int id, string name, string address, string city, string phone)
+
+        public async Task UpdateUserAsync(int id, string name, string address, string city, string phone)
         {
             var user = await _userRepository.GetUserById(id);
             if (user == null)
@@ -38,13 +39,13 @@ namespace SmartManagement.Service.Services
                 throw new UserNotFoundException("User not found");
             }
 
-            user.Name=name;
+            user.Name = name;
             user.Address = address;
             user.City = city;
             user.Phone = phone;
 
             _logger.LogInformation($"user update: id {user.UserId} to {user}");
-            _userRepository.UpdateUser(user);
+            await _userRepository.UpdateUserAsync(user);
         }
 
         public string GetUserIdFromToken(ClaimsPrincipal user)
@@ -63,33 +64,6 @@ namespace SmartManagement.Service.Services
             }
             return userIdClaim.Value;
         }
-
-
-        //public async Task<UserDto> UpdateRoleToUserAsync(UpdateUserRoleDto updateUser,int id)
-        //{
-        //    var user = await _userRepository.GetUserById(id);
-        //    if (user == null)
-        //    {
-        //        _logger.LogError($"User not found: {id}");
-        //        throw new UserNotFoundException("User not found");
-        //    }
-
-        //    var role = await _permissionService.GetRoleByNameAsync(updateUser.RoleName);
-        //    if (role == null)
-        //    {
-        //        _logger.LogError($"Role not found: {updateUser.RoleName}");
-        //        throw new Exception("Role not found");
-        //    }
-
-        //    user.Roles.Add(role);
-
-        //    _userRepository.UpdateUser(user);
-
-        //    var updatedUser = await _userRepository.GetUserById(id);
-        //    var UserDto = _mapper.Map<User, UserDto>(updatedUser);
-        //    return UserDto;
-        //}
-
 
         public async Task<UserDto> UpdateRoleToUserAsync(UpdateUserRoleDto updateUser, int id)
         {
@@ -126,7 +100,7 @@ namespace SmartManagement.Service.Services
                 }
             }
 
-            _userRepository.UpdateUser(user);
+            await _userRepository.UpdateUserAsync(user);
 
             var updatedUser = await _userRepository.GetUserById(id);
             var userDto = _mapper.Map<User, UserDto>(updatedUser);
@@ -146,9 +120,6 @@ namespace SmartManagement.Service.Services
                 return Enumerable.Empty<UserDto>();
             }
         }
-
-
-
 
     }
 }

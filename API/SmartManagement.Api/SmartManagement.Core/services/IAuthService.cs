@@ -13,5 +13,7 @@ namespace SmartManagement.Core.services
         Task<LoginResult> Login(LoginRequest loginRequest);
         Task<User> Register(RegisterUserDto userRegister);
         string GenerateJwtToken(User user);
+        Task ForgotPassword(ForgotPasswordRequest forgotPasswordRequest);
+        Task ResetPassword(ResetPasswordRequest request);
     }
 }

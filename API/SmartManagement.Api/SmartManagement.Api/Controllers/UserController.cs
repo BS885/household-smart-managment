@@ -27,7 +27,7 @@ namespace SmartManagement.Api.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Policy = "Users.Update")]
-        public IActionResult UpdateProfile([FromBody] UpdateUserDto updateProfileDto, string id)
+        public async Task<IActionResult> UpdateProfile([FromBody] UpdateUserDto updateProfileDto, string id)
         {
 
             var userId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -40,7 +40,7 @@ namespace SmartManagement.Api.Controllers
             }
             try
             {
-                _userService.UpdateUser(
+                await _userService.UpdateUserAsync(
                      int.Parse(id),
                      updateProfileDto.Name,
                      updateProfileDto.Address,

@@ -18,11 +18,13 @@ namespace SmartManagement.Api.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IAuthService _authService;
+        private readonly ILogger<AuthController> _logger;
 
-        public AuthController(IConfiguration configuration, IAuthService authService)
+        public AuthController(IConfiguration configuration, IAuthService authService, ILogger<AuthController> logger)
         {
             _configuration = configuration;
             _authService = authService;
+            _logger = logger;
         }
 
         [HttpPost("login")]
@@ -30,7 +32,7 @@ namespace SmartManagement.Api.Controllers
         {
             try
             {
-                var result =await _authService.Login(loginRequest);
+                var result = await _authService.Login(loginRequest);
 
                 if (result != null)
                 {
@@ -57,7 +59,7 @@ namespace SmartManagement.Api.Controllers
             {
                 var user = await _authService.Register(userRegister);
 
-                return CreatedAtAction(nameof(Register), new { email = user.Email}, user);
+                return CreatedAtAction(nameof(Register), new { email = user.Email }, user);
             }
             catch (Exception ex)
             {
@@ -65,7 +67,7 @@ namespace SmartManagement.Api.Controllers
             }
         }
 
-        [Authorize(Policy= "Users.AddAdmin")]
+        [Authorize(Policy = "Users.AddAdmin")]
         [HttpPost("register/Manager")]
         public async Task<IActionResult> RegisterManager([FromBody] RegisterUserDto userRegister)
         {
@@ -84,5 +86,43 @@ namespace SmartManagement.Api.Controllers
                 return BadRequest($"Error occurred: {ex.Message}");
             }
         }
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
+        {
+            await _authService.ForgotPassword(request);
+            return Ok(new { Message = "If the email exists, a password reset link has been sent." });
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        {
+            _logger.LogInformation("ResetPassword called with request: {@Request}", request);
+
+            try
+            {
+                await _authService.ResetPassword(request);
+                return Ok(new { message = "Password reset successful." });
+            }
+            catch (UserNotFoundException)
+            {
+                return NotFound(new { error = "User not found." });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { error = "An unexpected error occurred." });
+            }
+        }
+
     }
+
 }
+
