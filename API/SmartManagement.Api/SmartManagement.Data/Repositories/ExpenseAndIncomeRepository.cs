@@ -33,7 +33,7 @@ namespace SmartManagement.Data.Repositories
 
         public async Task<ExpenseAndIncome> AddExpenseOrIncomeAsynce(ExpenseAndIncome expenseAndIncome)
         { 
-            _logger.LogInformation($"{expenseAndIncome.Description} {expenseAndIncome.Category}");
+            _logger.LogInformation($"{expenseAndIncome.Description} Category = {expenseAndIncome.Category}");
             await _context.ExpensesAndIncomes.AddAsync(expenseAndIncome);
             await _context.SaveChangesAsync();
             return expenseAndIncome;

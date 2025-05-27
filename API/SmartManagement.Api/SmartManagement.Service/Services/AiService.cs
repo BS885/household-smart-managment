@@ -35,6 +35,7 @@ namespace SmartManagement.Service.Services
         public async Task<string> GetCategoryFromDescription(string description, string type)
         {
             var categoryList = await _categoryService.GetAllCategoriesListNameAsync(type);
+
             var url = "https://openrouter.ai/api/v1/chat/completions";
 
             var body = new
@@ -42,7 +43,15 @@ namespace SmartManagement.Service.Services
                 model = "tngtech/deepseek-r1t-chimera:free",
                 messages = new[]
                 {
-                    new { role = "user", content = $"{description} This is a description of an {type}. Which category would best fit your needs? Answer in one word or two words in Hebrew from the following list and only from this list: {string.Join(", ", categoryList)}" }
+                    new {
+                        role = "system",
+                        content = "אתה עוזר קטלוג. ענה אך ורק בשם קטגוריה אחד או שניים מהרשימה הנתונה. אל תסביר, אל תוסיף כלום. החזר את שם הקטגוריה בלבד."
+                    },
+                     new { role = "user", content =
+                        $"This is a description of an {type}: \"{description}\". " +
+                        $"From the following list of Hebrew categories: {string.Join(", ", categoryList)} " +
+                        $"— respond **only** with the most fitting category name from the list, " +
+                        $"in Hebrew, without any explanation, and no more than two words. Return only the category name." }
                 }
             };
 
@@ -57,7 +66,12 @@ namespace SmartManagement.Service.Services
                 response.EnsureSuccessStatusCode();
 
                 var responseString = await response.Content.ReadAsStringAsync();
-                return ExtractCleanContent(responseString);
+                var responseLines = responseString.Split('\n');
+                var lastLine = responseLines.LastOrDefault(line => !string.IsNullOrWhiteSpace(line));
+                 lastLine?.Trim();
+                string category = ExtractCleanContent(lastLine);
+                Console.WriteLine("category after ExtractCleanContent " + category);
+                return category;
             }
             catch (Exception ex)
             {
@@ -66,21 +80,22 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        private static string ExtractCleanContent(string jsonResponse)
+        private string ExtractCleanContent(string responseString)
         {
-            var doc = JsonDocument.Parse(jsonResponse);
+            using JsonDocument doc = JsonDocument.Parse(responseString);
+            var root = doc.RootElement;
 
-            var content = doc.RootElement
+            var content = root
                 .GetProperty("choices")[0]
                 .GetProperty("message")
                 .GetProperty("content")
                 .GetString();
 
-            content = content.Replace("\\n", "").Replace("\\", "").Trim();
-            content = content.Trim().Trim('"');
+            var lines = content.Split('\n')
+                       .Where(l => !string.IsNullOrWhiteSpace(l))
+                       .ToList();
 
-
-            return content;
+            return lines.Last().Trim();
         }
     }
 }

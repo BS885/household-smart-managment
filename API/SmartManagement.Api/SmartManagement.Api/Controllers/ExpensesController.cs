@@ -33,7 +33,9 @@ namespace SmartManagement.Api.Controllers
                 Console.WriteLine($"enter AddExpense userId {userId}");
 
                 var category = await _aiService.GetCategoryFromDescription(expenseDto.Description, "expense");
+
                 Console.WriteLine($"enter AddExpense category {category}");
+
                 if (category == null)
                 {
                     return BadRequest("Error in AI service");

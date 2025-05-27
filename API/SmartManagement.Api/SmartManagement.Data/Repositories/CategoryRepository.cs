@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SmartManagement.Core.DTOs;
 using SmartManagement.Core.Models;
 using SmartManagement.Core.Repositories;
@@ -13,10 +14,12 @@ namespace SmartManagement.Data.Repositories
     public class CategoryRepository : ICategoryRepository
     {
         private readonly DataContext _context;
+        private readonly ILogger<CategoryRepository> _logger;
 
-        public CategoryRepository(DataContext context)
+        public CategoryRepository(DataContext context, ILogger<CategoryRepository> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<CategoryExpenseAndIncome> AddAsync(CategoryExpenseAndIncome category)
@@ -28,6 +31,7 @@ namespace SmartManagement.Data.Repositories
 
         public async Task<CategoryExpenseAndIncome> GetByNameAsync(string name)
         {
+            _logger.LogInformation("GetByNameAsync " + name);
             return await _context.CategoriesExpenseAndIncome.FirstOrDefaultAsync(c => c.Name == name);
         }
 
@@ -49,7 +53,7 @@ namespace SmartManagement.Data.Repositories
         {
             var existingCategory = await GetByIdAsync(id);
             if (existingCategory == null)
-               throw new KeyNotFoundException($"Category with ID {id} not found.");
+                throw new KeyNotFoundException($"Category with ID {id} not found.");
 
 
             existingCategory.Name = categoryDto.Name;
@@ -60,7 +64,7 @@ namespace SmartManagement.Data.Repositories
             await _context.SaveChangesAsync();
             return existingCategory;
         }
-        
+
         public async Task DeleteAsync(int id)
         {
             var category = await GetByIdAsync(id);

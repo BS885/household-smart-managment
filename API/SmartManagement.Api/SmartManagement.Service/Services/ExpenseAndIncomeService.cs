@@ -45,6 +45,7 @@ namespace SmartManagement.Service.Services
 
                 var categoryExpense = await _categoryRepository.GetByNameAsync(category);
 
+                _logger.LogInformation($"Adding expense with category: {categoryExpense.Name}, userId: {userId}, description: {description}, typeTransaction: {typeTransaction}, sum: {sum}");
                 var expense = new ExpenseAndIncome
                 {
                     Date = date,
