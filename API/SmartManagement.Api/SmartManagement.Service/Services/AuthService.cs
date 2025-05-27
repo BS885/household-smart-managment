@@ -153,7 +153,7 @@ namespace SmartManagement.Service.Services
 
                 await _passwordResetTokensRepository.AddTokenAsync(request.Email, token, expiry);
                 var link = $"{_resetPasswordUrl}?token={token}";
-
+                _logger.LogInformation("Generated password reset link: {Link} ", link);
                 await _emailSender.SendEmailAsync(
                     user.Email,
                     "איפוס סיסמה",
