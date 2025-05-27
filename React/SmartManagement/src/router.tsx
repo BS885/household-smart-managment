@@ -1,5 +1,5 @@
 // import { createBrowserRouter, createHashRouter } from "react-router-dom";
-import Login from "./components/Auth/Login";
+// import Login from "./components/Auth/Login";
 import AppLayout from "./components/AppLayout";
 import ExpenseTracker from "./components/Expenses and Imcome/ExpenseTracker";
 import IncomeTracker from "./components/Expenses and Imcome/IncomeTracker";
@@ -9,6 +9,7 @@ import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPasswordForm from "./components/Auth/ResetPasswordForm";
 import Registr from "./components/Auth/Registr";
 import { createHashRouter } from "react-router-dom";
+import LoginNotInHomePage from "./components/Auth/LoginNotInHomePage";
 
 
 export const router = createHashRouter([
@@ -24,7 +25,7 @@ export const router = createHashRouter([
             { path: "graphs", element: <Dashboard /> },
         ],
     },
-    { path: "login", element: <Login /> },
+    { path: "login", element: <LoginNotInHomePage /> },
     { path: "register", element: <Registr /> },
     { path: "forgot-password", element: <ForgotPassword /> },
     { path: "reset-password", element: <ResetPasswordForm /> }
