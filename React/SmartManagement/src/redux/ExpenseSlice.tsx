@@ -21,12 +21,13 @@ export const loadExpenses = createAsyncThunk("expenses/loadExpenses", async () =
 });
 
 export const addExpenseAsync = createAsyncThunk("expenses/addExpense", async (expense: Omit<Transaction, "id" | 'category'>) => {
+  
   const response = await api.post("/expenses", expense);
   console.log(response.data);
   return response.data;
 });
 
-export const addWithFileExpenseAsync = createAsyncThunk("expenses/addExpense", async ({ expense, file }: { expense: Omit<Transaction, "id" | 'category'>; file: FileState }) => {
+export const addWithFileExpenseAsync = createAsyncThunk("expenses/addExpense", async ({ expense, file,s3Key }: { expense: Omit<Transaction, "id" | 'category'>; file: FileState ,s3Key:string}) => {
   const expenseAndFile = {
 
     Date: new Date(expense.date).toISOString().split('T')[0],
@@ -37,6 +38,7 @@ export const addWithFileExpenseAsync = createAsyncThunk("expenses/addExpense", a
     FileName: file.fileName,
     FileType: file.fileType,
     Filesize: file.fileSize.toString(),
+    S3key: s3Key,
   };
 
   console.log("Sending request with data:", expenseAndFile);
@@ -151,3 +153,5 @@ const expenseSlice = createSlice({
 
 export const { removeExpense, updateExpense } = expenseSlice.actions;
 export default expenseSlice.reducer;
+
+

@@ -32,14 +32,14 @@ namespace SmartManagement.Service.Services
             _fileService = fileService;
         }
 
-        public async Task<int> AddExpenseOrIncomeAsync(DateTime date, string category, int userId, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId)
+        public async Task<int> AddExpenseOrIncomeAsync(DateTime date, string category, int userId, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId, string? s3Key)
         {
             try
             {
                 TransactionDocument? resultFile = null;
                 if (file)
                 {
-                    var file1 = new FileDto { NameFile = fileName, Size = long.Parse(fileSize), TypeFile = fileType };
+                    var file1 = new FileDto { NameFile = fileName, Size = long.Parse(fileSize), TypeFile = fileType, S3_Key = s3Key };
                     resultFile = await _fileService.AddTransactionDocumentAsync(file1);
                 }
 

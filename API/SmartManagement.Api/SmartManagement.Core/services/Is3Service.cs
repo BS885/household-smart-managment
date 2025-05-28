@@ -9,7 +9,7 @@ namespace SmartManagement.Core.services
 {
     public interface Is3Service
     {
-        Task<string> GetDownloadUrlAsync(string fileName);
+        Task<string> GetDownloadUrlAsync(string s3Key);
 
         Task DeleteFileAsync(string fileKey);
 

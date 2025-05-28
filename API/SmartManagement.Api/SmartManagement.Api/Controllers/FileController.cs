@@ -34,7 +34,6 @@ namespace SmartManagement.Api.Controllers
             }
         }
 
-
         [HttpPost]
         public async Task<IActionResult> AddTransactionDocumentAsync([FromBody] FileDto transactionDocument)
         {

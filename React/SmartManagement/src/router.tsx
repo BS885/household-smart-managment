@@ -1,5 +1,3 @@
-// import { createBrowserRouter, createHashRouter } from "react-router-dom";
-// import Login from "./components/Auth/Login";
 import AppLayout from "./components/AppLayout";
 import ExpenseTracker from "./components/Expenses and Imcome/ExpenseTracker";
 import IncomeTracker from "./components/Expenses and Imcome/IncomeTracker";

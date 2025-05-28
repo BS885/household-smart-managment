@@ -52,7 +52,8 @@ namespace SmartManagement.Api.Controllers
                     expenseDto.FileName,
                     expenseDto.FileType,
                     expenseDto.Filesize,
-                    null
+                    null,
+                    expenseDto.S3key
                 );
 
                 return Ok(new { expenseId });
@@ -187,6 +188,7 @@ namespace SmartManagement.Api.Controllers
                 return StatusCode(500, "שגיאה בשרת: " + ex.Message);
             }
         }
+
         [HttpGet("by-year-user/{year}")]
         public async Task<IActionResult> GetByYearAndUser(int year)
         {

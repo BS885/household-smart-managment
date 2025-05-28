@@ -4,6 +4,7 @@ import api from "./api";
 
 interface FileStatus {
   file: File | null;
+  S3_Key: string | null;
   progress: number;
   status: "idle" | "loading" | "success" | "error";
   error: string | null;
@@ -12,6 +13,7 @@ interface FileStatus {
 
 const initialState: FileStatus = {
   file: null,
+  S3_Key: null,
   progress: 0,
   status: "idle",
   error: null,
@@ -19,19 +21,24 @@ const initialState: FileStatus = {
 };
 
 // Async thunk לקבלת Presigned URL והעלאת קובץ
-export const uploadFile = createAsyncThunk(
+export const uploadFile = createAsyncThunk<
+  string, // מה מחזיר
+  { file: File; s3Key: string }, // מה מקבל
+  { rejectValue: string } // אם נכשל
+>(
   "file/upload",
-  async (file: File, { rejectWithValue, dispatch }) => {
+  async ({ file, s3Key }, { rejectWithValue, dispatch }) => {
     try {
-        console.log(file.name);
-        console.log(file.type);
-        console.log("uploadFile executed");
+      console.log(file.name);
+      console.log(file.type);
+      console.log("uploadFile executed");
 
       // שלב 1: קבלת Presigned URL
       const response = await api.get("/s3/upload-url", {
         params: {
           fileName: file.name,
           contentType: file.type,
+          s3Key,
         },
       });
 
@@ -61,14 +68,19 @@ export const uploadFile = createAsyncThunk(
 );
 
 // Async thunk להורדת קובץ
-export const downloadFile = createAsyncThunk(
+export const downloadFile = createAsyncThunk<
+  string,
+  { fileName: string; s3_Key: string },
+  { rejectValue: string }
+>(
   "file/download",
-  async (fileName: string, { rejectWithValue }) => {
+  async ({ fileName, s3_Key }, { rejectWithValue }) => {
     try {
       console.log("downloadFile executed");
 
       // שלב 1: קבלת Presigned URL להורדה
-      const response = await api.get(`/s3/download-url/${fileName}`);
+      
+      const response = await api.get(`/s3/download-url/${s3_Key}`);
 
       const presignedUrl = response.data.downloadUrl;
       console.log("Download URL:", presignedUrl);

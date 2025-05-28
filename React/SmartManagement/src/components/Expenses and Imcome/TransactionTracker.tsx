@@ -227,7 +227,7 @@ const TransactionTracker: React.FC<TransactionTrackerProps> = ({
               variant={showFilters ? "contained" : "outlined"}
               startIcon={<FilterListIcon />}
               onClick={() => setShowFilters(!showFilters)}
-              sx={{ borderRadius: '8px' }}
+              sx={{ borderRadius: '8px'}}
             >
               פילטרים
             </Button>
@@ -406,8 +406,14 @@ const TransactionTracker: React.FC<TransactionTrackerProps> = ({
                         size="small"
                         onClick={async (e) => {
                           e.preventDefault();
+                          
+                          console.log("Downloading file:", transaction.fileName, transaction.s3_Key);
+                          
                           try {
-                            const downloadUrl = await dispatch(downloadFile(transaction.fileType || "")).unwrap();
+                            const downloadUrl = await dispatch(downloadFile({
+                              fileName: transaction.fileName || "",
+                              s3_Key: transaction.s3_Key || "",
+                            })).unwrap();
                             window.open(downloadUrl, "_blank");
                           } catch (error) {
                             console.error("שגיאה בהורדה", error);
@@ -482,7 +488,7 @@ const TransactionTracker: React.FC<TransactionTrackerProps> = ({
         </Box>
       </Dialog>
 
-      {/* Edit Dialog */}
+      {/* Edit Dialog */ }
       <Dialog
         open={isEditing}
         onClose={() => setIsEditing(false)}
@@ -552,7 +558,7 @@ const TransactionTracker: React.FC<TransactionTrackerProps> = ({
           </Stack>
         </Box>
       </Dialog>
-    </Container>
+    </Container >
   );
 };
 

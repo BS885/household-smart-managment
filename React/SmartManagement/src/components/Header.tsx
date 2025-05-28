@@ -87,11 +87,11 @@ const Header = () => {
                     <Button
                         variant="contained"
                         color="inherit"
-                        sx={{ color: '#2C3E50' }}
-                        endIcon={<LogoutIcon />}
+                        sx={{ color: '#2C3E50', direction: 'rtl' ,gap: 1}}
+                        startIcon={<LogoutIcon />}
                         onClick={() => dispatch(logout())}
-                    > התנתק
-
+                    >
+                        התנתק
                     </Button>
                 </Toolbar>
                 <StyledTabs

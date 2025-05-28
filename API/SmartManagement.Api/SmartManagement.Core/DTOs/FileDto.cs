@@ -11,6 +11,7 @@ namespace SmartManagement.Core.DTOs
     {
         public string NameFile { get; set; }
         public string TypeFile { get; set; }
+        public string S3_Key { get; set; }
         public long Size { get; set; }
     }
 }

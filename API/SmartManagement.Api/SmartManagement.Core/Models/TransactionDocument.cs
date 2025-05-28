@@ -14,6 +14,7 @@ namespace SmartManagement.Core.Models
         [Key]
         public int Id { get; set; }
         public string FileName { get; set; }
+        public string? S3_Key { get; set; }
         public string FileType { get; set; }
         public long Size { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

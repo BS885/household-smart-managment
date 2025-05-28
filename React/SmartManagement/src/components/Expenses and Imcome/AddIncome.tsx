@@ -6,6 +6,7 @@ import { fetchIncomeCategories } from '../../redux/categoriesSlice';
 import { Transaction } from '../../models/Expense&Income';
 import { uploadFile } from '../../redux/FileSlice';
 import { addIncomeAsync, addWithFileIncomeAsync, loadIncomes } from '../../redux/IncomeSlices';
+import { v4 as uuidv4 } from 'uuid';
 
 interface IncomeData {
   date: string;
@@ -34,9 +35,11 @@ const AddIncome = ({ onClose }: { onClose: () => void }) => {
       let fileData;
   
       if (incomeData.file instanceof File) {
+        const s3Key = `${uuidv4()}_${incomeData.file.name}`;
         try {
           // Upload the file and get file information
-          const uploadedFile = await dispatch(uploadFile(incomeData.file)).unwrap();
+          const uploadedFile = await dispatch(uploadFile({file: incomeData.file,
+            s3Key: s3Key})).unwrap();
           console.log('File uploaded successfully:', uploadedFile);
   
           fileData = {
@@ -54,7 +57,7 @@ const AddIncome = ({ onClose }: { onClose: () => void }) => {
   
           // Wrap the newExpense inside an object with the 'expense' property
           try {
-            await dispatch(addWithFileIncomeAsync({ Income: newExpense, file: fileData })).unwrap();
+            await dispatch(addWithFileIncomeAsync({ Income: newExpense, file: fileData,s3Key:s3Key })).unwrap();
             await dispatch(loadIncomes()).unwrap();
             onClose();
           } catch (error) {
@@ -63,7 +66,7 @@ const AddIncome = ({ onClose }: { onClose: () => void }) => {
   
         } catch (error) {
           console.error('File upload failed:', error);
-          return; // If the upload fails, we do not proceed
+          throw error;
         }
       }
   

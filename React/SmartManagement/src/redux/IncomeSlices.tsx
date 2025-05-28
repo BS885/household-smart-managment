@@ -26,7 +26,7 @@ export const addIncomeAsync = createAsyncThunk("Incomes/addIncome", async (incom
     return response.data;
 });
 
-export const addWithFileIncomeAsync = createAsyncThunk("Incomes/AddIncome", async ({ Income, file }: { Income: Omit<Transaction, "id">; file: FileState }) => {
+export const addWithFileIncomeAsync = createAsyncThunk("Incomes/AddIncome", async ({ Income, file, s3Key }: { Income: Omit<Transaction, "id">; file: FileState, s3Key: string }) => {
     const IncomeAndFile = {
 
         Date: new Date(Income.date).toISOString().split('T')[0],
@@ -37,6 +37,7 @@ export const addWithFileIncomeAsync = createAsyncThunk("Incomes/AddIncome", asyn
         FileName: file.fileName,
         FileType: file.fileType,
         Filesize: file.fileSize.toString(),
+        S3key: s3Key,
     };
 
     console.log("Sending request with data:", IncomeAndFile);

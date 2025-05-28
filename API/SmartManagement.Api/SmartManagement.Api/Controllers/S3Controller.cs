@@ -17,7 +17,7 @@ namespace SmartManagement.Api.Controllers
         }
 
         [HttpGet("upload-url")]
-        public async Task<IActionResult> GetUploadUrl([FromQuery] string fileName, [FromQuery] string contentType)
+        public async Task<IActionResult> GetUploadUrl([FromQuery] string fileName, [FromQuery] string contentType, [FromQuery] string s3Key)
             {
             try
             {
@@ -28,7 +28,7 @@ namespace SmartManagement.Api.Controllers
                 }
 
                 // קבלת ה-Presigned URL להעלאה
-                var url = await _s3Service.GeneratePresignedUrlAsync(fileName, contentType);
+                var url = await _s3Service.GeneratePresignedUrlAsync(s3Key, contentType);
 
                 // החזרת ה-URL להעלאה
                 return Ok(new { url });
@@ -40,19 +40,19 @@ namespace SmartManagement.Api.Controllers
             }
         }
 
-        [HttpGet("download-url/{fileName}")]
-        public async Task<IActionResult> GetDownloadUrl(string fileName)
+        [HttpGet("download-url/{s3Key}")]
+        public async Task<IActionResult> GetDownloadUrl(string s3Key)
         {
             try
             {
                 // בדיקה אם שם הקובץ לא נמסר
-                if (string.IsNullOrEmpty(fileName))
+                if (string.IsNullOrEmpty(s3Key))
                 {
                     return BadRequest("Missing file name");
                 }
 
                 // קבלת ה-Presigned URL להורדה
-                var url = await _s3Service.GetDownloadUrlAsync(fileName);
+                var url = await _s3Service.GetDownloadUrlAsync(s3Key);
 
                 // החזרת ה-URL להורדה
                 return Ok(new { downloadUrl = url });
@@ -87,8 +87,6 @@ namespace SmartManagement.Api.Controllers
                 return StatusCode(500, $"Error extracting text from file: {ex.Message}");
             }
         }
-
-       
 
     }
 }

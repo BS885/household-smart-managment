@@ -82,40 +82,27 @@ const ExpenseOrIncomeForm: FC<TransactionFormProps> = ({ onSubmit, categories, i
     setErrors({});
   };
 
-  
-  //   const newErrors: Record<string, string> = {};
-  //   if (!formData.sum) newErrors.sum = 'שדה חובה';
-  //   else if (parseFloat(formData.sum) <= 0) newErrors.sum = 'הסכום חייב להיות גדול מאפס';
-
-  //   // if (!formData.category) newErrors.category = 'שדה חובה';
-
-  //   if (formData.file instanceof File && formData.file.size > 5 * 1024 * 1024) {
-  //     newErrors.general = 'גודל הקובץ חייב להיות קטן מ-5MB';
-  //   }
-
-  //   return newErrors;
-  // };
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-  
+
     if (!formData.sum) {
       newErrors.sum = 'שדה חובה';
     } else if (parseFloat(formData.sum) <= 0) {
       newErrors.sum = 'הסכום חייב להיות גדול מאפס';
     }
-  
+
     // בדיקת קטגוריה רק אם מדובר בעריכה
     if (isEdit && !formData.category) {
       newErrors.category = 'שדה חובה';
     }
-  
+
     if (formData.file instanceof File && formData.file.size > 5 * 1024 * 1024) {
       newErrors.general = 'גודל הקובץ חייב להיות קטן מ-5MB';
     }
-  
+
     return newErrors;
   };
-  
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const validationErrors = validateForm();
@@ -128,10 +115,13 @@ const ExpenseOrIncomeForm: FC<TransactionFormProps> = ({ onSubmit, categories, i
     try {
       await onSubmit(formData);
       if (!isEdit) handleReset();
+      
       setErrors({ general: 'ההוצאה נשמרה בהצלחה' });
-    } catch (error: any) {
+    }
+    catch (error: any) {
       setErrors({ general: error.message || 'אירעה שגיאה בשמירת ההוצאה.' });
-    } finally {
+    }
+    finally {
       setIsSubmitting(false);
     }
   };

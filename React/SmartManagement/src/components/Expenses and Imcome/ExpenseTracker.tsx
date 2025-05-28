@@ -7,6 +7,7 @@ import TransactionTracker from "./TransactionTracker";
 
 
 const ExpenseTracker = () => {
+  
   const dispatch = useDispatch<AppDispatch>();
   const load = () => {
     dispatch(loadExpenses());

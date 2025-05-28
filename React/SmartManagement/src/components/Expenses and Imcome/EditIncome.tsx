@@ -7,6 +7,7 @@ import { AppDispatch } from "../../redux/store";
 import ExpenseForm from "./ExpenseOrIncomeForm";
 import { uploadFile } from "../../redux/FileSlice";
 import { loadIncomes, updateIncomeAsync, updateWithFileIncomeAsync } from "../../redux/IncomeSlices";
+import { v4 as uuidv4 } from 'uuid';
 
 interface IncomeData {
     id: number;
@@ -35,9 +36,10 @@ const EditIncome = ({ onClose, transaction }: { onClose: Function, transaction: 
     
         // אם יש קובץ חדש
         if (incomeData.file && incomeData.file instanceof File) {
+            const s3Key = `${uuidv4()}_${incomeData.file.name}`;
             try {
                 // העלאת הקובץ ולקבל פרטי קובץ
-                const uploadedFile = await dispatch(uploadFile(incomeData.file)).unwrap();
+                const uploadedFile = await dispatch(uploadFile({file: incomeData.file, s3Key:s3Key})).unwrap();
                 console.log('File uploaded successfully:', uploadedFile);
     
                 fileData = {
@@ -47,11 +49,10 @@ const EditIncome = ({ onClose, transaction }: { onClose: Function, transaction: 
                 };
             } catch (error) {
                 console.error('File upload failed:', error);
-                return; // אם ההעלאה נכשלת, לא נמשיך בעדכון
+                throw error;
             }
         }
     
-        // יצירת אובייקט ההוצאה לעדכון
         const updatedIncome: Transaction = {
             id: incomeData.id,
             date: incomeData.date,
@@ -67,6 +68,7 @@ const EditIncome = ({ onClose, transaction }: { onClose: Function, transaction: 
                 onClose();
             } catch (error) {
                 console.error('Failed to update income with file:', error);
+                throw error;
             }
         } else {
             try {
@@ -75,6 +77,7 @@ const EditIncome = ({ onClose, transaction }: { onClose: Function, transaction: 
                 onClose();
             } catch (error) {
                 console.error('Failed to update income without file:', error);
+                throw error;
             }
         }
     };

@@ -48,7 +48,8 @@ namespace SmartManagement.Api.Controllers
                     IncomeDto.FileType,
                     IncomeDto.FileName,
                     IncomeDto.Filesize,
-                    null
+                    null,
+                    IncomeDto.S3key
                 );
 
                 return Ok(new { IncomeId });
@@ -90,7 +91,7 @@ namespace SmartManagement.Api.Controllers
         {
             try
             {
-                var tyu = ((int)TransactionType.UnFixIncome);
+                //var tyu = ((int)TransactionType.UnFixIncome);
                 var userId = _userService.GetUserIdFromToken(User);
 
                 var filteredExpenses = await _expenseService.GetExpensesOrIncomesByUserIdAsync(int.Parse(userId), TransactionType.UnFixIncome);
@@ -131,6 +132,7 @@ namespace SmartManagement.Api.Controllers
                     IncomeDto.FileName,
                     IncomeDto.Filesize,
                     null
+
                 );
                 return Ok();
             }

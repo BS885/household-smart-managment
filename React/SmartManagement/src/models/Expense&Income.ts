@@ -15,6 +15,7 @@ export type TransactionToSave = {
   fileName?: string;
   fileType?: string;
   filesize?: string;
+  s3_Key?: string;
 }
 
 export interface ExpenseFormProps {

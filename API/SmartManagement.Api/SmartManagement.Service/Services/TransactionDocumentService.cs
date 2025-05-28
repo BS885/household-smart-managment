@@ -50,6 +50,7 @@ namespace SmartManagement.Service.Services
             {
                 _logger.LogInformation($"Adding transaction document with ");
                 var file = _mapper.Map<TransactionDocument>(transactionDocument);
+                //file.S3_key = $"{Guid.NewGuid()}_{file.FileName}";
                 await _transactionDocumentRepository.AddAsync(file);
                 return file;
             }
@@ -83,9 +84,8 @@ namespace SmartManagement.Service.Services
 
                 if (document != null)
                 {
-                    //document.IsDeleted = true;
-                   // document.UpdatedAt = DateTime.UtcNow;
-                    await _s3Service.DeleteFileAsync(document.FileName);
+                    
+                    await _s3Service.DeleteFileAsync(document.S3_Key);
                     await _transactionDocumentRepository.DeleteAsync(id);
                 }
             }

@@ -19,5 +19,6 @@ namespace SmartManagement.Core.DTOs
         public string? FileType { get; set; } 
         public string? FileName { get; set; } 
         public string? Filesize { get; set; }
+        public string? S3key { get; set; }
     }
 }

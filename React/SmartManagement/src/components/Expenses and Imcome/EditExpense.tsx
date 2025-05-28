@@ -7,6 +7,7 @@ import { updateExpenseAsync, loadExpenses, updateWithFileExpenseAsync } from "..
 import { AppDispatch } from "../../redux/store";
 import ExpenseForm from "./ExpenseOrIncomeForm";
 import { uploadFile } from "../../redux/FileSlice";
+import { v4 as uuidv4 } from 'uuid';
 
 interface ExpenseData {
     id: number;
@@ -53,9 +54,10 @@ const EditExpense = ({ onClose, transaction }: { onClose: Function, transaction:
     
         // אם יש קובץ חדש
         if (expenseData.file && expenseData.file instanceof File) {
+            const s3Key = `${uuidv4()}_${expenseData.file.name}`;
             try {
                 // העלאת הקובץ ולקבל פרטי קובץ
-                const uploadedFile = await dispatch(uploadFile(expenseData.file)).unwrap();
+                const uploadedFile = await dispatch(uploadFile({file: expenseData.file, s3Key:s3Key})).unwrap();
                 console.log('File uploaded successfully:', uploadedFile);
     
                 fileData = {
@@ -86,6 +88,7 @@ const EditExpense = ({ onClose, transaction }: { onClose: Function, transaction:
                 onClose();
             } catch (error) {
                 console.error('Failed to update expense with file:', error);
+                throw error;
             }
         } else {
             // אם אין קובץ, נשלח את הבקשה ללא קובץ
@@ -95,6 +98,7 @@ const EditExpense = ({ onClose, transaction }: { onClose: Function, transaction:
                 onClose();
             } catch (error) {
                 console.error('Failed to update expense without file:', error);
+                throw error;
             }
         }
     };

@@ -29,81 +29,81 @@ namespace SmartManagement.Service.services
             _textractClient = textractClient;
         }
 
-        public async Task<string> GetDownloadUrlAsync(string fileName)
+        public async Task<string> GetDownloadUrlAsync(string s3Key)
         {
             try
             {
                 var request = new GetPreSignedUrlRequest
                 {
                     BucketName = _bucketName,
-                    Key = fileName,
+                    Key = s3Key,
                     Expires = DateTime.UtcNow.AddMinutes(10)
 
                 };
 
                 string url = await Task.Run(() => _s3Client.GetPreSignedURL(request));
-                _logger.LogInformation($"Generated download URL for file: {fileName}");
+                _logger.LogInformation($"Generated download URL for file: {s3Key}");
                 return url;
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error generating download URL for {fileName}: {ex.Message}");
+                _logger.LogError($"Error generating download URL for {s3Key}: {ex.Message}");
                 throw;
             }
         }
 
-        public async Task DeleteFileAsync(string fileKey)
+        public async Task DeleteFileAsync(string s3Key)
         {
             try
             {
                 var deleteRequest = new DeleteObjectRequest
                 {
                     BucketName = _bucketName,
-                    Key = fileKey
+                    Key = s3Key
                 };
 
                 await _s3Client.DeleteObjectAsync(deleteRequest);
-                _logger.LogInformation($"File deleted from S3: {fileKey} (Bucket: {_bucketName})");
+                _logger.LogInformation($"File deleted from S3: {s3Key} (Bucket: {_bucketName})");
             }
             catch (AmazonS3Exception e)
             {
-                _logger.LogError($"AWS S3 error while deleting {fileKey}: {e.Message}");
+                _logger.LogError($"AWS S3 error while deleting {s3Key}: {e.Message}");
                 throw new Exception("S3 delete failed", e);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Unexpected error deleting {fileKey}: {ex.Message}");
+                _logger.LogError($"Unexpected error deleting {s3Key}: {ex.Message}");
                 throw;
             }
         }
 
-        public async Task<string> GeneratePresignedUrlAsync(string fileName, string contentType)
+        public async Task<string> GeneratePresignedUrlAsync(string S3_key, string contentType)
         {
             try
             {
-               _logger.LogInformation($"Generating presigned URL for file: {fileName} backet Name: {_bucketName}");
+               _logger.LogInformation($"Generating presigned URL for file: {S3_key} backet Name: {_bucketName}");
 
                 var request = new GetPreSignedUrlRequest
                 {
                     BucketName = _bucketName,
-                    Key = fileName,
+                    Key = S3_key,
                     Verb = HttpVerb.PUT,
                     Expires = DateTime.UtcNow.AddMinutes(5),
                     ContentType = contentType
                 };
 
                 string url = await  _s3Client.GetPreSignedURLAsync(request);
-                _logger.LogInformation($"Generated presigned URL for file: {fileName}");
+                _logger.LogInformation($"Generated presigned URL for file: {S3_key}");
                 return url;
             }
             catch (AmazonS3Exception ex)
             {
-                _logger.LogError($"AWS S3 error generating presigned URL for {fileName}: {ex.Message}");
+                _logger.LogError($"AWS S3 error generating presigned URL for {S3_key}: {ex.Message}");
                 throw new Exception("S3 presigned URL generation failed", ex);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Unexpected error generating presigned URL for {fileName}: {ex.Message}");
+                _logger.LogError($"Unexpected error generating presigned URL for {S3_key}: {ex.Message}");
                 throw;
             }
         }
