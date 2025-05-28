@@ -49,8 +49,8 @@ namespace SmartManagement.Api.Controllers
                     TransactionType.UnFixedExpense,
                     expenseDto.Sum,
                     expenseDto.file,
-                    expenseDto.FileType,
                     expenseDto.FileName,
+                    expenseDto.FileType,
                     expenseDto.Filesize,
                     null
                 );

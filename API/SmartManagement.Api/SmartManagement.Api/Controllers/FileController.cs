@@ -34,23 +34,6 @@ namespace SmartManagement.Api.Controllers
             }
         }
 
-        //[HttpGet("transaction/{transactionId}")]
-        //public async Task<IActionResult> GetTransactionDocumentByTransactionIdAsync(int transactionId)
-        //{
-        //    try
-        //    {
-        //        var document = await _transactionDocumentService.GetTransactionDocumentByTransactionIdAsync(transactionId);
-        //        if (document == null)
-        //        {
-        //            return NotFound($"Transaction document for transaction ID {transactionId} not found.");
-        //        }
-        //        return Ok(document);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"Error retrieving transaction document for transaction ID {transactionId}: {ex.Message}");
-        //    }
-        //}
 
         [HttpPost]
         public async Task<IActionResult> AddTransactionDocumentAsync([FromBody] FileDto transactionDocument)
@@ -85,14 +68,13 @@ namespace SmartManagement.Api.Controllers
             }
         }
 
-        // Endpoint to delete a transaction document (soft delete)
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTransactionDocumentAsync(int id)
         {
             try
             {
                 await _transactionDocumentService.DeleteTransactionDocumentAsync(id);
-                return NoContent();  // Successful deletion, no content to return
+                return NoContent();
             }
             catch (Exception ex)
             {

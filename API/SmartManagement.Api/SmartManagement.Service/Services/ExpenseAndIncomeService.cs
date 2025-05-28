@@ -71,7 +71,6 @@ namespace SmartManagement.Service.Services
             }
         }
 
-
         public async Task UpdateExpenseOrIncomeAsync(int expenseId, DateTime date, string category, string description, TransactionType typeTransaction, decimal sum, bool file, string? fileName, string? fileType, string fileSize, int? fixedExpenseAndIncomeId)
         {
             try
@@ -142,12 +141,19 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task DeleteExpenseOrIncomeAsync(int expenseId)
+        public async Task DeleteExpenseOrIncomeAsync(int transactionId)
         {
             try
             {
-                await _expenseRepository.DeleteExpenseOrIncomeAsync(expenseId);
-                _logger.LogInformation($"delete expense {expenseId}");
+                var transaction = await _expenseRepository.FindExpenseOrIncomeById(transactionId);
+
+                if (transaction.TransactionDocument != null)
+                {
+                    await _fileService.DeleteTransactionDocumentAsync(transaction.TransactionDocument.Id);
+                }
+                await _expenseRepository.DeleteExpenseOrIncomeAsync(transactionId);
+                _logger.LogInformation($"delete expense {transactionId}");
+
             }
             catch (Exception ex)
             {
@@ -211,11 +217,11 @@ namespace SmartManagement.Service.Services
             }
         }
 
-        public async Task<IEnumerable<ExpenseRes>> GetTransactionsAcordingYearAndUserAsync(int Year,int userID,TransactionType type)
+        public async Task<IEnumerable<ExpenseRes>> GetTransactionsAcordingYearAndUserAsync(int Year, int userID, TransactionType type)
         {
             try
             {
-                var result=await _expenseRepository.GetTransactionsByYearAndUserAsync(Year,userID,type);
+                var result = await _expenseRepository.GetTransactionsByYearAndUserAsync(Year, userID, type);
                 _logger.LogInformation($"in service:: get {type} by year: {Year} ");
                 return _mapper.Map<List<ExpenseRes>>(result);
             }

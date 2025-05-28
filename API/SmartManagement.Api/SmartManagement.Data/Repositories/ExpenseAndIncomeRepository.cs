@@ -41,7 +41,7 @@ namespace SmartManagement.Data.Repositories
 
         public async Task<ExpenseAndIncome> FindExpenseOrIncomeById(int id)
         {
-            var result = await _context.ExpensesAndIncomes.Include(e => e.Category).FirstOrDefaultAsync(e => e.Id == id);
+            var result = await _context.ExpensesAndIncomes.Include(e => e.Category).Include(e => e.TransactionDocument).FirstOrDefaultAsync(e => e.Id == id);
 
             _logger.LogInformation($"find expense by Id");
             return result;

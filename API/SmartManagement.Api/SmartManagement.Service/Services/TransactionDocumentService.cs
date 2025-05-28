@@ -18,12 +18,14 @@ namespace SmartManagement.Service.Services
         private readonly ITransactionDocumentRepository _transactionDocumentRepository;
         private readonly ILogger<TransactionDocumentService> _logger;
         private readonly IMapper _mapper;
+        private readonly Is3Service _s3Service;
 
-        public TransactionDocumentService(ITransactionDocumentRepository transactionDocumentRepository, ILogger<TransactionDocumentService> logger, IMapper mapper)
+        public TransactionDocumentService(ITransactionDocumentRepository transactionDocumentRepository, ILogger<TransactionDocumentService> logger, IMapper mapper, Is3Service s3Service)
         {
             _transactionDocumentRepository = transactionDocumentRepository;
             _logger = logger;
             _mapper = mapper;
+            _s3Service = s3Service;
         }
 
 
@@ -76,13 +78,15 @@ namespace SmartManagement.Service.Services
         {
             try
             {
-                _logger.LogInformation($"Soft deleting transaction document with ID: {id}");
+                _logger.LogInformation($"deleting transaction document with ID: {id}");
                 var document = await _transactionDocumentRepository.GetByIdAsync(id);
+
                 if (document != null)
                 {
                     //document.IsDeleted = true;
-                    document.UpdatedAt = DateTime.UtcNow;
-                    await _transactionDocumentRepository.UpdateAsync(document);
+                   // document.UpdatedAt = DateTime.UtcNow;
+                    await _s3Service.DeleteFileAsync(document.FileName);
+                    await _transactionDocumentRepository.DeleteAsync(id);
                 }
             }
             catch (Exception ex)

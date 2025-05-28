@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartManagement.Service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9f026c8670f7a11c0d32a8861fa26b5420dac61")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+51015752e767ac22d8d4c80bbf265f5525847b51")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartManagement.Service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartManagement.Service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
