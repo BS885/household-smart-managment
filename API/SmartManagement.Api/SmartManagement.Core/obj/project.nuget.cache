@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PEU1QMfR+W8=",
+  "dgSpecHash": "qdCdZoizTaY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות\\שנה ב'\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\SmartManagement.Core.csproj",
+  "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות\\second-year\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\SmartManagement.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\awssdk.core\\3.7.402.19\\awssdk.core.3.7.402.19.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\awssdk.s3\\3.7.415.18\\awssdk.s3.3.7.415.18.nupkg.sha512",

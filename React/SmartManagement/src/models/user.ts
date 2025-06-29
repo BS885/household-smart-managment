@@ -5,4 +5,5 @@ export type User = {
     phone: string;
     lastLogin:Date;
     roles: string[];
+    email: string;
 }

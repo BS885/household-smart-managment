@@ -3,27 +3,10 @@ import { Container, Tabs, Tab, Box, Typography, Fade, useTheme } from '@mui/mate
 import { DateRange, CalendarToday } from '@mui/icons-material';
 import DateRangeReport from './DateRangeReport';
 import YearlyReport from './YearlyReport';
-
 const ReportsScreen = () => {
   const theme = useTheme();
 
   const [tabIndex, setTabIndex] = useState(0);
-
-  const downloadCSV = (rows: string[][], headers: string[], filename: string) => {
-    const csvContent = [headers, ...rows]
-      .map((row) => row.map((cell) => `"${cell}"`).join(','))
-      .join('\n');
-
-    const bom = '\uFEFF';
-    const blob = new Blob([bom + csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', filename);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, marginTop: '10%' }}>
@@ -55,11 +38,7 @@ const ReportsScreen = () => {
                 '&:hover': {
                   color: theme => theme.palette.primary.main,
                   backgroundColor: theme => `${theme.palette.primary.light}15`,
-                },
-                // '&.Mui-selected': {
-                //   color: theme => theme.palette.primary.main,
-                //   backgroundColor: theme => `${theme.palette.primary.light}20`,
-                // },
+                }
               },
             }}
           >
@@ -76,15 +55,14 @@ const ReportsScreen = () => {
           </Tabs>
         </Box>
 
-        {/* תוכן הטאבים */}
         <Box sx={{ p: 4 }}>
           <Fade in={true} timeout={500}>
             <Box>
               {tabIndex === 0 && (
-                <DateRangeReport handleDownloadCSV={downloadCSV} />
+                <DateRangeReport />
               )}
               {tabIndex === 1 && (
-                <YearlyReport handleDownloadCSV={downloadCSV} />
+                <YearlyReport />
               )}
             </Box>
           </Fade>

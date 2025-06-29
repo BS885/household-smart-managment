@@ -30,3 +30,19 @@ C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-
 C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\refint\SmartManagement.Data.dll
 C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\SmartManagement.Data.pdb
 C:\Users\user1\Documents\תכנות\שנה ב'\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\ref\SmartManagement.Data.dll
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\bin\Debug\net9.0\SmartManagement.Data.deps.json
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\bin\Debug\net9.0\SmartManagement.Data.dll
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\bin\Debug\net9.0\SmartManagement.Data.pdb
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\bin\Debug\net9.0\SmartManagement.Core.dll
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\bin\Debug\net9.0\SmartManagement.Core.pdb
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\SmartManagement.Data.csproj.AssemblyReference.cache
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\SmartManagement.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\SmartManagement.Data.AssemblyInfoInputs.cache
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\SmartManagement.Data.AssemblyInfo.cs
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\SmartManagement.Data.csproj.CoreCompileInputs.cache
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\SmartManagement.Data.sourcelink.json
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\SmartMan.ADE9235C.Up2Date
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\SmartManagement.Data.dll
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\refint\SmartManagement.Data.dll
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\SmartManagement.Data.pdb
+C:\Users\user1\Documents\תכנות\second-year\פרויקט Fullstack\household-management\API\SmartManagement.Api\SmartManagement.Data\obj\Debug\net9.0\ref\SmartManagement.Data.dll

@@ -9,5 +9,7 @@ namespace SmartManagement.Core.services
     public interface IEmailSenderService
     {
         Task SendEmailAsync(string toEmail, string subject, string bodyHtml);
+        Task SendEmailWithAttachmentAsync(string toEmail, string subject, string bodyHtml, byte[] fileBytes, string fileName);
+
     }
 }

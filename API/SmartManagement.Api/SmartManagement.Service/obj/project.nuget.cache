@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z9uhQLb/WRc=",
+  "dgSpecHash": "AQ6hFkytUW4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות\\שנה ב'\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\SmartManagement.Service.csproj",
+  "projectFilePath": "C:\\Users\\user1\\Documents\\תכנות\\second-year\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Service\\SmartManagement.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

@@ -13,9 +13,7 @@ const initialState: AuthState = {
     user: null,
     token: sessionStorage.getItem("token") || null,
     loading: false,
-    error:
-
-        null,
+    error: null,
 };
 export const loginUser = createAsyncThunk(
     "auth/login",
@@ -33,8 +31,10 @@ export const loginUser = createAsyncThunk(
                 phone: string;
                 lastLogin: Date;
                 roles: string[];
+                email: string;
             };
-            const user: User = { name, address, city, phone, lastLogin, roles };
+            const user: User = { name, address, city, phone, lastLogin, roles, email };
+            console.log("User data:", user);
             sessionStorage.setItem("token", token);
             return { token, user };
         } catch (error: any) {
@@ -81,7 +81,7 @@ export const resetPassword = createAsyncThunk(
     async ({ email, token, newPassword }: { email: string; token: string; newPassword: string }, thunkAPI) => {
         try {
             console.log("Resetting password for:", email, "with token:", token);
-            
+
             await api.post("Auth/reset-password", { email, token, newPassword });
             return "success";
         } catch (error: any) {

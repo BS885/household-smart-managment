@@ -31,6 +31,7 @@ import HeaderReport from './HeaderReport';
 import SearchOffIcon from "@mui/icons-material/SearchOff";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import { downloadCSV, printCSV, sendCSVToEmail } from '../../utils/csvUtils';
 
 const getCurrentYear = () => new Date().getFullYear();
 const getYearsList = (range = 5) =>
@@ -46,18 +47,15 @@ const shortMonthNames = [
   'יול', 'אוג', 'ספט', 'אוק', 'נוב', 'דצמ'
 ];
 
-interface YearlyCategoryReportProps {
-  handleDownloadCSV: (rows: string[][], headers: string[], filename: string) => void;
-}
-
-const YearlyCategoryReport = ({ handleDownloadCSV }: YearlyCategoryReportProps) => {
+const YearlyCategoryReport = () => {
   const [year, setYear] = useState(getCurrentYear());
   const [dataByMonthAndCategory, setDataByMonthAndCategory] = useState<Record<string, Record<string, number>>>({});
   const [categoriesUsed, setCategoriesUsed] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const dispatch = useDispatch<AppDispatch>();
   const status = useSelector((state: RootState) => state.categories.expenseStatus);
+  const emailUser = useSelector((state: RootState) => state.auth.user?.email);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
@@ -108,9 +106,12 @@ const YearlyCategoryReport = ({ handleDownloadCSV }: YearlyCategoryReportProps) 
     return totals;
   };
 
-  const handleDownloadFile = () => {
+  const handleActionsFile = (action: string) => {
     const headers = ['קטגוריה', ...monthNames.slice(1), 'סה"כ'];
-    const rows: string[][] = categoriesUsed.map((cat) => {
+    const rows: string[][] = [];
+  
+    // בונה את שורות הדוח
+    categoriesUsed.forEach((cat) => {
       const row: string[] = [cat];
       let total = 0;
       for (let i = 1; i <= 12; i++) {
@@ -120,14 +121,32 @@ const YearlyCategoryReport = ({ handleDownloadCSV }: YearlyCategoryReportProps) 
         row.push(val.toFixed(2));
       }
       row.push(total.toFixed(2));
-      return row;
+      rows.push(row);
     });
-
+  
+    // שורת סיכום חודשים
     const monthTotalsRow = ['סה"כ לחודש', ...monthTotals.map(val => val.toFixed(2)), monthTotals.reduce((a, b) => a + b, 0).toFixed(2)];
+    rows.push([]);
     rows.push(monthTotalsRow);
-    handleDownloadCSV(rows, headers, `דוח_קטגוריות_${year}.csv`);
+  
+    const filename = `דוח_קטגוריות_${year}.csv`;
+  
+    switch (action) {
+      case 'download':
+        downloadCSV(rows, headers, filename);
+        break;
+      case 'print':
+        printCSV(rows, headers);
+        break;
+      case 'email':
+        if (!emailUser) return;
+        sendCSVToEmail(rows, headers, filename, emailUser);
+        break;
+      default:
+        break;
+    }
   };
-
+  
   const monthTotals = calculateMonthTotals();
   const yearTotal = monthTotals.reduce((a, b) => a + b, 0);
 
@@ -416,7 +435,7 @@ const YearlyCategoryReport = ({ handleDownloadCSV }: YearlyCategoryReportProps) 
   return (
     <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
       <HeaderReport
-        handleDownloadFile={handleDownloadFile}
+       handleDownloadFile={() => handleActionsFile('download')} handlePrintFile={() => handleActionsFile('print')} handleSendEmailFile={() => handleActionsFile('email')}
         isDownload={categoriesUsed.length > 0}
         title="דוח קטגוריות לשנה"
       />

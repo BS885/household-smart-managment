@@ -1062,11 +1062,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user1\\Documents\\תכנות\\שנה ב'\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\SmartManagement.Data.csproj",
+      "projectUniqueName": "C:\\Users\\user1\\Documents\\תכנות\\second-year\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\SmartManagement.Data.csproj",
       "projectName": "SmartManagement.Data",
-      "projectPath": "C:\\Users\\user1\\Documents\\תכנות\\שנה ב'\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\SmartManagement.Data.csproj",
+      "projectPath": "C:\\Users\\user1\\Documents\\תכנות\\second-year\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\SmartManagement.Data.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user1\\Documents\\תכנות\\שנה ב'\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\obj\\",
+      "outputPath": "C:\\Users\\user1\\Documents\\תכנות\\second-year\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1087,8 +1087,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\user1\\Documents\\תכנות\\שנה ב'\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\SmartManagement.Core.csproj": {
-              "projectPath": "C:\\Users\\user1\\Documents\\תכנות\\שנה ב'\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\SmartManagement.Core.csproj"
+            "C:\\Users\\user1\\Documents\\תכנות\\second-year\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\SmartManagement.Core.csproj": {
+              "projectPath": "C:\\Users\\user1\\Documents\\תכנות\\second-year\\פרויקט Fullstack\\household-management\\API\\SmartManagement.Api\\SmartManagement.Core\\SmartManagement.Core.csproj"
             }
           }
         }

@@ -1,5 +1,5 @@
-import { Box,Button, Container, Typography, Grid, Paper,  Divider, ThemeProvider, CssBaseline} from '@mui/material';
-import { AttachMoney as MoneyIcon, TrendingUp as TrendingUpIcon, Receipt as ReceiptIcon, Savings as SavingsIcon,} from '@mui/icons-material';
+import { Box, Button, Container, Typography, Grid, Paper, Divider, ThemeProvider, CssBaseline } from '@mui/material';
+import { AttachMoney as MoneyIcon, TrendingUp as TrendingUpIcon, Receipt as ReceiptIcon, Savings as SavingsIcon, } from '@mui/icons-material';
 import { theme } from '../Style/Theme';
 import Login from './Auth/Login';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +27,7 @@ const featureIconStyle = {
 };
 
 const HomePage = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -48,6 +48,14 @@ const HomePage = () => {
               <Typography variant="h5" fontWeight="bold">
                 משק בית מאוזן
               </Typography>
+              <Box component="img"
+                src={"../../public/logo.png"}
+                alt="logo"
+                sx={{
+                  height: 40,
+                  maxHeight: 90,
+                  mr: 2,
+                }} />
             </Box>
           </Container>
         </Box>
@@ -61,7 +69,7 @@ const HomePage = () => {
               <Typography variant="h5" color="primary.dark" sx={{ mb: 4, opacity: 0.9 }}>
                 פתרון פשוט וחכם לניהול הוצאות והכנסות, מעקב אחר חסכונות ותכנון תקציבי
               </Typography>
-              <Box sx={{ display: 'flex', mt: 3,justifyContent: 'center',}}>
+              <Box sx={{ display: 'flex', mt: 3, justifyContent: 'center', }}>
                 <Button
                   variant="contained"
                   size="large"
@@ -72,14 +80,14 @@ const HomePage = () => {
                     fontWeight: 'bold',
                     fontSize: '1.1rem'
                   }}
-                  onClick={() => navigate('/register')} 
+                  onClick={() => navigate('/register')}
                 >
                   הירשמו עכשיו
                 </Button>
               </Box>
             </Grid>
             <Grid item xs={12} md={5}>
-              <Login/>
+              <Login />
             </Grid>
           </Grid>
         </Container>
@@ -92,7 +100,7 @@ const HomePage = () => {
             <Typography variant="h6" align="center" color="text.secondary" sx={{ mb: 6, maxWidth: '800px', mx: 'auto' }}>
               מערכת מושלמת לניהול התקציב המשפחתי, מותאמת בדיוק לצרכים שלכם
             </Typography>
-           
+
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6} md={3}>
                 <Paper sx={featureCardStyle} elevation={2}>

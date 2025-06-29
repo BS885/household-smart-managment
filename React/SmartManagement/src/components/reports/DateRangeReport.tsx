@@ -19,8 +19,10 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { getAdvancedFilterCardStyles, getButtonPlayDataStyles, getSummaryCardStyles } from "./ThemReports";
 import ReportTable from "./ReportTable";
 import HeaderReport from "./HeaderReport";
+import { downloadCSV, printCSV, sendCSVToEmail } from '../../utils/csvUtils';
 
-const DateRangeReport = ({ handleDownloadCSV }: { handleDownloadCSV: (rows: string[][], headers: string[], filename: string) => void }) => {
+
+const DateRangeReport = () => {
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
     const [category, setCategory] = useState('');
@@ -30,6 +32,8 @@ const DateRangeReport = ({ handleDownloadCSV }: { handleDownloadCSV: (rows: stri
 
     const dispatch = useDispatch<AppDispatch>();
     const expenseCategories = useSelector((state: RootState) => state.categories.expenseCategories);
+    const emailUser = useSelector((state: RootState) => state.auth.user?.email);
+
     const status = useSelector((state: RootState) => state.categories.expenseStatus);
     const theme = useTheme();
     const columns = [
@@ -47,10 +51,8 @@ const DateRangeReport = ({ handleDownloadCSV }: { handleDownloadCSV: (rows: stri
 
     const handleFetch = async () => {
         if (!fromDate || !toDate) return;
-
         setLoading(true);
         setHasSearched(true);
-
         try {
             const response = await dispatch(filterExpensesByRngeDateAndCategoryAsync({
                 from: fromDate,
@@ -66,7 +68,7 @@ const DateRangeReport = ({ handleDownloadCSV }: { handleDownloadCSV: (rows: stri
         }
     };
 
-    const handleDownloadFile = () => {
+    const handleActionsFile = (action: string) => {
         const headers = ['תאריך', 'קטגוריה', 'סכום', 'תיאור'];
         const rows = transactions.map((t) => [
             dayjs(t.date).format('YYYY-MM-DD') + "\t",
@@ -80,7 +82,20 @@ const DateRangeReport = ({ handleDownloadCSV }: { handleDownloadCSV: (rows: stri
         rows.push(['', 'סה"כ:', totalAmount.toFixed(2), '']);
 
         const filename = `דוח_תנועות_${fromDate}_עד_${toDate}_${category ? 'קטגוריה_' + category : 'כל_הקטגוריות'}.csv`;
-        handleDownloadCSV(rows, headers, filename);
+        switch (action) {
+            case 'download':
+                downloadCSV(rows, headers, filename);
+                break;
+            case 'print':
+                printCSV(rows, headers);
+                break;
+            case 'email':
+                if (!emailUser) return;
+                sendCSVToEmail(rows, headers, filename, emailUser);
+                break;
+            default:
+                break;
+        }
     };
 
     const getTotalAmount = () => {
@@ -98,7 +113,7 @@ const DateRangeReport = ({ handleDownloadCSV }: { handleDownloadCSV: (rows: stri
     return (
         <Container maxWidth="lg" sx={{ py: 4 }}>
 
-            <HeaderReport handleDownloadFile={handleDownloadFile} isDownload={transactions.length > 0} title="דוח תנועות לפי טווח תאריכים" />
+            <HeaderReport handleDownloadFile={() => handleActionsFile('download')} handlePrintFile={() => handleActionsFile('print')} handleSendEmailFile={() => handleActionsFile('email')} isDownload={transactions.length > 0} title="דוח תנועות לפי טווח תאריכים" />
 
             <Fade in timeout={1000}>
                 <Card

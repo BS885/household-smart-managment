@@ -145,14 +145,13 @@ namespace SmartManagement.Service.Services
             if (user != null)
             {
 
-
-
                 var token = Guid.NewGuid().ToString();
                 var expiry = DateTime.UtcNow.AddHours(1);
 
 
                 await _passwordResetTokensRepository.AddTokenAsync(request.Email, token, expiry);
                 var link = $"{_resetPasswordUrl}?token={token}";
+
                 _logger.LogInformation("Generated password reset link: {Link} ", link);
                 await _emailSender.SendEmailAsync(
                     user.Email,
