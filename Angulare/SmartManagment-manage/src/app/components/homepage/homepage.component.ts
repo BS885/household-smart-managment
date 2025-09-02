@@ -14,7 +14,6 @@ export class HomepageComponent {
 
   constructor(private router: Router) { }
   openModule(navigator:string){
-    console.log("openModule",navigator);
     this.router.navigate([navigator]);
   }
 }

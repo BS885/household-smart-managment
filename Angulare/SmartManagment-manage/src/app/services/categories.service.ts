@@ -17,8 +17,6 @@ export class CategoriesService {
       this.http.get<{$values: Category[]}>(this.apiUrl + '/Income')
     ]).pipe(
       map(([expenses, incomes]) => {
-        console.log('Expenses:', expenses);
-        console.log('Incomes:', incomes);
         return [...expenses.$values, ...incomes.$values];
       })
     );

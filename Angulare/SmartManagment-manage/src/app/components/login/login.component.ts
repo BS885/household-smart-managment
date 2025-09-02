@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -36,7 +36,7 @@ export class LoginComponent {
 
   onSubmit(form: NgForm): void {
     if (form.invalid) return;
-  
+
     this.loading = true;
     this.errorMessage = '';
 
@@ -47,7 +47,6 @@ export class LoginComponent {
       },
       error: (error: HttpErrorResponse) => {
         this.loading = false;
-        console.error(error.message);
         if (error.message === 'אין הרשאה - רק מנהל יכול להתחבר') {
           this.errorMessage = error.message;
         } else {
@@ -56,15 +55,12 @@ export class LoginComponent {
       }
     });
   }
-  
+
 
   getEmailError(): string {
     if (!this.email) {
-      
       return 'יש להזין כתובת אימייל';
-
     }
-    // אתה יכול להוסיף כאן ולידציית אימייל אם תרצה
     if (!this.email.includes('@')) return 'כתובת האימייל אינה תקינה';
     if (this.email.length < 5) return 'כתובת האימייל חייבת להכיל לפחות 5 תווים';
     return '';

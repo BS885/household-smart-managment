@@ -19,48 +19,6 @@ export const initialCategoriesState: CategoriesState = {
   updateSuccess: false
 };
 
-// export const categoriesReducer = createReducer(
-//   initialCategoriesState,
-
-//   on(CategoriesActions.loadCategoriesSuccess, (state, { categories }) => ({
-//     ...state,
-//     categories,
-//     error: null
-//   })),
-
-//   on(CategoriesActions.loadCategoriesFailure, (state, { error }) => ({
-//     ...state,
-//     error
-//   })),
-
-//   on(CategoriesActions.setCategories, (state, { categories }) => ({
-//     ...state,
-//     categories,
-//     error: null
-//   })),
-
-//   on(CategoriesActions.addCategorySuccess, (state, { category }) => ({
-//     ...state,
-//     categories: [...state.categories, category],
-//     error: null
-//   })),
-
-//   on(CategoriesActions.addCategoryFailure, (state, { error }) => ({
-//     ...state,
-//     error
-//   })),
-
-//   on(CategoriesActions.updateCategorySuccess, (state, { category }) => ({
-//     ...state,
-//     categories: state.categories.map(c => c.id === category.id ? category : c),
-//     error: null
-//   })),
-
-//   on(CategoriesActions.updateCategoryFailure, (state, { error }) => ({
-//     ...state,
-//     error
-//   })),
-// );
 export const categoriesReducer = createReducer(
   initialCategoriesState,
 

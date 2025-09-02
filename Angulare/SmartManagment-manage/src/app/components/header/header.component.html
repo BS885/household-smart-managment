@@ -1,11 +1,65 @@
-<header class="header">
+<!-- <header class="header">
     <div class="logo">
         <i class="fas fa-cube"></i>
         <h1>מערכת ניהול</h1>
     </div>
-<!--     
+    
+    <nav class="admin-nav" [class.mobile-open]="isMobileMenuOpen">
+        <button class="admin-button" (click)="navigateToUsers($event)">
+            <i class="fas fa-users"></i>
+            <span class="button-text">ניהול משתמשים</span>
+        </button>
+        
+        <button class="admin-button" (click)="navigateToCategories($event)">
+            <i class="fas fa-folder-tree"></i>
+            <span class="button-text">ניהול קטגוריות</span>
+        </button>
+        
+        <button class="admin-button" (click)="navigateToPermissions($event)">
+            <i class="fas fa-shield-halved"></i>
+            <span class="button-text">ניהול הרשאות</span>
+        </button>
+    </nav>
+
+    <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+</header> -->
+
+
+<header class="header">
+    <div class="logo">
+      <i class="fas fa-cube"></i>
+      <h1>מערכת ניהול</h1>
+    </div>
+  
+    <nav class="admin-nav" [class.mobile-open]="isMobileMenuOpen">
+      <button class="admin-button" (click)="navigateToUsers($event)">
+        <i class="fas fa-users"></i>
+        <span class="button-text">ניהול משתמשים</span>
+      </button>
+  
+      <button class="admin-button" (click)="navigateToCategories($event)">
+        <i class="fas fa-folder-tree"></i>
+        <span class="button-text">ניהול קטגוריות</span>
+      </button>
+  
+      <button class="admin-button" (click)="navigateToPermissions($event)">
+        <i class="fas fa-shield-halved"></i>
+        <span class="button-text">ניהול הרשאות</span>
+      </button>
+    </nav>
+  
+    <!-- User info + Logout -->
     <div class="user-info">
-        <p>שלום, {{ username }}!</p>
-        <button class="logout-button" (click)="logout()">התנתק</button>
-    </div> -->
-</header>
+      <span class="username">{{ username }}</span>
+      <button class="logout-btn" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        התנתקות
+      </button>
+    </div>
+  
+    <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>  

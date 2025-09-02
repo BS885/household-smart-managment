@@ -1,5 +1,6 @@
 import { AuthState } from "./Auth/auth.reducer";
 import { CategoriesState } from "./Category/categories.reducer";
+import { PermissionState } from "./Permission/permissions.reducer";
 import { UsersState } from "./Users/users.reducer";
 
 

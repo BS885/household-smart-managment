@@ -83,7 +83,6 @@ export class CategoriesListComponent implements OnInit {
 
     this.filterSubject.next(this.categoryFilter);
 
-    // ✅ הודעת הצלחה בהוספה
     this.store.select(fromCategories.selectAddSuccess).subscribe(success => {
       if (success) {
         this.snackBar.open('✅ הקטגוריה נוספה בהצלחה', '', {
@@ -93,7 +92,6 @@ export class CategoriesListComponent implements OnInit {
       }
     });
 
-    // ✅ הודעת הצלחה בעדכון
     this.store.select(fromCategories.selectUpdateSuccess).subscribe(success => {
       if (success) {
         this.snackBar.open('✅ הקטגוריה עודכנה בהצלחה', '', {
@@ -103,7 +101,6 @@ export class CategoriesListComponent implements OnInit {
       }
     });
 
-    // ❌ הודעת שגיאה כללית
     this.store.select(fromCategories.selectError).subscribe(error => {
       if (error) {
         this.snackBar.open(`❌ שגיאה: ${error}`, '', {

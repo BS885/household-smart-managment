@@ -13,7 +13,6 @@ export class UserListHeaderComponent {
   searchControl = new FormControl('');
   roleControl = new FormControl('');
 
-  // Outputs
   @Output() searchChanged = new EventEmitter<string>();
   @Output() roleChanged = new EventEmitter<string>();
   @Output() addAdminClicked = new EventEmitter<void>();

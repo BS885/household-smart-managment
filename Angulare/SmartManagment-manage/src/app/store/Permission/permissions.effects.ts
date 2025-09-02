@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as PermissionActions from '../../store/Permission/permissions.actions';
-import { Permission } from '../../models/Permission.model';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { PermissionService } from '../../services/permissions.service';
 

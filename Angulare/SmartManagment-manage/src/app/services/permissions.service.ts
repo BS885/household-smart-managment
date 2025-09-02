@@ -12,17 +12,9 @@ export class PermissionService {
 
   constructor(private http: HttpClient) { }
 
-  // getAll(): Observable<Permission[]> {
-  //   return this.http.get<any>(this.apiUrl).pipe(
-  //     map(response => response.$values),
-  //     tap(data => console.log('permissions:', data))
-  //   );
-  // }
   getAll(): Observable<Permission[]> {
     return this.http.get<any>(this.apiUrl).pipe(
       map(response => {
-        console.log('response:', response);
-        
         return response.$values.map((p: any) => ({
           id: p.id,
           name: p.name,
@@ -32,7 +24,6 @@ export class PermissionService {
           })) || []
         }));
       }),
-      tap(data => console.log('permissions:', data))
     );
   }
 

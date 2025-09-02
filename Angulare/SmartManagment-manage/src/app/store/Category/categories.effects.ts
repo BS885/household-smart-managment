@@ -36,20 +36,6 @@ export class CategoriesEffects {
     )
   );
 
-  // deleteCategory$ = createEffect(() =>
-  //   defer(() =>
-  //     this.actions$.pipe(
-  //       ofType(CategoriesActions.deleteCategory),
-  //       mergeMap(({ id }) =>
-  //         this.categoriesService.deleteCategory(id).pipe(
-  //           map(() => CategoriesActions.deleteCategorySuccess({ id })),
-  //           catchError((error) => of(CategoriesActions.deleteCategoryFailure({ error: error.message })))
-  //         )
-  //       )
-  //     )
-  //   )
-  // );
-
   updateCategory$ = createEffect(() =>
     defer(() =>
       this.actions$.pipe(
@@ -69,7 +55,6 @@ export class CategoriesEffects {
         this.actions$.pipe(
           ofType(
             CategoriesActions.addCategorySuccess,
-            // CategoriesActions.deleteCategorySuccess,
             CategoriesActions.updateCategorySuccess
           ),
           map(() => CategoriesActions.loadCategories())

@@ -63,7 +63,6 @@ export class UsersEffects {
         ofType(
           UsersActions.changeRoleSuccess,
           UsersActions.addUserSuccess,
-          // UsersActions.deleteUserSuccess
         ),
         map(() => UsersActions.loadUsers())
       )

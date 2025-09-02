@@ -23,6 +23,6 @@ export class AuthEffects {
   );
 
   constructor(private actions$: Actions, private authService: AuthService) {
-    console.log('actions$', this.actions$); // ← האם זה undefined?
+  
   }
 }

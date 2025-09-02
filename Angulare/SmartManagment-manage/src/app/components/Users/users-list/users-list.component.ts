@@ -44,12 +44,10 @@ export class UsersListComponent implements OnInit {
 
   @ViewChild(UserListHeaderComponent) headerComponent!: UserListHeaderComponent;
 
-  // מה-Store
   users$: Observable<User[]>;
   loading$: Observable<boolean>;
   error$: Observable<any>;
 
-  // התוצאה אחרי סינון ומיון
   filteredUsers$: Observable<User[]>;
 
   constructor(
@@ -57,36 +55,6 @@ export class UsersListComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router
   ) { }
-
-  // ngOnInit(): void {
-  //   console.log('Dispatching loadUsers');
-  //   // 1. קריאה ראשונית
-  //   this.store.dispatch(UsersActions.loadUsers());
-
-  //   // 2. גישה ל־state
-  //   this.users$ = this.store.select(selectAllUsers);
-  //   this.loading$ = this.store.select(selectUsersLoading);
-  //   this.error$ = this.store.select(selectUsersError);
-
-  //   // 3. בניית ה-filteredUsers$
-  //   this.filteredUsers$ = combineLatest([
-  //     this.users$,
-  //     this.searchControl.valueChanges.pipe(startWith('')),
-  //     this.roleControl.valueChanges.pipe(startWith(''))
-  //   ]).pipe(
-  //     map(([users, search, role]) =>
-  //       users.filter(user => {
-  //         const matchesSearch = user.name.toLowerCase().includes((search ?? '').toLowerCase())
-  //           || user.email.toLowerCase().includes((search ?? '').toLowerCase());
-  //         const matchesRole =
-  //           !role || (user.role?.toLowerCase() ?? '') === role;
-  //         return matchesSearch && matchesRole;
-  //       })
-  //     )
-  //   );
-  //   console.log(this.filteredUsers$);
-
-  // }
 
   ngOnInit(): void {
     this.store.dispatch(UsersActions.loadUsers());

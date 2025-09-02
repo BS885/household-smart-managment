@@ -18,19 +18,16 @@ export const selectCategoriesError = createSelector(
   (state) => state.error
 );
 
-// ✅ הצלחה בהוספה
 export const selectAddSuccess = createSelector(
   selectCategoriesState,
   (state) => state.addSuccess
 );
 
-// ✅ הצלחה בעדכון
 export const selectUpdateSuccess = createSelector(
   selectCategoriesState,
   (state) => state.updateSuccess
 );
 
-// ✅ שגיאה כללית
 export const selectError = createSelector(
   selectCategoriesState,
   (state) => state.error

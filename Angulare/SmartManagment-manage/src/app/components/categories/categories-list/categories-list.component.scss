@@ -1,6 +1,5 @@
 @import '../../../../styles/variables';
 
-// מיקסין לסקרולבר אחיד
 @mixin scrollbar-style {
   &::-webkit-scrollbar {
     width: 6px;
@@ -17,7 +16,6 @@
   }
 }
 
-// מיקסין לכפתור
 @mixin btn-style($bg, $color, $hover-bg, $hover-color: null, $border: none) {
   background-color: $bg;
   color: $color;

@@ -17,7 +17,6 @@ export class CategoriesHeaderComponent {
   constructor() { }
 
   ngOnInit(): void {
-    // אפשר כאן לאתחל או להקשיב לשינויים אם רוצים, אבל לרוב מזרימים מהאב
   }
 
   onFilter(type: 'all' | 'income' | 'expense') {
