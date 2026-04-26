@@ -40,7 +40,7 @@
 
 //            var body = new
 //            {
-//                model = "tngtech/deepseek-r1t-chimera:free",
+//                model = "openrouter/free",
 //                messages = new[]
 //                {
 //                    new {
