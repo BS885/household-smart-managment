@@ -159,9 +159,25 @@ namespace SmartManagement.Service.Services
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
 
-            try
-            {
-                var response = await _httpClient.PostAsync(_apiUrl, content);
+           try
+{
+    var response = await _httpClient.PostAsync(_apiUrl, content);
+    
+    if (!response.IsSuccessStatusCode)
+    {
+        var errorContent = await response.Content.ReadAsStringAsync();
+        // הדפסה לקונסול כדי שתוכל לראות מה בדיוק השרת מחזיר
+        Console.WriteLine($"--- API ERROR RESPONSE ---");
+        Console.WriteLine($"Status Code: {response.StatusCode}");
+        Console.WriteLine($"Content: {errorContent}");
+        Console.WriteLine($"--------------------------");
+        
+        throw new Exception($"OpenRouter API Error: {response.StatusCode} - {errorContent}");
+    }
+
+    var responseString = await response.Content.ReadAsStringAsync();
+}
+                
                 response.EnsureSuccessStatusCode();
 
                 var responseString = await response.Content.ReadAsStringAsync();
