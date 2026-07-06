@@ -34,8 +34,8 @@
 
 | צד לקוח (Frontend) | צד שרת (Backend) |
 |--------------------|------------------|
-| React + TypeScript | Node.js + Express |
-| Vite               | MongoDB (Atlas)   |
+| React + TypeScript | .net core |
+| Vite               | MySQL            |
 | React Router       | JWT Authentication |
 | Material UI        | RESTful API       |
 
